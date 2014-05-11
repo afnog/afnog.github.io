@@ -51,3 +51,18 @@ About 23% of the servers polled by the [Open Email Survey](http://www.openemails
 * Reasonably scalable
 * Good debugging options
 * Sane (but complex) configuration syntax
+
+---
+
+## Why not to use Exim
+
+* Not every problem is a nail
+* *Simplicity?* Use postfix or qmail
+* Top security? Use qmail
+* Faster delivery? Use postfix or sendmail
+* Insane configuration file? Use sendmail
+
+Note: Exim is not designed for spooling large amounts of mail. Its queue
+handling slows down with large queues (thousands of messages queued).
+
+
