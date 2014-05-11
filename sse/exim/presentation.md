@@ -19,3 +19,14 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 # How email works
 
 ![How Internet Email Works](how-internet-email-works.svg)
+
+---
+
+# What is Exim?
+
+* Listens on port 25 (smtp)
+* Accepts mail
+* Queues mail
+* Delivers it somewhere
+	* Using SMTP, LMTP, LDA, mbox or maildir
+* No POP, IMAP, calendars, to-do lists, Crackberry!
