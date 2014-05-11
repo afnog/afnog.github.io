@@ -56,7 +56,8 @@ About 23% of the servers polled by the [Open Email Survey](http://www.openemails
 
 ## Why not to use Exim
 
-* Not every problem is a nail
+Not every problem is a nail:
+
 * **Simplicity?** Use postfix or qmail
 * **Security?** Use qmail
 * **Faster delivery?** Use postfix or sendmail
