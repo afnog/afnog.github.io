@@ -42,6 +42,11 @@ makes it visible as a slideshow using Remark: http://remarkjs.com/#1
 			jQuery('#source').html(data);
 			var slideshow = remark.create();
 			$('#loading').hide();
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			alert("Failed to load page: " + url + ": " +
+				textStatus + " " + errorThrown);
 		}
 	});
 	</script>
