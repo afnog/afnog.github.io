@@ -17,3 +17,5 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 ---
 
 # How email works
+
+![How Internet Email Works](how-internet-email-works.svg)
