@@ -42,6 +42,8 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 About 23% of the servers polled by the [Open Email Survey](http://www.openemailsurvey.org/smtp.html).
 2nd most popular SMTP server after Postfix.
 
+---
+
 ## Why use Exim?
 
 * Flexible (lots of features)
