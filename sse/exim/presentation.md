@@ -44,7 +44,7 @@ About 23% of the servers polled by the [Open Email Survey](http://www.openemails
 
 ---
 
-## Why use Exim?
+# Why use Exim?
 
 * Flexible (lots of features)
 * Reasonably secure
