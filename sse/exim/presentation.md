@@ -61,7 +61,7 @@ Not every problem is a nail:
 * **Simplicity?** Use postfix or qmail
 * **Security?** Use qmail
 * **Speed?** Use postfix or sendmail
-* **Insanity?** Use sendmail
+* **Insanity?** Use sendmail or qmail
 
 Note: Exim is not designed for spooling large amounts of mail. Its queue
 handling slows down with large queues (thousands of messages queued).
