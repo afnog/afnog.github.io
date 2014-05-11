@@ -30,3 +30,14 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 * Delivers it somewhere
 	* Using SMTP, LMTP, LDA, mbox or maildir
 * No POP, IMAP, calendars, to-do lists, Crackberry!
+
+---
+
+# Who uses Exim?
+
+![Public SMTP Server survey results](public-smtp-servers.svg)
+
+???
+
+About 22% of the servers polled by the [Open Email Survey](http://www.openemailsurvey.org/smtp.html).
+2nd most popular SMTP server after Postfix. 
