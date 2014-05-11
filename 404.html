@@ -52,12 +52,15 @@ https://github.com/afnog/afnog.github.io
 	<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var url = location.pathname + ".md";
+		var lastText = undefined;
+		var slideshow;
 
 		jQuery.ajax({
 			url: url,
 			dataType: "text",
 			success: function(data, textStatus, jqXHR)
 			{
+				lastText = data;
 				jQuery('#source').html(data);
 				var slideshow = remark.create();
 				$('#loading').hide();
@@ -67,6 +70,34 @@ https://github.com/afnog/afnog.github.io
 				alert("Failed to load page: " + url + ": " +
 					textStatus + " " + errorThrown);
 			}
+		});
+
+		var interval = setInterval(5000, function() {
+			// Do nothing if not finished loading yet
+			if (slideshow)
+			{
+				jQuery.ajax({
+					url: url,
+					dataType: "text",
+					cache: false,
+					success: function(data, textStatus, jqXHR)
+					{
+						if (data != lastText)
+						{
+							slideshow.loadFromString(data);
+							lastText = data;
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown)
+					{
+						console.log("Failed to load page: " + url + ": " +
+							textStatus + " " + errorThrown);
+					}
+				});
+
+
+
+
 		});
 	</script>
   </body>
