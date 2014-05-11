@@ -8,7 +8,7 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 
 ---
 
-# Agenda
+## Agenda
 
 1. How email works
 2. Setting up a mail server
@@ -16,13 +16,13 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 
 ---
 
-# How email works
+## How email works
 
 ![How Internet Email Works](how-internet-email-works.svg)
 
 ---
 
-# What is Exim?
+## What is Exim?
 
 * Listens on port 25 (smtp)
 * Accepts mail
@@ -33,7 +33,7 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim
 
 ---
 
-# Who uses Exim?
+## Who uses Exim?
 
 ![Public SMTP Server survey results](public-smtp-servers.svg)
 
@@ -44,7 +44,7 @@ About 23% of the servers polled by the [Open Email Survey](http://www.openemails
 
 ---
 
-# Why use Exim?
+## Why use Exim?
 
 * Flexible (lots of features)
 * Reasonably secure
