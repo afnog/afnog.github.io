@@ -66,4 +66,23 @@ Not every problem is a nail:
 Note: Exim is not designed for spooling large amounts of mail. Its queue
 handling slows down with large queues (thousands of messages queued).
 
+---
+
+## Conventions
+
+As used in this presentation:
+
+* File names and technical terms are in *italics*.
+* Commands to type are shown thus:
+
+	cat /etc/monospaced/bold/italic/purple
+
+* Long command lines may be wrapped:
+
+	cat /usr/local/etc/foo/bar | less | more | grep | sed | awk > /usr/local/tmp/foo/bar
+
+Text that is output by a program, or should already be in a file, is shown in plain monospaced type:
+sshd_enable="YES"
+
+
 
