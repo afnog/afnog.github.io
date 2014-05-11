@@ -33,7 +33,7 @@ makes it visible as a slideshow using Remark: http://remarkjs.com/#1
 	<script src="//code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
 	<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	var url = location.hash;
+	var url = location.hash.substr(1);
 	jQuery.ajax({
 		url: url,
 		dataType: "text",
