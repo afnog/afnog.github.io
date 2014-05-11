@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <!--
+This is a document loader and renderer using Remark: http://remarkjs.com/#1
 
-Note: Most of this file is in Markdown for ease of editing. The boilerplate
-makes it visible as a slideshow using Remark: http://remarkjs.com/#1
+It acts as a 404 page handler, intercepting requests for pages that don't
+exist, adding .md to the end of the URL, fetching the contents using AJAX
+and rendering them as an HTML presentation using Remark.
 
+The actual content is found at the URL that you accessed, followed by .md,
+for example: http://afnog.github.io/sse/exim/presentation.md.
+
+You can fork and modify this presentation on Github:
+https://github.com/afnog/afnog.github.io
 -->
 <html>
   <head>
