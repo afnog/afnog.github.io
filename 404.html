@@ -72,7 +72,7 @@ https://github.com/afnog/afnog.github.io
 			}
 		});
 
-		var interval = setInterval(5000, function() {
+		var interval = setInterval(function() {
 			// Do nothing if not finished loading yet
 			if (slideshow)
 			{
@@ -95,7 +95,7 @@ https://github.com/afnog/afnog.github.io
 					}
 				});
 			}
-		});
+		}, 5000);
 	</script>
   </body>
 </html>
