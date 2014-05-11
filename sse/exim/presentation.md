@@ -77,7 +77,7 @@ As used in this presentation:
 
 	cat /etc/monospaced/bold/italic/purple
 
-* Long command lines may be wrapped, with lines between each line:
+Long command lines may be wrapped, with lines between each line:
 
 	cat /usr/local/etc/foo/bar | less | more | grep | sed | awk > /usr/local/tmp/foo/bar
 	sudo make SUBDIR=old WITH_RADIUS_TYPE=RADLIB EXTRALIBS_EXIM=/usr/lib/libradius.so install clean
