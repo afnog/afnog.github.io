@@ -22,11 +22,19 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/intr
 * Virtualization
 * Security
 
+What do you want to learn about?
+
+* https://www.surveymonkey.com/s/7Q88MH7
+
 ---
 
-## How email works
+## Instructors
 
-![How Internet Email Works](how-internet-email-works.svg)
+* Joe Abley (Canada)
+* Kevin Chege (Kenya)
+* Laban Mwangi (Kenya)
+* Evelyn Namara (Uganda)
+* Chris Wilson (UK)
 
 ---
 
