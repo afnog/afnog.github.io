@@ -1,18 +1,26 @@
 class: center, middle
 
-# Exim and Internet Mail
+# Welcome to AfNOG 2014
 
-## Chris Wilson, [Aptivate](http://www.aptivate.org/), AfNOG 2013
+## Welcome to Scalable Internet Services (SS-E)
 
-Download or edit this presentation [on GitHub](https://github.com/afnog/sse/exim/presentation.md).
+### Chris Wilson, [Aptivate](http://www.aptivate.org/), AfNOG 2014
+
+Download or edit this presentation [on GitHub](https://github.com/afnog/sse/introduction/presentation.md).
 
 ---
 
-## Agenda
+## What you will learn about
 
-1. How email works
-2. Setting up a mail server
-3. Customising your server
+* The FreeBSD OS
+* Domain Name Services using BIND
+* Web Services using Apache
+* AAA Services using FreeRADIUS
+* SMTP Services using Exim
+* POP3 & IMAP Services
+* Monitoring IP Services
+* Virtualization
+* Security
 
 ---
 
