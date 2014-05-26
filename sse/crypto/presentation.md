@@ -165,7 +165,12 @@ Why do you lock your doors?
 
 * The process of proving one's identity.
   * The primary forms of host-to-host authentication on the Internet today are name-based or address-based, both of which are notoriously weak.
-* Cryptography can help establish identity for authentication purposes
+* Cryptography can help establish identity for authentication purposes (how?)
+
+--
+
+  * Can prove that you possess a secret
+  * Or that you spent a LOT of energy to brute-force it
 
 ---
 
