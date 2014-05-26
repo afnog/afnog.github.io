@@ -168,8 +168,7 @@ https://www.schneier.com/book-applied.html
   * creation
   * distribution
 * ciphers
-  * block
-  * stream
+  * block/stream
 
 Terminology:
 
