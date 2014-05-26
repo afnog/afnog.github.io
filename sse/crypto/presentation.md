@@ -9,9 +9,8 @@ class: center, middle
 Credit to [Marcus Adomey](http://www.afnog.org/afnog_chix2011/Thursday/MA/CryptographySlides.odp)
 and [NSRC](https://nsrc.org/workshops/2013/nsrc-tenet-tut/raw-attachment/wiki/AgendaTrack2)
 
-You can follow this presentation online at: http://afnog.github.io/sse/crypto/presentation
-
-Download or edit this presentation [on GitHub](https://github.com/afnog/sse/crypto/presentation.md).
+You can follow this presentation online at http://afnog.github.io/sse/crypto/presentation
+or edit [on GitHub](https://github.com/afnog/sse/crypto/presentation.md).
 
 ---
 
