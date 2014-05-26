@@ -36,7 +36,7 @@ What is security?
 
 --
 
-* Preventing some particular event.
+* Trying to prevent some particular event.
 
 What do you want to prevent? Consider the *threat*:
 
