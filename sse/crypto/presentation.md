@@ -245,6 +245,8 @@ The foundation of all of cryptography:
 * Almost all ciphers were secret until recently.
 * Creating a secure cipher is HARD.
 
+![Cryptography Process](cryptography-overview-shorter-034.jpg)
+
 ---
 
 ## FIN
