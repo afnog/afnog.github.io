@@ -163,7 +163,7 @@ https://www.schneier.com/book-applied.html
   * collisions
 * entropy (randomness)
 * keys
-  * symmetric/asymmetric
+  * symmetric/asymmetric (public/private)
   * length
   * creation
   * distribution
