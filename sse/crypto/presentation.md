@@ -67,7 +67,7 @@ Security is *impossible* if:
 
 * some users have rights (privileges)
 * you cannot distinguish people using only laws of physics
-* you cannot make it physically impossible to violate
+* you cannot make it physically impossible to violate policy
 
 
 
