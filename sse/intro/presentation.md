@@ -55,6 +55,8 @@ Get to know each other!
 * Work
 * Favourite superhero
 
+Close your laptops :)
+
 ???
 
 If you're running a workshop, try this game:
