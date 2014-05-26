@@ -230,7 +230,7 @@ class: small
 
 ---
 
-## Ciphers &rarr; ciphertext
+## Ciphers &rarr; Ciphertext
 
 The foundation of all of cryptography:
 
