@@ -6,6 +6,8 @@ class: center, middle
 
 ### Chris Wilson, [Aptivate](http://www.aptivate.org/), AfNOG 2014
 
+class: left
+
 Based on presentations by:
 
 * [Marcus Adomey](http://www.afnog.org/afnog_chix2011/Thursday/MA/CryptographySlides.odp) (AfChix, Malawi, 2011)
