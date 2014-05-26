@@ -38,12 +38,6 @@ https://github.com/afnog/afnog.github.io
 	li {
 		margin: 1em 0;
 	}
-	li ul, .small ul, .small p {
-		font-size: 85%;
-	}
-	.small ul li, .small p {
-		margin: 0.5em 0;
-	}
 	.remark-code-line {
 		white-space: pre-wrap;
 		line-height: 150%;
@@ -53,13 +47,15 @@ https://github.com/afnog/afnog.github.io
     </style>
   </head>
   <body>
+	<textarea id="source"></textarea>
+
 	<div id="loading">
 		<h1>Loading</h1>
 		<p>Please wait... If this message doesn't disappear soon, check whether you have JavaScript enabled?</p>
 	</div>
 
-	<script src="/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-	<script src="/js/remark-latest.min.js" type="text/javascript"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+	<script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var url = location.pathname + ".md";
 		var lastText = undefined;
@@ -72,7 +68,7 @@ https://github.com/afnog/afnog.github.io
 			{
 				lastText = data;
 				jQuery('#source').html(data);
-				slideshow = remark.create({source: data});
+				slideshow = remark.create();
 				$('#loading').hide();
 			},
 			error: function(jqXHR, textStatus, errorThrown)
