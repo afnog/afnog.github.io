@@ -159,16 +159,17 @@ https://www.schneier.com/book-applied.html
 ## Cryptographic Tools
 
 * hashes/message digests
-  * md5/sha1/sha2/sha3
+  * MD5, SHA1, SHA256, SHA512
   * collisions
 * entropy (randomness)
-  * keys
+* keys
   * symmetric/asymmetric
   * length
   * creation
   * distribution
 * ciphers
   * block/stream
+  * AES, 
 
 Terminology:
 
