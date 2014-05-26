@@ -67,9 +67,9 @@ How would you crack the defensive measures that we just listed?
 
 > The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards - and even then I have my doubts. - [Gene Spafford](http://spaf.cerias.purdue.edu/quotes.html)
 
-Security is *impossible* if:
+Security is **impossible** if:
 
-* some users have rights (privileges)
+* some users have additional rights (privileges)
 * you cannot distinguish people using only laws of physics
 * you cannot make it physically impossible to violate policy
 
