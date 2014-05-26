@@ -247,9 +247,9 @@ The foundation of all of cryptography:
 * Ciphertext and back to plaintext – Apply a key
 * Security of ciphertext with key
   * Lost key = compromised/lost data
-* This is a private key.
+* This is a private key
 * This type of cipher system is efficient for large amounts of data
-* This is a symmetric cipher.
+* This is a symmetric cipher
 
 ---
 
