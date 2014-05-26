@@ -50,6 +50,11 @@ Use the answers to adjust the number of sessions on each topic.
 
 Get to know each other!
 
+* Name
+* Country
+* Work
+* Favourite superhero
+
 ???
 
 If you're running a workshop, try this game:
