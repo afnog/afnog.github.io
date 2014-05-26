@@ -39,11 +39,12 @@ https://github.com/afnog/afnog.github.io
 		margin: 1em 0;
 	}
 	li ul, .small ul, .small p {
-		font-size: 85%;
+		font-size: 80%;
 	}
 	.small ul li, .small p {
 		margin: 0.5em 0;
 	}
+
 	.remark-code-line {
 		white-space: pre-wrap;
 		line-height: 150%;
@@ -65,16 +66,15 @@ https://github.com/afnog/afnog.github.io
 	<script type="text/javascript">
 		var url = location.pathname + ".md";
 		var lastText = undefined;
-		var slideshow = remark.create({sourceUrl: url});
+		var slideshow;
 
-		/*
 		jQuery.ajax({
 			url: url,
 			dataType: "text",
 			success: function(data, textStatus, jqXHR)
 			{
 				lastText = data;
-				var source = jQuery('#source').html(data);
+				jQuery('#source').html(data);
 				slideshow = remark.create();
 				$('#loading').hide();
 			},
@@ -84,7 +84,6 @@ https://github.com/afnog/afnog.github.io
 					textStatus + " " + errorThrown);
 			}
 		});
-		*/
 
 		var interval = setInterval(function() {
 			// Do nothing if not finished loading yet
