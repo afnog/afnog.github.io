@@ -81,6 +81,7 @@ For example:
 * Dual signatures
 * Thumb prints
 * Credit card PIN
+* Credit limits
 
 ---
 
