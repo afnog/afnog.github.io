@@ -242,6 +242,8 @@ The foundation of all of cryptography:
 
 ![Cryptography process](images/cryptography-overview-shorter-034.jpg)
 
+---
+
 ## Symmetric Ciphers
 
 * Ciphertext and back to plaintext – Apply a key
