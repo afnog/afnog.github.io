@@ -80,6 +80,7 @@ Security is **impossible** if:
 * **Can't** be completely secure
 * **Can** make individual attacks more expensive.
 * Beware the side effects (systems harder to use)
+* Increase transparency (more eyes on attackers)
 
 ---
 
@@ -88,7 +89,22 @@ Security is **impossible** if:
 * Use encrypted communications
 * Use multi-factor authentication
 * Verify authenticity of messages
-* 
+* Reduce risks (don't keep sensitive data)
+
+---
+
+## Goals of system security
+
+Why do you lock your doors?
+
+* Confidentiality
+* Integrity
+* Authentication
+  * Access Control
+  * Verification
+  * Non-repudiation
+* Availability
+
 
 
 ---
