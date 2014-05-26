@@ -156,6 +156,8 @@ https://www.schneier.com/book-applied.html
 
 ---
 
+class: small
+
 ## Cryptographic Tools
 
 * hashes/message digests
