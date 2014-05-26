@@ -128,7 +128,7 @@ Why do you lock your doors?
 <img src="https://www.schneier.com/images/bruce-blog3.jpg">
 
 Written by Bruce Schneier. Perhaps the best book around if you
-want to understand how all this works.
+want to understand how cryptography works.
 
 https://www.schneier.com/book-applied.html
 
