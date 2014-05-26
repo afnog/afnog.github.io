@@ -230,6 +230,19 @@ class: small
 
 ---
 
+## Ciphers &rarr; ciphertext
+
+### The foundation
+
+* We start with *plaintext*. Something you can read.
+* We apply a mathematical algorithm to the plaintext.
+  * The algorithm is the *cipher*.
+* The plaintext is turned in to *ciphertext*.
+* Almost all ciphers were secret until recently.
+* Creating a secure cipher is HARD.
+
+---
+
 ## FIN
 
 Any questions?
