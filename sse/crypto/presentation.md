@@ -77,7 +77,6 @@ For example:
 * Security lights
 * Video cameras
 * Passwords
-* Missile codes
 * Dual signatures
 * Thumb prints
 * Credit card PIN
