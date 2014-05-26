@@ -105,6 +105,28 @@ Why do you lock your doors?
   * Non-repudiation
 * Availability
 
+???
+
+### Confidentiality (secrecy)
+
+* Ensuring that no one can read the message except the intended receiver.
+* Data is kept secret from those without the proper credentials, even if that data travels through an insecure medium.
+
+### Integrity (anti-tampering)
+
+* Assuring the receiver that the received message has not been altered in any way from the original.
+* Preventing unauthorised or undetected changes to the protected system.
+
+### Authentication
+
+* The process of proving one's identity.
+  * The primary forms of host-to-host authentication on the Internet today are name-based or address-based, both of which are notoriously weak.
+* Cryptography can help establish identity for authentication purposes
+
+### Non-repudiation
+
+* A mechanism to prove that the sender really sent this message
+
 ---
 
 ## How do we use cryptography?
@@ -112,13 +134,13 @@ Why do you lock your doors?
 * ssh/scp/sftp
 * SSL/TLS/https
 * pops/imaps/smtps
-- VPNs
+* VPNs
 * dnssec
 * wep/wpa
-- digital signatures (software)
-- certificates and pki
-- DRM
-- disk encryption
+* digital signatures (software)
+* certificates and pki
+* DRM
+* disk encryption
 
 ---
 
@@ -131,6 +153,29 @@ Written by Bruce Schneier. Perhaps the best book around if you
 want to understand how cryptography works.
 
 https://www.schneier.com/book-applied.html
+
+---
+
+## Cryptographic Tools
+
+* hashes/message digests
+  * md5/sha1/sha2/sha3
+  * collisions
+* entropy (randomness)
+  * keys
+  * symmetric
+  * asymmetric (public/private)
+  * length
+  * creation
+  * distribution
+* ciphers
+  * block
+  * stream
+
+Terminology:
+
+* plaintext/ciphertext
+* password/passphrase
 
 ---
 
