@@ -73,6 +73,22 @@ Security is *impossible* if:
 * you cannot distinguish people using only laws of physics
 * you cannot make it physically impossible to violate policy
 
+---
+
+## Living with insecurity
+
+* *Can't* be completely secure
+* *Can* make individual attacks more expensive.
+* Beware the side effects (systems harder to use)
+
+---
+
+## Reducing specific risks
+
+* Use encrypted communications
+* Use multi-factor authentication
+* Verify authenticity of messages
+* 
 
 
 ---
