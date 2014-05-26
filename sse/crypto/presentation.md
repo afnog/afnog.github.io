@@ -6,7 +6,7 @@ class: center, middle
 
 ### Chris Wilson, [Aptivate](http://www.aptivate.org/), AfNOG 2014
 
-Credits to [Marcus Adomey](http://www.afnog.org/afnog_chix2011/Thursday/MA/CryptographySlides.odp) (AfChix, Malawi, 2011)
+Credit to [Marcus Adomey](http://www.afnog.org/afnog_chix2011/Thursday/MA/CryptographySlides.odp) (AfChix, Malawi, 2011)
 and [NSRC](https://nsrc.org/workshops/2013/nsrc-tenet-tut/raw-attachment/wiki/AgendaTrack2) for their materials.
 
 You can access this presentation at: http://afnog.github.io/sse/crypto/presentation
