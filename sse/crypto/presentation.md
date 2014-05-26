@@ -105,8 +105,37 @@ Why do you lock your doors?
   * Non-repudiation
 * Availability
 
+---
 
+## How do we use cryptography?
 
+* ssh/scp/sftp
+* SSL/TLS/https
+* pops/imaps/smtps
+- VPNs
+* dnssec
+* wep/wpa
+- digital signatures (software)
+- certificates and pki
+- DRM
+- disk encryption
+
+---
+
+## Applied Cryptography
+
+<img src="https://www.schneier.com/images/cover-applied-200h.gif">
+<img src="https://www.schneier.com/images/bruce-blog3.jpg">
+
+Written by Bruce Schneier. This is, perhaps, the
+best book around if you want to
+understand how all this works.
+ Crypto-Gram email newsletter
+- http://www.schneir.com/crypto-gram.html
+ Counterpane Security
+- http://www.counterpane.com/
+ A voice of reason around much of the
+security hysteria we face today.
 ---
 
 ## FIN
