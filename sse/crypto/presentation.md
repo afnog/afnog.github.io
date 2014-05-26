@@ -24,16 +24,9 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/cryp
 ## What we can talk about
 
 * What is security?
-* How secure is your data? (risks and hazards)
+* How secure are you?
+* Attack vectors
 * 
-* Domain Name Services using BIND
-* Web Services using Apache
-* AAA Services using FreeRADIUS
-* SMTP Services using Exim
-* POP3 & IMAP Services
-* Monitoring IP Services
-* Virtualization
-* Security
 
 ---
 
@@ -63,6 +56,19 @@ What do you want to prevent? Consider the *threat*:
 * What prevents them from doing that? - brainstorm
 
 ## How secure are you?
+
+How would you crack the defensive measures that we just listed?
+
+## Absolute security
+
+> The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards - and even then I have my doubts. - [Gene Spafford](http://spaf.cerias.purdue.edu/quotes.html)
+
+Security is *impossible* if:
+
+* some users have rights (privileges)
+* you cannot distinguish people using only laws of physics
+* you cannot make it physically impossible to violate
+
 
 
 ---
