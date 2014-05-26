@@ -232,7 +232,7 @@ class: small
 
 ## Ciphers &rarr; ciphertext
 
-### The foundation
+The foundation of all of cryptography:
 
 * We start with *plaintext*. Something you can read.
 * We apply a mathematical algorithm to the plaintext.
