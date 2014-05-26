@@ -127,15 +127,9 @@ Why do you lock your doors?
 <img src="https://www.schneier.com/images/cover-applied-200h.gif">
 <img src="https://www.schneier.com/images/bruce-blog3.jpg">
 
-Written by Bruce Schneier. This is, perhaps, the
-best book around if you want to
-understand how all this works.
- Crypto-Gram email newsletter
-- http://www.schneir.com/crypto-gram.html
- Counterpane Security
-- http://www.counterpane.com/
- A voice of reason around much of the
-security hysteria we face today.
+Written by Bruce Schneier. This is, perhaps, the best book around if you
+want to understand how all this works.
+
 ---
 
 ## FIN
