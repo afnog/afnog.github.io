@@ -47,7 +47,7 @@ What do you want to prevent? What is the **threat**?
 * Can someone cause expensive damage (e.g. death)?
 * What prevents them from doing that?
 
-### Make a list of security measures
+### Activity: Make a list of security measures
 
 ???
 
