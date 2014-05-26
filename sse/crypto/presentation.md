@@ -247,8 +247,7 @@ The foundation of all of cryptography:
 ## Symmetric Ciphers
 
 * Ciphertext and back to plaintext – apply a key (the same key)
-* Security of ciphertext with **private** key
-  * Lost key = compromised/lost data
+* Lost key = compromised/lost data
 * This type of cipher system is efficient for large amounts of data
 
 ![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
