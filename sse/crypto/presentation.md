@@ -44,7 +44,7 @@ What do you want to prevent? Consider the *threat*:
 * Are your systems valuable to someone else?
 * Can someone cause expensive damage (e.g. death)?
 * What prevents them from doing that?
-  * Make a list of defensive measures
+  * Make a list of security measures
 
 ???
 
@@ -112,25 +112,40 @@ Why do you lock your doors?
   * Non-repudiation
 * Availability
 
-???
+---
 
 ### Confidentiality (secrecy)
 
+--
+
 * Ensuring that no one can read the message except the intended receiver.
 * Data is kept secret from those without the proper credentials, even if that data travels through an insecure medium.
+* How does this prevent 
+
+---
 
 ### Integrity (anti-tampering)
+
+--
 
 * Assuring the receiver that the received message has not been altered in any way from the original.
 * Preventing unauthorised or undetected changes to the protected system.
 
+---
+
 ### Authentication
+
+--
 
 * The process of proving one's identity.
   * The primary forms of host-to-host authentication on the Internet today are name-based or address-based, both of which are notoriously weak.
 * Cryptography can help establish identity for authentication purposes
 
+---
+
 ### Non-repudiation
+
+--
 
 * A mechanism to prove that the sender really sent this message
 
