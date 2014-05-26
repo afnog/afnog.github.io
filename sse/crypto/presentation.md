@@ -97,8 +97,8 @@ How would you crack the defensive measures that we just listed?
 Security is **impossible** if:
 
 * some users have additional rights (privileges)
-* you cannot distinguish people using only laws of physics
-* you cannot make it physically impossible to violate policy
+* AND you cannot distinguish users using only laws of physics
+* OR you cannot make it physically impossible to violate policy
 
 ---
 
