@@ -224,7 +224,7 @@ class: small
   * distribution
 * ciphers
   * block/stream
-  * AES, 3DES, Blowfish
+  * AES, 3DES, Blowfish, IDEA
 * plaintext/ciphertext
 * password/passphrase
 
