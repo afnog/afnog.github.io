@@ -73,8 +73,8 @@ https://github.com/afnog/afnog.github.io
 			success: function(data, textStatus, jqXHR)
 			{
 				lastText = data;
-				jQuery('#source').html(data);
-				slideshow = remark.create('#source');
+				var source = jQuery('#source').html(data);
+				slideshow = remark.create(source);
 				$('#loading').hide();
 			},
 			error: function(jqXHR, textStatus, errorThrown)
