@@ -55,9 +55,13 @@ What do you want to prevent? Consider the *threat*:
   * Access to other systems?
 * What prevents them from doing that? - brainstorm
 
+---
+
 ## How secure are you?
 
 How would you crack the defensive measures that we just listed?
+
+---
 
 ## Absolute security
 
