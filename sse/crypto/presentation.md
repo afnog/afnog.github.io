@@ -252,7 +252,7 @@ The foundation of all of cryptography:
 * This is a private key
 * This type of cipher system is efficient for large amounts of data
 
-![Symmetric decryption](cryptography-overview-shorter-037.jpg)
+![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
 
 ---
 
