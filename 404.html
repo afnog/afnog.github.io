@@ -65,8 +65,9 @@ https://github.com/afnog/afnog.github.io
 	<script type="text/javascript">
 		var url = location.pathname + ".md";
 		var lastText = undefined;
-		var slideshow;
+		var slideshow = remark.create({sourceUrl: url});
 
+		/*
 		jQuery.ajax({
 			url: url,
 			dataType: "text",
@@ -83,6 +84,7 @@ https://github.com/afnog/afnog.github.io
 					textStatus + " " + errorThrown);
 			}
 		});
+		*/
 
 		var interval = setInterval(function() {
 			// Do nothing if not finished loading yet
