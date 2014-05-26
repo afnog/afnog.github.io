@@ -235,8 +235,7 @@ class: small
 The foundation of all of cryptography:
 
 * We start with *plaintext*. Something you can read.
-* We apply a mathematical algorithm to the plaintext.
-  * The algorithm is the *cipher*.
+* We apply a mathematical algorithm (*cipher*) to the plaintext.
 * The plaintext is turned in to *ciphertext*.
 * Almost all ciphers were secret until recently.
 * Creating a secure cipher is HARD.
