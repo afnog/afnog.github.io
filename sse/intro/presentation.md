@@ -95,13 +95,13 @@ Suggestion: if someone's phone rings, they have to do a dance for us :)
 ## Timetable
 
 * 06:30-08:00: Breakfast at the hotel (Kempinski)
-* 08:15 and 08:30: Buses to the venue (Palace du Peuple)
+* 07:45, 08:00, 08:15 and 08:30: Buses to the venue (Palace du Peuple)
 * 09:00: Workshops start
 * 11:00: tea break
 * 14:00-15:00: lunch at the venue (Palace du Peuple)
 * 16:30: tea break
 * 18:30: dinner at the venue (Palace du Peuple)
-* 20:15 and 20:30: buses to hotel (Kempinski)
+* 19:30, 19:45, 20:00 and 20:15: buses to hotel (Kempinski)
 
 Updates on the [NSRC wiki](https://nsrc.org/workshops/2014/afnog/wiki/Timetable).
 
