@@ -40,6 +40,8 @@ What is security?
 
 What do you want to prevent? Consider the *threat*:
 
+--
+
 * Is your data valuable to someone else?
 * Are your systems valuable to someone else?
 * Can someone cause expensive damage (e.g. death)?
