@@ -65,7 +65,22 @@ What do you want to prevent? What is the **threat**?
 
 ---
 
-## Make a list of security measures
+## Examples of security measures
+
+Make a list of measures that you actually use.
+
+--
+
+For example:
+
+* Locks on doors
+* Security lights
+* Video cameras
+* Passwords
+* Missile codes
+* Dual signatures
+* Thumb prints
+* Credit card PIN
 
 ---
 
@@ -90,9 +105,14 @@ Security is **impossible** if:
 ## Living with insecurity
 
 * **Can't** be completely secure
-* **Can** make individual attacks more expensive.
+* **Can** make individual attacks:
+  * More expensive
+  * More risky
+  * Less rewarding
 * Beware the side effects (systems harder to use)
-* Increase transparency (more eyes on attackers)
+* Increase transparency
+  * more eyes on attackers
+  * more understanding of what security means
 
 ---
 
@@ -102,6 +122,7 @@ Security is **impossible** if:
 * Use multi-factor authentication
 * Verify authenticity of messages
 * Reduce risks (don't keep sensitive data)
+* Increase risks for attackers (monitoring and logging)
 
 ---
 
