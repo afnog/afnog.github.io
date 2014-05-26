@@ -225,9 +225,6 @@ class: small
 * ciphers
   * block/stream
   * AES, 
-
-Terminology:
-
 * plaintext/ciphertext
 * password/passphrase
 
