@@ -32,6 +32,12 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/cryp
 
 ## What do you care about?
 
+What is security?
+
+--
+
+* Preventing some particular event.
+
 What do you want to prevent? Consider the *threat*:
 
 * Is your data valuable to someone else?
