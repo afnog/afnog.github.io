@@ -242,6 +242,15 @@ The foundation of all of cryptography:
 
 ![Cryptography process](images/cryptography-overview-shorter-034.jpg)
 
+## Symmetric Ciphers
+
+* Ciphertext and back to plaintext – Apply a key
+* Security of ciphertext with key
+  * Lost key = compromised/lost data
+* This is a private key.
+* This type of cipher system is efficient for large amounts of data.
+* This is a symmetric cipher.
+
 ---
 
 ## FIN
