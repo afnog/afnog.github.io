@@ -60,6 +60,7 @@ https://github.com/afnog/afnog.github.io
 		var url = location.pathname + ".md";
 		var lastText = undefined;
 		var slideshow = remark.create({sourceUrl: url});
+		$('#loading').hide();
 
 		/*
 		jQuery.ajax({
