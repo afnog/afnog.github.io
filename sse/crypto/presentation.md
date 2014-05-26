@@ -47,8 +47,6 @@ What do you want to prevent? What is the **threat**?
 * Can someone cause expensive damage (e.g. death)?
 * What prevents them from doing that?
 
-### Activity: Make a list of security measures
-
 ???
 
 * Is your data valuable to someone else?
@@ -64,6 +62,10 @@ What do you want to prevent? What is the **threat**?
   * IP addresses?
   * Access to other systems?
 * What prevents them from doing that? - brainstorm
+
+---
+
+### Make a list of security measures
 
 ---
 
