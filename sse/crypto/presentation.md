@@ -38,9 +38,9 @@ What is security?
 
 * Trying to prevent some particular event.
 
-What do you want to prevent? Consider the *threat*:
-
+What do you want to prevent?
 --
+Consider the *threat*:
 
 * Is your data valuable to someone else?
 * Are your systems valuable to someone else?
