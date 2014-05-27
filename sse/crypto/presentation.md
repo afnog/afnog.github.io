@@ -403,9 +403,7 @@ sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 * Use the `sha256` command to generate a signature for the file.
 * Use `scp` to copy the file to your partner's computer:
 
-<pre>
-scp mymessage.txt afnog@pcYY.sse.ws.afnog.org:/tmp
-</pre>
+	scp mymessage.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 
 * Tell your partner the first four letters of the hash.
   * With a good hash function, it's reasonably safe to compare just the first
