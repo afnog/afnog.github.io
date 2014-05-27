@@ -379,7 +379,7 @@ Does this hash function meet our ideal properties?
 
 ---
 
-## Hash Analysis
+### Analysis
 
 Not really!
 
