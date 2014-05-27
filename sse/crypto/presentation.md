@@ -725,7 +725,7 @@ Answers:
 
 1. If stolen, allows login to server with no password!
 2. The passphrase is not sent to the server, only used to decrypt the key.
-3. You need an agent to cache your passphrase and forward to 
+3. You need an agent to cache your passphrase and forward through servers.
 
 
 
