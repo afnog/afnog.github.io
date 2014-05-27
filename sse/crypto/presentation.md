@@ -431,6 +431,8 @@ layout: true
 
 ---
 
+### Basic Encryption
+
 * Write a message to your partner in a text file (e.g. `message2.txt`)
 * Choose your encryption passphrase to share with your partner
 * Encrypt your message with `openssl`:
@@ -438,6 +440,10 @@ layout: true
 ```sh
 openssl aes-256-cbc -a -salt -in message2.txt -out message2.txt.enc
 ```
+
+---
+
+### Basic Decryption
 
 * Have a look at the output file (`message2.txt.enc`)
 * Send the file to your partner
