@@ -391,6 +391,8 @@ The checksums of the large binary files in that directory.
 
 ## Hash Practical 1
 
+### Verifying downloads
+
 ```sh
 fetch http://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
 md5 FreeBSD-10.0-RELEASE-i386-bootonly.iso
@@ -404,6 +406,8 @@ sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 ---
 
 ## Hash Practical 2
+
+### Hashing your own message
 
 * Write a message to your partner in a text file (e.g. `message1.txt`)
 * Use the `sha256` command to generate a signature for the file.
@@ -424,6 +428,8 @@ name: encryption-practical-1
 layout: true
 
 ## Encryption Practical 1
+
+### Basic Encryption
 
 ---
 
@@ -455,9 +461,15 @@ template: encryption-practical-1
 
 ### Questions
 
-* Was the previous exercise using symmetric or asymmetric crypto?
+* Was the previous exercise using symmetric or asymmetric crypto? How do you know?
 * Using public key crypto?
 * What algorithm?
+
+---
+
+layout: true
+
+## Encryption 
 
 ---
 
