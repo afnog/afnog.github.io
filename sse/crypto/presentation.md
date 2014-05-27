@@ -633,6 +633,8 @@ sudo /etc/rc.d/sshd keygen
 
 Now what happens when you connect?
 
+---
+
 ```
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
