@@ -658,6 +658,9 @@ Host key verification failed.
 
 * When is this useful?
 * When is it a problem?
+* How would you fix it:
+  * On the client?
+  * On the server?
 
 ---
 
