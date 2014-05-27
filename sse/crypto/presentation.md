@@ -678,6 +678,12 @@ And test that you can SSH without this warning.
 
 ---
 
+### Passwords
+
+![XKCD on Password Strength](password_strength.png)
+
+---
+
 ### Key Authentication
 
 * What is the biggest vulnerability in SSH?
@@ -691,7 +697,9 @@ Passwords, and don't use them!
 
 ???
 
-Two-factor authentication.
+* Why are password
+* Two-factor authentication.
+* 
 
 ---
 
@@ -715,7 +723,7 @@ Answers:
 
 1. If stolen, allows login to server with no password!
 2. The passphrase is not sent to the server, only used to decrypt the key.
-
+3. You need an agent to cache your passphrase and forward to 
 
 
 
