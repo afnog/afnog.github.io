@@ -633,6 +633,8 @@ ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
 
 ---
 
+### Key Caching
+
 What happens after the first time you connect? Why?
 
 --
