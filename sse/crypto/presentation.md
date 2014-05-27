@@ -755,7 +755,7 @@ Copy the key to your partner's server:
 ssh-copy-id -i ~/.ssh/id_rsa.pub pcYY.sse.ws.afnog.org
 ```
 
-Now try logging in. What do you notice?
+Now try logging in to their server. What do you notice?
 
 ```sh
 ssh pcYY.sse.ws.afnog.org
