@@ -633,11 +633,12 @@ ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
 
 ---
 
-
-
 What happens after the first time you connect? Why?
 
-* What should you do about it? `ssh-keygen -lf /etc/ssh/
+--
+
+* If you answer **Yes**, the host key is cached in `~/.ssh/known_hosts`
+* No message is displayed if the key has not changed.
 
 ---
 
