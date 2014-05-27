@@ -349,6 +349,10 @@ Has these properties:
 
 What does *infeasible* mean?
 
+---
+
+## Perfect hash function
+
 A hash function that maps each valid input to a different hash value is said
 to be *perfect*.
 
