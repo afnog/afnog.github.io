@@ -459,8 +459,6 @@ Credit: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-ope
 
 ---
 
-template: encryption-practical-1
-
 ### Questions
 
 * Was the previous exercise using symmetric or asymmetric crypto? How do you know?
