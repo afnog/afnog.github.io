@@ -608,7 +608,10 @@ Why do we verify host keys?
 
 .height_8em.center[![A Man-in-the-Middle Attack](images/Main_the_middle.JPG)]
 
-* Avoid *Man-in-the-Middle Attacks*
+--
+
+* Avoid giving your password to an attacker (why?)
+* Avoid leaking information to an attacker (how and why?)
 
 
 
