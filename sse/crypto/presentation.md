@@ -385,7 +385,7 @@ The checksums of the large binary files in that directory.
 
 ---
 
-## Hash practical 1
+## Hash Practical 1
 
 ```sh
 fetch http://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
@@ -399,7 +399,7 @@ sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 
 ---
 
-## Hash practical 2
+## Hash Practical 2
 
 * Write a message to your partner in a text file (e.g. `message1.txt`)
 * Use the `sha256` command to generate a signature for the file.
@@ -416,7 +416,7 @@ scp message1.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 
 ---
 
-## Encryption Practical
+## Encryption Practical 1
 
 * Write a message to your partner in a text file (e.g. `message2.txt`)
 * Choose your encryption passphrase to share with your partner
@@ -433,6 +433,14 @@ openssl aes-256-cbc -a -salt -in message2.txt -out message2.txt.enc
 ```sh
 openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.new
 ```
+
+---
+
+## Encryption Practical 2
+
+* Was the previous exercise using symmetric or asymmetric crypto?
+* Using public key crypto?
+
 
 ## FIN
 
