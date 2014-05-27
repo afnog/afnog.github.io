@@ -1,4 +1,4 @@
-class: center, middle
+class: center, middle, title
 
 # Cryptography and Security
 
