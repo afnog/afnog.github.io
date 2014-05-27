@@ -286,14 +286,6 @@ sending and to decrypt it once it is received.
 
 ![Public key cryptography](images/security_concepts_asymmetric.png)
 
-Examples:
-
-* DES and 3DES (56/112 bits, 1977+)
-* AES (128-256 bits, 
-* IDEA (128 bit, 1991, patented?)
-
-
-
 ---
 
 ## FIN
