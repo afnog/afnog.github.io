@@ -715,6 +715,8 @@ ssh-keygen
 
 Make sure you use a passphrase!
 
+### Questions
+
 * Why is a key with no passphrase dangerous?
 * Why is a passphrase (on a key) better than a password (on an account?)
 * What are the disadvantages?
