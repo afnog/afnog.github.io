@@ -358,7 +358,7 @@ Not really!
 
 ## Hashes in real life
 
-Look at ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/,
+Look at [ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/](ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/),
 specifically `CHECKSUM.MD5` and `CHECKSUM.SHA256`.
 
 What do these tell you?
