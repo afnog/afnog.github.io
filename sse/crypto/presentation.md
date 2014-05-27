@@ -366,6 +366,9 @@ Not really!
 
 The checksums of the large binary files in that directory.
 
+* Do you actually need to download this file from `ftp.freebsd.org`?
+* How would you check that your download is complete and not corrupt?
+
 ---
 
 ## FIN
