@@ -767,8 +767,6 @@ You should be prompted for your passphrase instead of a password:
 
 > Enter passphrase for key '/home/afnog/.ssh/id_rsa': 
 
-
-
 ---
 
 layout: false
