@@ -637,7 +637,7 @@ To see what happens, replace your host key:
 sudo /etc/rc.d/sshd keygen
 ```
 
-Now what happens when you connect?
+When your partner has replaced their host key, what happens when you connect to their PC?
 
 ---
 
