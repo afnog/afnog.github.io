@@ -385,9 +385,11 @@ The checksums of the large binary files in that directory.
 
 ## Hash practical 1
 
-	fetch http://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
-	md5 FreeBSD-10.0-RELEASE-i386-bootonly.iso
-	sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
+```
+fetch http://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
+md5 FreeBSD-10.0-RELEASE-i386-bootonly.iso
+sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
+```
 
 * Does it match?
 * Why would you do this?
