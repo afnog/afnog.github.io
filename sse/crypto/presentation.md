@@ -491,14 +491,14 @@ Questions:
 
 ### Certificate Exchange
 
-Send the certificate (NOT the key) to your partner.
-
-Examine the certificate sent by your partner:
+* Send the certificate (NOT the key) to your partner.
+* Examine the certificate sent by your partner:
 
 ```sh
 openssl x509 -in yourpartner.crt.pem -noout -text
 ```
 
+* How do you know that you're looking at the correct certificate?
 
 ---
 
