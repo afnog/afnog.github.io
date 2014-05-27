@@ -588,10 +588,53 @@ Questions:
 
 ---
 layout: true
-## Secure Shell Practical
+## Secure Shell
 ---
 
-### Rationale
+### Host Keys
+
+Why do we verify host keys?
+
+.height_8em.center[![A Man-in-the-Middle Attack](images/Main_the_middle.JPG)]
+
+--
+
+* Avoid giving your password to an attacker (why?)
+* Avoid leaking information to an attacker (how and why?)
+
+---
+
+### Host Key Demonstration
+
+* When you SSH to your partner's computer for the first time, what do you see?
+
+--
+
+	The authenticity of host 'pc34.sse.ws.afnog.org (196.200.219.134)' can't be established.
+	ECDSA key fingerprint is ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
+	Are you sure you want to continue connecting (yes/no)? 
+
+* Have your parnet 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
+Please contact your system administrator.
+Add correct host key in /home/chris/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /home/chris/.ssh/known_hosts:228
+  remove with: ssh-keygen -f "/home/chris/.ssh/known_hosts" -R pc34.sse.ws.afnog.org
+ECDSA host key for pc34.sse.ws.afnog.org has changed and you have requested strict checking.
+Host key verification failed.
+
+
+
+### Key Authentication
 
 * What is the biggest vulnerability in SSH?
 * What can we do about it?
@@ -607,17 +650,6 @@ Passwords, and don't use them!
 Two-factor authentication.
 
 ---
-
-### Host Key Verification
-
-Why do we verify host keys?
-
-.height_8em.center[![A Man-in-the-Middle Attack](images/Main_the_middle.JPG)]
-
---
-
-* Avoid giving your password to an attacker (why?)
-* Avoid leaking information to an attacker (how and why?)
 
 ---
 
