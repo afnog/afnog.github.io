@@ -451,7 +451,7 @@ scp message1.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 
 * Tell your partner the first four letters of the hash.
 * Check the hash of your partner's message.
-* Make a small change to the file. How does the hash change?
+* Make a small change to the message. How does the hash change?
 
 ---
 layout: true
