@@ -719,9 +719,9 @@ Make sure you use a passphrase!
 * Why is a passphrase (on a key) better than a password (on an account?)
 * What are the disadvantages?
 
---
+---
 
-Answers:
+### Reasons to Use a Passphrase
 
 1. If stolen, allows login to server with no password!
 2. The passphrase is not sent to the server, only used to decrypt the key.
