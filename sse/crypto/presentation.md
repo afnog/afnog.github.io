@@ -374,6 +374,7 @@ Perform the following exercise:
 
 * Write a short message to a partner
 * Compute the hash **on a separate paper**
+  * Avoid giving away your working to make it harder
 * Give the message and hash to your partner to verify
 * Verify the message from your partner
 
