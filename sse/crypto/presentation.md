@@ -360,7 +360,8 @@ Not really!
 
 [ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/](ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/)
 
-Look at the `CHECKSUM.MD5` and `CHECKSUM.SHA256` files. What do these tell you?
+* Look at the `CHECKSUM.MD5` and `CHECKSUM.SHA256` files.
+* What do they tell you?
 
 --
 
