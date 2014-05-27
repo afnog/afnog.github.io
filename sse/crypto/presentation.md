@@ -363,6 +363,7 @@ Not really!
 * Look at the `CHECKSUM.MD5` and `CHECKSUM.SHA256` files.
 * What do they tell you?
 --
+
 The checksums of the large binary files in that directory.
 
 ---
