@@ -402,9 +402,10 @@ sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 scp mymessage.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 </pre>
 
-* Tell your partner the first four letters of the 
+* Tell your partner the first four letters of the hash.
   * With a good hash function, it's reasonably safe to compare just the first
     few characters.
+* Check the hash of your partner's message.
 
 ---
 
