@@ -613,8 +613,6 @@ Why do we verify host keys?
 * Avoid giving your password to an attacker (why?)
 * Avoid leaking information to an attacker (how and why?)
 
-
-
 ---
 
 layout: false
