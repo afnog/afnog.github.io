@@ -695,6 +695,33 @@ Two-factor authentication.
 
 ---
 
+### Key Generation
+
+If you don't already have an SSH key, generate one:
+
+```sh
+ssh-keygen
+```
+
+Make sure you use a passphrase!
+
+* Why is a key with no passphrase dangerous?
+* Why is a passphrase (on a key) better than a password (on an account?)
+* What are the disadvantages?
+
+--
+
+Answers:
+
+1. If stolen, allows login to server with no password!
+2. The passphrase is not sent to the server, only used to decrypt the key.
+
+
+
+
+
+---
+
 layout: false
 
 ## FIN
