@@ -310,7 +310,9 @@ which is called the hash value or **hash**.
 
 ![Hash function](images/Hash_table_4_1_1_0_0_1_0_LL.svg)
 
-Ideal hash function:
+---
+
+## Ideal hash function
 
 * it is easy to compute the hash value for any given message
 * it is infeasible to find a message that has a given hash
