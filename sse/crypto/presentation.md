@@ -637,7 +637,9 @@ To see what happens, replace your host key:
 sudo /etc/rc.d/sshd keygen
 ```
 
-When your partner has replaced their host key, what happens when you connect to their PC?
+* Wait until your partner has replaced their host key
+* Try connecting to their virtual machine
+* What happens?
 
 ---
 
