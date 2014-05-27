@@ -389,6 +389,7 @@ Not really!
 
 ---
 
+layout: false
 ## Hashes in real life
 
 [ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/](ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/)
