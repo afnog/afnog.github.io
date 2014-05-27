@@ -509,6 +509,12 @@ Question:
 ### Encryption
 
 * Write a message to your partner in a text file (e.g. `message3.txt`)
+* Encrypt your message with `openssl`:
+
+```sh
+openssl smime -encrypt -binary -aes-256-cbc -in message3.txt -out message3.txt.enc yourpartner.crt.pem
+openssl aes-256-cbc -a -salt -in message2.txt -out message2.txt.enc
+```
 
 ---
 
