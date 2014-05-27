@@ -403,6 +403,8 @@ scp mymessage.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 </pre>
 
 * Tell your partner the first four letters of the 
+  * With a good hash function, it's reasonably safe to compare just the first
+    few characters.
 
 ---
 
