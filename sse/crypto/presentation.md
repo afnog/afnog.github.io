@@ -543,6 +543,18 @@ Credit: http://stackoverflow.com/a/12233688/648162
 
 ---
 
+### Decryption
+
+* Have a look at the output file (`message2.txt.enc`)
+* Send the file to your partner
+* Decrypt the message from your partner:
+
+```sh
+openssl smime -decrypt -binary -in message3.txt.enc -out message3.txt.dec -inkey yourname.key.pem
+```
+
+---
+
 layout: false
 
 ## FIN
