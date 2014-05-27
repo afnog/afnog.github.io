@@ -264,7 +264,8 @@ sending and to decrypt it once it is received.
 
 ## Common Symmetric Ciphers
 
-* DES and 3DES (56/112 bits, 1977+)
+* DES (56 bits, 1977)
+* 3DES (112 bits, 1998)
 * AES (128-256 bits, 2001)
 * IDEA (128 bit, 1991, patented until 2012)
 
