@@ -581,6 +581,8 @@ Questions:
 * How do we verify the authenticity of the message?
 * Where are the weak points in this process?
 
+---
+
 ### Weaknesses
 
 * Certificate exchange
