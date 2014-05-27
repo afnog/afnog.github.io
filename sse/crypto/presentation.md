@@ -469,11 +469,10 @@ Credit: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-ope
 
 layout: true
 ## Encryption Practical 2
-### Asymmetric Encryption
 
 ---
 
-#### Certificate Generation
+### Certificate Generation
 
 * If you don't already have a certificate, generate one.
 * We can make self-signed certificates for free:
