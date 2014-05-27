@@ -349,8 +349,11 @@ A hash function that maps each valid input to a different hash value is said
 to be *perfect*.
 
 ---
+layout: true
+## Hash Practical 1
+---
 
-## Hash Exercise
+### Exercise
 
 Example hash function:
 
@@ -365,7 +368,7 @@ The exercise:
 
 ---
 
-## Hash Analysis
+### Analysis
 
 Does this hash function meet our ideal properties?
 
