@@ -433,8 +433,6 @@ layout: true
 
 ---
 
-template: encryption-practical-1
-
 * Write a message to your partner in a text file (e.g. `message2.txt`)
 * Choose your encryption passphrase to share with your partner
 * Encrypt your message with `openssl`:
@@ -468,8 +466,12 @@ template: encryption-practical-1
 ---
 
 layout: true
+## Encryption Practical 2
+### Asymmetric Encryption
 
-## Encryption 
+---
+
+
 
 ---
 
