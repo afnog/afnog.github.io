@@ -592,6 +592,12 @@ Questions:
 * Brute force attack on key
 
 ---
+layout: false
+### Passwords
+
+[![XKCD on Password Strength](images/password_strength.png)](http://xkcd.com/936/)
+
+---
 layout: true
 ## Secure Shell
 ---
@@ -675,12 +681,6 @@ ssh-keygen -R pcYY.sse.ws.afnog.org
 And test that you can SSH without this warning.
 
 * What do you see instead, and why?
-
----
-
-### Passwords
-
-[![XKCD on Password Strength](images/password_strength.png)](http://xkcd.com/936/)
 
 ---
 
