@@ -350,7 +350,7 @@ Has these properties:
 What does *infeasible* mean?
 
 A hash function that maps each valid input to a different hash value is said
-to be *perfect*.
+to be *perfect*. What does that mean?
 
 ---
 layout: true
