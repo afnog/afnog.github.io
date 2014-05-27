@@ -189,6 +189,8 @@ Why do you lock your doors?
 
 ## How do we use cryptography?
 
+--
+
 * ssh/scp/sftp
 * SSL/TLS/https
 * pops/imaps/smtps
