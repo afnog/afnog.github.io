@@ -246,11 +246,15 @@ The foundation of all of cryptography:
 
 ## Symmetric Ciphers
 
+**The same key** is used to encrypt the document before
+sending and to decrypt it once it is received.
+
 * Ciphertext and back to plaintext – apply a key (the same key)
 * Lost key = compromised/lost data
 * This type of cipher system is efficient for large amounts of data
 
 ![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
+
 
 ---
 
