@@ -721,7 +721,7 @@ Make sure you use a passphrase!
 
 ---
 
-### Reasons to Use a Passphrase
+### Answers
 
 1. Unprotected key allows login to server with no password!
 2. The passphrase is not sent to the server, only used to decrypt the key.
