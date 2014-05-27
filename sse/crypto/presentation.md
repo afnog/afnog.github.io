@@ -474,7 +474,7 @@ layout: true
 
 ### Certificate Generation
 
-* If you don't already have a certificate, generate one.
+* If you don't already have a certificate, you need one.
 * We can make self-signed certificates for free:
 
 ```sh
