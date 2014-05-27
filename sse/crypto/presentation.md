@@ -595,7 +595,7 @@ Questions:
 layout: false
 ## Passwords
 
-[![XKCD on Password Strength](images/password_strength.png)](http://xkcd.com/936/)
+.center[[![XKCD on Password Strength](images/password_strength.png)](http://xkcd.com/936/)]
 
 ---
 layout: true
