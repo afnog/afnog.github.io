@@ -340,10 +340,12 @@ which is called the hash value or **hash**.
 
 ## Ideal hash function
 
-* it is easy to compute the hash value for any given message
-* it is infeasible to find a message that has a given hash
-* it is infeasible to modify a message without changing its hash
-* it is infeasible to find two different messages with the same hash
+* easy to compute the hash value for any given message
+* infeasible to find a message that has a given hash
+* infeasible to modify a message without changing its hash
+* infeasible to find two different messages with the same hash
+
+What does *infeasible* mean?
 
 A hash function that maps each valid input to a different hash value is said
 to be *perfect*.
@@ -372,10 +374,10 @@ Perform the following exercise:
 
 Does this hash function meet our ideal properties?
 
-1. it is easy to compute the hash value for any given message
-2. it is infeasible to find a message that has a given hash
-3. it is infeasible to modify a message without changing its hash
-4. it is infeasible to find two different messages with the same hash
+1. easy to compute the hash value for any given message
+2. infeasible to find a message that has a given hash
+3. infeasible to modify a message without changing its hash
+4. infeasible to find two different messages with the same hash
 
 ---
 
