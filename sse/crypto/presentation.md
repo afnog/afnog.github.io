@@ -344,7 +344,9 @@ Does this hash function meet our ideal properties?
 3. it is infeasible to modify a message without changing its hash
 4. it is infeasible to find two different messages with the same hash
 
---
+---
+
+## Hash Analysis
 
 Not really!
 
