@@ -232,6 +232,8 @@ class: small
 
 ## Ciphers &rarr; Ciphertext
 
+![Cryptography process](images/cryptography-overview-shorter-034.jpg)
+
 The foundation of all of cryptography:
 
 * We start with *plaintext*. Something you can read.
@@ -240,7 +242,6 @@ The foundation of all of cryptography:
 * Almost all ciphers were secret until recently.
 * Creating a secure cipher is HARD.
 
-![Cryptography process](images/cryptography-overview-shorter-034.jpg)
 
 ---
 
