@@ -258,7 +258,7 @@ sending and to decrypt it once it is received.
 * This type of cipher system is efficient for large amounts of data
 * Most are relatively simple to understand and implement
 
-![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
+.center.height_8em[![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)]
 
 Examples:
 
