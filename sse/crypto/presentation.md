@@ -617,20 +617,20 @@ Why do we verify host keys?
 * Have your parnet 
 
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-The fingerprint for the ECDSA key sent by the remote host is
-ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
-Please contact your system administrator.
-Add correct host key in /home/chris/.ssh/known_hosts to get rid of this message.
-Offending ECDSA key in /home/chris/.ssh/known_hosts:228
-  remove with: ssh-keygen -f "/home/chris/.ssh/known_hosts" -R pc34.sse.ws.afnog.org
-ECDSA host key for pc34.sse.ws.afnog.org has changed and you have requested strict checking.
-Host key verification failed.
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+	Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+	It is also possible that a host key has just been changed.
+	The fingerprint for the ECDSA key sent by the remote host is
+	ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
+	Please contact your system administrator.
+	Add correct host key in /home/chris/.ssh/known_hosts to get rid of this message.
+	Offending ECDSA key in /home/chris/.ssh/known_hosts:228
+	  remove with: ssh-keygen -f "/home/chris/.ssh/known_hosts" -R pc34.sse.ws.afnog.org
+	ECDSA host key for pc34.sse.ws.afnog.org has changed and you have requested strict checking.
+	Host key verification failed.
 
 
 
