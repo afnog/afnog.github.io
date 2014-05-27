@@ -242,7 +242,6 @@ The foundation of all of cryptography:
 * Almost all ciphers were secret until recently.
 * Creating a secure cipher is HARD.
 
-
 ---
 
 ## Symmetric Ciphers
