@@ -455,8 +455,8 @@ template: encryption-practical-1
 * Using public key crypto?
 * What algorithm?
 
+---
 layout:
-
 ---
 
 ## FIN
