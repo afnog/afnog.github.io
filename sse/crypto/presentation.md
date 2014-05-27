@@ -308,7 +308,7 @@ Solutions?
 Algorithms that take any amount of input and return a fixed-size output string,
 which is called the hash value or **hash**.
 
-![Hash function](Hash_table_4_1_1_0_0_1_0_LL.svg)
+![Hash function](images/Hash_table_4_1_1_0_0_1_0_LL.svg)
 
 Ideal hash function:
 
