@@ -459,7 +459,6 @@ template: encryption-practical-1
 layout: false
 ---
 
-
 ## FIN
 
 Any questions?
