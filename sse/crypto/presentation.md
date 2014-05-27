@@ -299,7 +299,7 @@ Solutions?
 * Use public key crypto to encrypt the secret used to encrypt document
 * Longer keys are harder to brute-force (e.g. 2048 bits, 4096 bits)
   * Notice how long these are compared to symmetric cipher keys!
-
+* Use a well-designed (unbroken) algorithm
 
 ---
 
