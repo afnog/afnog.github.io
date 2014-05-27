@@ -606,9 +606,9 @@ layout: true
 
 Why do we verify host keys?
 
-.height_8em.center[![A Man-in-the-Middle Attack](images/Main_the_middle.JPG)]
-
 --
+
+.height_8em.center[![A Man-in-the-Middle Attack](images/Main_the_middle.JPG)]
 
 * Avoid giving your password to an attacker (why?)
 * Avoid leaking information to an attacker (how and why?)
