@@ -714,9 +714,7 @@ Passwords, and don't use them!
 
 ???
 
-* Why are password
-* Two-factor authentication.
-* 
+Two-factor authentication.
 
 ---
 
@@ -744,7 +742,21 @@ Make sure you use a passphrase!
 2. The passphrase is not sent to the server, only used to decrypt the key.
 3. You need an agent to cache your passphrase and forward through servers.
 
+---
 
+### Key Distribution
+
+Copy the key to your partner's server:
+
+```sh
+ssh-copy-id pcYY.sse.ws.afnog.org
+```
+
+Now try logging in. What do you notice?
+
+--
+
+You should be prompted for your passphrase instead of a password:
 
 
 ---
