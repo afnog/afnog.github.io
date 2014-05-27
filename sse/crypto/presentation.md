@@ -662,7 +662,9 @@ Host key verification failed.
   * On the client?
   * On the server?
 
---
+---
+
+### Recovery
 
 For now, fix it on your client by running:
 
