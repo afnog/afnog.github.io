@@ -553,6 +553,10 @@ Credit: http://stackoverflow.com/a/12233688/648162
 openssl smime -decrypt -binary -in message3.txt.enc -out message3.txt.dec -inkey yourname.key.pem
 ```
 
+Questions:
+
+* Why do you need to enter your passphrase?
+
 ---
 
 layout: false
