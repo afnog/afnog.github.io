@@ -442,7 +442,7 @@ openssl aes-256-cbc -a -salt -in message2.txt -out message2.txt.enc
 * Decrypt the message from your partner:
 
 ```sh
-openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.new
+openssl aes-256-cbc -d -a -in message2.txt.enc -out message2.txt.new
 ```
 
 ???
