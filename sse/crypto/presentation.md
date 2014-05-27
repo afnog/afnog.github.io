@@ -556,8 +556,29 @@ openssl smime -decrypt -binary -in message3.txt.enc -out message3.txt.dec -inkey
 Questions:
 
 * Why do you need to enter your passphrase?
+
+---
+
+### Questions
+
 * How could an attacker break this encryption?
 * How much would it cost?
+* How do we verify the authenticity of the message?
+* Where are the weak points in this process?
+
+--
+  * Certificate exchange
+  * Passphrase entry
+  * Decrypted file stored on disk
+
+---
+
+layout: true
+## Encryption Practical 2
+
+---
+
+
 
 ---
 
