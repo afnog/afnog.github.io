@@ -568,8 +568,11 @@ Questions:
 
 --
   * Certificate exchange
+  * Passphrase memory
   * Passphrase entry
   * Decrypted file stored on disk
+  * Brute force attack on passphrase
+  * Brute force attack on key
 
 ---
 
