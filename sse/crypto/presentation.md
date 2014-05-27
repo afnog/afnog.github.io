@@ -587,10 +587,8 @@ Questions:
 * Brute force attack on key
 
 ---
-
 layout: true
-## Encryption Practical 2
-
+## Secure Login with Keys
 ---
 
 
