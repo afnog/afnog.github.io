@@ -355,11 +355,11 @@ layout: true
 
 ### Exercise
 
-Example hash function:
+Using this hash function:
 
 * Add up all the letters and digits in the message (A=1, B=2, etc)
 
-The exercise:
+Perform the following exercise:
 
 * Write a short message to a partner
 * Compute the hash
