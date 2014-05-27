@@ -501,6 +501,7 @@ openssl x509 -in yourpartner.crt.pem -noout -text
 Question:
 
 * How do you know that you're looking at the correct certificate?
+* What can you do with this certificate?
 
 ---
 
