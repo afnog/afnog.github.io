@@ -726,7 +726,8 @@ If you don't already have an SSH key, generate one:
 ssh-keygen
 ```
 
-Make sure you use a passphrase!
+* Make sure you use a passphrase!
+* **DO NOT** use `afnog` as the passphrase!
 
 ### Questions
 
