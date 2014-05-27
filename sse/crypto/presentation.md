@@ -456,11 +456,9 @@ template: encryption-practical-1
 * What algorithm?
 
 ---
-
-
+layout: false
 ---
 
-layout:
 
 ## FIN
 
