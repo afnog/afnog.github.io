@@ -473,7 +473,16 @@ layout: true
 
 ---
 
+Generate a private key for yourself:
 
+```sh
+openssl genrsa -out private.pem
+```
+
+Questions:
+
+* Where is the key saved?
+* How long is it?
 
 ---
 
