@@ -637,7 +637,7 @@ What happens after the first time you connect? Why?
 
 --
 
-* If you answer **Yes**, the host key is cached in `~/.ssh/known_hosts`
+* If you answer **Yes**, the host key is cached in `~/.ssh/known_hosts`.
 * No message is displayed if the key has not changed.
 
 ---
