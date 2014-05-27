@@ -450,9 +450,8 @@ scp message1.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 ```
 
 * Tell your partner the first four letters of the hash.
-  * With a good hash function, it's reasonably safe to compare just the first
-    few characters.
 * Check the hash of your partner's message.
+* Make a small change to the file. How does the hash change?
 
 ---
 layout: true
