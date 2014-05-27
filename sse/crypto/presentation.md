@@ -619,7 +619,13 @@ When you SSH to your partner's computer for the first time, what do you see?
 > ECDSA key fingerprint is ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
 > Are you sure you want to continue connecting (yes/no)? 
 
-To see what happens if it changes, replace your host key:
+What happens after the first time you connect? Why?
+
+---
+
+### Attack Demonstration
+
+To see what happens, replace your host key:
 
 ```sh
 sudo /etc/rc.d/sshd keygen
