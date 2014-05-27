@@ -10,6 +10,15 @@ class: center, middle, title
 
 ---
 
+## Conventions
+
+Commands to enter are shown like this:
+
+```sh
+openssl smime -encrypt -binary -aes-256-cbc -in message3.txt -out message3.txt.enc yourpartner.crt.pem
+openssl smime -decrypt -binary -in encrypted.zip.enc -out decrypted.zip -inkey private.key -passin pass:your_password
+```
+
 ## Credits
 
 Based on presentations by:
