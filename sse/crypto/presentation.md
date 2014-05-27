@@ -436,8 +436,9 @@ sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 * What speed did you get?
 
 ---
-
+layout: true
 ## Hash Practical 2
+---
 
 ### Hashing your own message
 
