@@ -258,7 +258,7 @@ sending and to decrypt it once it is received.
 Examples:
 
 * DES and 3DES (56/112 bits, 1977+)
-* AES (128-256 bits, 
+* AES (128-256 bits,
 * IDEA (128 bit, 1991, patented?)
 
 ---
@@ -319,6 +319,9 @@ which is called the hash value or **hash**.
 * it is infeasible to modify a message without changing its hash
 * it is infeasible to find two different messages with the same hash
 
+A hash function that maps each valid input to a different hash value is said
+to be *perfect*.
+
 ---
 
 ## Hash Exercise
@@ -371,16 +374,31 @@ The checksums of the large binary files in that directory.
 
 ---
 
-## Hash practical
+## Hash practical 1
 
 <pre>
 fetch http://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
 md5 FreeBSD-10.0-RELEASE-i386-bootonly.iso
+sha256 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 </pre>
 
 * Does it match?
 * Why would you do this?
 * What speed did you get?
+
+---
+
+## Hash practical 2
+
+* Write a message to your partner in a text file.
+* Use the `sha256` command to generate a signature for the file.
+* Use `scp` to copy the file to your partner's computer:
+
+<pre>
+scp mymessage.txt afnog@pcYY.sse.ws.afnog.org:/tmp
+</pre>
+
+* Tell your partner the first four letters of the 
 
 ---
 
