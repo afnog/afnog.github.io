@@ -581,13 +581,14 @@ Questions:
 * How do we verify the authenticity of the message?
 * Where are the weak points in this process?
 
---
-  * Certificate exchange
-  * Passphrase memory
-  * Passphrase entry
-  * Decrypted file stored on disk
-  * Brute force attack on passphrase
-  * Brute force attack on key
+### Weaknesses
+
+* Certificate exchange
+* Passphrase memory
+* Passphrase entry
+* Decrypted file stored on disk
+* Brute force attack on passphrase
+* Brute force attack on key
 
 ---
 
