@@ -625,9 +625,19 @@ When you SSH to your partner's computer for the first time, what do you see?
 > ECDSA key fingerprint is ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
 > Are you sure you want to continue connecting (yes/no)? 
 
+What should you do about it?
+
+```sh
+ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
+```
+
+---
+
+
+
 What happens after the first time you connect? Why?
 
-* What should you do about it?
+* What should you do about it? `ssh-keygen -lf /etc/ssh/
 
 ---
 
