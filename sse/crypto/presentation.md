@@ -385,6 +385,10 @@ The checksums of the large binary files in that directory.
 
 ---
 
+## Practicals
+
+---
+
 ## Hash Practical 1
 
 ```sh
