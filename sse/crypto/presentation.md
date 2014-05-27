@@ -23,10 +23,13 @@ Download or edit this presentation [on GitHub](https://github.com/afnog/sse/cryp
 
 ## What we can talk about
 
-* What is security?
-* How secure are you?
-* Attack vectors
-* 
+* What is security? (theory)
+* What is cryptography? (theory)
+* Public and private key crypto
+* Hash functions
+* Generating SSL certificates
+* Running a mini Certificate Authority
+* Practical exercises
 
 ---
 
