@@ -269,14 +269,14 @@ The foundation of all of cryptography:
 
 ## Symmetric Ciphers (Conventional)
 
+.center.height_8em[![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)]
+
 **The same key** is used to encrypt the document before
 sending and to decrypt it once it is received.
 
 * Lost key = compromised/lost data
 * This type of cipher system is efficient for large amounts of data
 * Most are relatively simple to understand and implement
-
-.center.height_8em[![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)]
 
 ---
 
