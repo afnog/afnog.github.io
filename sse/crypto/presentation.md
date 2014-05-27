@@ -680,7 +680,7 @@ And test that you can SSH without this warning.
 
 ### Passwords
 
-![XKCD on Password Strength](password_strength.png)
+![XKCD on Password Strength](images/password_strength.png)
 
 ---
 
