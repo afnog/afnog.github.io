@@ -498,7 +498,7 @@ Questions:
 openssl x509 -in yourpartner.crt.pem -noout -text
 ```
 
-Question:
+Questions:
 
 * How do you know that you're looking at the correct certificate?
 * What can you do with this certificate?
@@ -513,8 +513,13 @@ Question:
 
 ```sh
 openssl smime -encrypt -binary -aes-256-cbc -in message3.txt -out message3.txt.enc yourpartner.crt.pem
-openssl aes-256-cbc -a -salt -in message2.txt -out message2.txt.enc
 ```
+
+Questions:
+
+* Why do we use our partner's certificate, not our own?
+* What can you do with this file?
+* Who can read the file?
 
 ---
 
