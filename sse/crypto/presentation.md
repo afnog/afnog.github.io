@@ -280,9 +280,7 @@ sending and to decrypt it once it is received.
 * Usually one key is public and the other private
   * Anyone can encrypt with public key, but only private key holder can decrypt
   * Holder can encrypt with private key, then anyone can decrypt
-* Inefficient for large amounts of data
 * Examples: RSA, DSA
-* Theoretically possible to convert a public key back to private
 
 ![Public key cryptography](images/security_concepts_asymmetric.png)
 
