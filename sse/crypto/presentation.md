@@ -244,7 +244,7 @@ The foundation of all of cryptography:
 
 ---
 
-## Symmetric Ciphers
+## Symmetric Ciphers (Conventional)
 
 **The same key** is used to encrypt the document before
 sending and to decrypt it once it is received.
@@ -263,7 +263,37 @@ Examples:
 
 ---
 
-## 
+## Problems with Conventional Cryptography
+
+### Key Management
+
+* How to get the same key to all users without risk of compromise?
+* This is why the “Public Key Cryptography” came into existence.
+
+---
+
+## Public Key Cryptography
+
+**Different related keys** are used to encrypt the document before
+sending and to decrypt it once it is received.
+
+* Usually one key is public and the other private
+  * Anyone can encrypt with public key, but only private key holder can decrypt
+  * Holder can encrypt with private key, then anyone can decrypt
+* Inefficient for large amounts of data
+* Examples: RSA, DSA
+* Theoretically possible to convert a public key back to private
+
+
+![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
+
+Examples:
+
+* DES and 3DES (56/112 bits, 1977+)
+* AES (128-256 bits, 
+* IDEA (128 bit, 1991, patented?)
+
+
 
 ---
 
