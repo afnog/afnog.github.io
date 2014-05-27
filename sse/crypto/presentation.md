@@ -273,7 +273,7 @@ Examples:
 ### Key Management
 
 * How to get the same key to all users without risk of compromise?
-* This is why the “Public Key Cryptography” came into existence.
+* This is why "Public Key Cryptography" became popular.
 
 ---
 
