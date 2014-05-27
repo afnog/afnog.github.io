@@ -473,6 +473,8 @@ layout: true
 
 ---
 
+#### Certificate Generation
+
 * If you don't already have a certificate, generate one.
 * We can make self-signed certificates for free:
 
@@ -485,6 +487,10 @@ Questions:
 * What are the output files?
 * How long is the key?
 * What is the passphrase for?
+
+---
+
+#### Certificate Exchange
 
 Send the certificate (NOT the key) to your partner.
 
