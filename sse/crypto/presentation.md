@@ -627,6 +627,8 @@ When you SSH to your partner's computer for the first time, what do you see?
 
 What happens after the first time you connect? Why?
 
+* What should you do about it?
+
 ---
 
 ### Attack Demonstration
