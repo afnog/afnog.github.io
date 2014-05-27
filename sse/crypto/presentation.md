@@ -598,7 +598,13 @@ layout: true
 
 --
 
-Passwords, and don't use them! (or combine them with something else)
+Passwords, and don't use them!
+
+* or combine them with something else (what's that called?)
+
+???
+
+Two-factor authentication.
 
 ---
 
