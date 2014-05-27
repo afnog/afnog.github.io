@@ -373,7 +373,7 @@ Using this hash function:
 Perform the following exercise:
 
 * Write a short message to a partner
-* Compute the hash
+* Compute the hash **on a separate paper**
 * Give the message and hash to your partner to verify
 * Verify the message from your partner
 
