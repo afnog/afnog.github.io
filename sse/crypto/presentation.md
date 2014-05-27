@@ -632,7 +632,7 @@ Why do we verify host keys?
 	ECDSA host key for pc34.sse.ws.afnog.org has changed and you have requested strict checking.
 	Host key verification failed.
 
-
+---
 
 ### Key Authentication
 
