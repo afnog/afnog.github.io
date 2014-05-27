@@ -4,7 +4,7 @@ class: center, middle
 
 ## How to keep your data safe (a bit)
 
-.halfheight[![Chihuahua Security](https://c1.staticflickr.com/3/2313/2205272682_fd55c43296_z.jpg)]
+.height_25[![Chihuahua Security](https://c1.staticflickr.com/3/2313/2205272682_fd55c43296_z.jpg)]
 
 ### Chris Wilson, [Aptivate](http://www.aptivate.org/), AfNOG 2014
 
