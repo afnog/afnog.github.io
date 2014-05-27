@@ -588,8 +588,27 @@ Questions:
 
 ---
 layout: true
-## Secure Login with Keys
+## Secure Shell Practical
 ---
+
+### Rationale
+
+* What is the biggest vulnerability in SSH?
+* What can we do about it?
+
+--
+
+Passwords, and don't use them! (or combine them with something else)
+
+---
+
+### Host Key Verification
+
+Why do we verify host keys?
+
+.height_8em.center[![A Man-in-the-Middle Attack](images/Main_the_middle.JPG)]
+
+* Avoid *Man-in-the-Middle Attacks*
 
 
 
