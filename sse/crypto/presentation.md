@@ -654,6 +654,13 @@ Host key verification failed.
 
 ---
 
+### Implications
+
+* When is this useful?
+* When is it a problem?
+
+---
+
 ### Key Authentication
 
 * What is the biggest vulnerability in SSH?
