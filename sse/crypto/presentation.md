@@ -288,6 +288,15 @@ sending and to decrypt it once it is received.
 
 ---
 
+## Problems with Public Key Crypto
+
+* Inefficient for large amounts of data
+* Theoretically possible to convert a public key back to private
+
+
+
+---
+
 ## Hash Functions
 
 Algorithms that take any amount of input and return a fixed-size output string,
