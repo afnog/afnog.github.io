@@ -32,7 +32,10 @@ openssl smime -encrypt -binary -aes-256-cbc -in message3.txt -out message3.txt.e
 openssl smime -decrypt -binary -in encrypted.zip.enc -out decrypted.zip -inkey private.key -passin pass:your_password
 ```
 
-Long command lines are wrapped for readability. Each &#9656; triangle marks the start of a single command.
+Please note:
+
+* Long command lines are wrapped for readability.
+* Each &#9656; triangle marks the start of a single command.
 
 ---
 
