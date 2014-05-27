@@ -340,6 +340,8 @@ which is called the hash value or **hash**.
 
 ## Ideal hash function
 
+Has these properties:
+
 * easy to compute the hash value for any given message
 * infeasible to find a message that has a given hash
 * infeasible to modify a message without changing its hash
