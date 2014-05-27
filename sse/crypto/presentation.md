@@ -454,12 +454,8 @@ scp message1.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 * Check the hash of your partner's message.
 
 ---
-
-name: encryption-practical-1
 layout: true
-
 ## Encryption Practical 1
-
 ---
 
 ### Basic Encryption
@@ -497,10 +493,8 @@ Credit: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-ope
 * What algorithm did we use?
 
 ---
-
 layout: true
 ## Encryption Practical 2
-
 ---
 
 ### Certificate Generation
