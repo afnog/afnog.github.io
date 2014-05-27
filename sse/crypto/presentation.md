@@ -374,7 +374,7 @@ The checksums of the large binary files in that directory.
 ## Hash practical
 
 <pre>
-fetch ftp://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
+fetch http://mini1.sse.ws.afnog.org/~inst/FreeBSD-10.0-RELEASE-i386-bootonly.iso
 md5 FreeBSD-10.0-RELEASE-i386-bootonly.iso
 </pre>
 
