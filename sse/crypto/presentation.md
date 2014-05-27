@@ -416,7 +416,14 @@ scp message1.txt afnog@pcYY.sse.ws.afnog.org:/tmp
 
 ---
 
+name: encryption-practical-1
+layout: true
+
 ## Encryption Practical 1
+
+---
+
+template: encryption-practical-1
 
 * Write a message to your partner in a text file (e.g. `message2.txt`)
 * Choose your encryption passphrase to share with your partner
@@ -436,10 +443,13 @@ openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.new
 
 ---
 
-## Encryption Practical 2
+template: encryption-practical-1
+
+### Questions
 
 * Was the previous exercise using symmetric or asymmetric crypto?
 * Using public key crypto?
+* What algorithm?
 
 
 ## FIN
