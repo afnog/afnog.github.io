@@ -752,7 +752,7 @@ ssh-keygen
 Copy the key to your partner's server:
 
 ```sh
-ssh-copy-id -i .ssh/id_rsa.pub pcYY.sse.ws.afnog.org
+ssh-copy-id -i ~/.ssh/id_rsa.pub pcYY.sse.ws.afnog.org
 ```
 
 Now try logging in. What do you notice?
