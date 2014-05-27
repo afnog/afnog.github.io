@@ -291,8 +291,16 @@ sending and to decrypt it once it is received.
 ## Problems with Public Key Crypto
 
 * Inefficient for large amounts of data
+* Possible to brute-force the private key for a public key
 * Theoretically possible to convert a public key back to private
 
+Solutions?
+
+--
+
+* Use public key crypto to encrypt the secret used to encrypt document
+* Longer keys are harder to brute-force (e.g. 2048 bits, 4096 bits)
+  * Notice how long these are compared to symmetric cipher keys!
 
 
 ---
