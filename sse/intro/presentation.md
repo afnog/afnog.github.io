@@ -219,7 +219,7 @@ Please be careful in class:
 * Use sudo to execute commands as root
 * Don't change passwords
 * Don't "close security holes"
-* Don't `shutdown` your server
+* Don't `shutdown` your server (there's no power button!)
 * Your servers are accessible over the Internet
 
 ---
