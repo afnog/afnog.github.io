@@ -473,16 +473,27 @@ layout: true
 
 ---
 
-Generate a private key for yourself:
+* If you don't already have a certificate, generate one.
+* We can make self-signed certificates for free:
 
 ```sh
-openssl genrsa -out private.pem
+openssl req -x509 -new -out yourname.crt.pem -keyout yourname.key.pem
 ```
 
 Questions:
 
-* Where is the key saved?
-* How long is it?
+* What are the output files?
+* How long is the key?
+* What is the passphrase for?
+
+Send the certificate (NOT the key) to your partner.
+
+Examine the certificate sent by your partner:
+
+```sh
+openssl x509 -in yourpartner.crt.pem -noout -text
+```
+
 
 ---
 
