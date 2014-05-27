@@ -354,7 +354,17 @@ Not really!
 2. Easy to find another message with the same hash (string of 1s)
 3. Easy to modify a message without changing its hash (rearrange the letters)
 
+---
 
+## Hashes in real life
+
+Look at ftp://ftp.freebsd.org/pub/FreeBSD/releases/i386/i386/ISO-IMAGES/10.0/,
+specifically `CHECKSUM.MD5` and `CHECKSUM.SHA256`.
+
+What do these tell you?
+--
+
+The checksums of the large binary files in that directory.
 
 ---
 
