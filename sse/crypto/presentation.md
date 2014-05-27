@@ -260,6 +260,10 @@ sending and to decrypt it once it is received.
 
 .center.height_8em[![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)]
 
+---
+
+## Common Symmetric Ciphers
+
 Examples:
 
 * DES and 3DES (56/112 bits, 1977+)
