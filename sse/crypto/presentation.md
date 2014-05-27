@@ -145,7 +145,7 @@ Why do you lock your doors?
 
 ---
 
-### Confidentiality (secrecy)
+## Confidentiality (secrecy)
 
 --
 
@@ -155,7 +155,7 @@ Why do you lock your doors?
 
 ---
 
-### Integrity (anti-tampering)
+## Integrity (anti-tampering)
 
 --
 
@@ -164,7 +164,7 @@ Why do you lock your doors?
 
 ---
 
-### Authentication
+## Authentication
 
 --
 
@@ -179,7 +179,7 @@ Why do you lock your doors?
 
 ---
 
-### Non-repudiation
+## Non-repudiation
 
 --
 
