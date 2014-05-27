@@ -46,7 +46,7 @@ Please note:
 * Public and private key crypto
 * Hash functions
 * Generating SSL certificates
-* Running a mini Certificate Authority
+* .red[Running a mini Certificate Authority] (todo)
 * Practical exercises
 
 ---
