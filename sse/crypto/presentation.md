@@ -286,7 +286,9 @@ sending and to decrypt it once it is received.
 
 ![Public key cryptography](images/security_concepts_asymmetric.png)
 
-## Hash functions
+---
+
+## Hash Functions
 
 Algorithms that take any amount of input and return a fixed-size output string,
 which is called the hash value or **hash**.
@@ -299,6 +301,40 @@ Ideal hash function:
 * it is infeasible to find a message that has a given hash
 * it is infeasible to modify a message without changing its hash
 * it is infeasible to find two different messages with the same hash
+
+---
+
+## Hash Exercise
+
+Example hash function:
+
+* Add up all the letters and digits in the message (A=1, B=2, etc)
+
+The exercise:
+
+* Write a short message to a partner
+* Compute the hash
+* Give the message and hash to your partner to verify
+
+---
+
+## Hash Analysis
+
+Does this hash function meet our ideal properties?
+
+1. it is easy to compute the hash value for any given message
+2. it is infeasible to find a message that has a given hash
+3. it is infeasible to modify a message without changing its hash
+4. it is infeasible to find two different messages with the same hash
+
+--
+
+Not really!
+
+1. Easy to compute.
+2. Easy to find another message with the same hash (string of 1s)
+3. Easy to modify a message without changing its hash (rearrange the letters)
+
 
 
 ---
