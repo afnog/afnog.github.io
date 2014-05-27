@@ -266,7 +266,7 @@ sending and to decrypt it once it is received.
 
 * DES and 3DES (56/112 bits, 1977+)
 * AES (128-256 bits, 2001)
-* IDEA (128 bit, 1991, was patented until 2012)
+* IDEA (128 bit, 1991, patented until 2012)
 
 ---
 
