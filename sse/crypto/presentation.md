@@ -429,8 +429,6 @@ layout: true
 
 ## Encryption Practical 1
 
-### Basic Encryption
-
 ---
 
 * Write a message to your partner in a text file (e.g. `message2.txt`)
