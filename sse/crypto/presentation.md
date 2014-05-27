@@ -287,7 +287,7 @@ sending and to decrypt it once it is received.
   * Private key holder &rarr; anyone (integrity)
 * Examples: RSA, DSA
 
-![Public key cryptography](images/security_concepts_asymmetric.png)
+.height_8em[![Public key cryptography](images/security_concepts_asymmetric.png)]
 
 ---
 
