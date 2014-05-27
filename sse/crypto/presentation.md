@@ -457,9 +457,10 @@ template: encryption-practical-1
 
 ---
 
-layout:
 
 ---
+
+layout:
 
 ## FIN
 
