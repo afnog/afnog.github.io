@@ -249,13 +249,21 @@ The foundation of all of cryptography:
 **The same key** is used to encrypt the document before
 sending and to decrypt it once it is received.
 
-* Ciphertext and back to plaintext – apply a key (the same key)
 * Lost key = compromised/lost data
 * This type of cipher system is efficient for large amounts of data
-* Most are relatively simple to understand
+* Most are relatively simple to understand and implement
 
 ![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
 
+Examples:
+
+* DES and 3DES (56/112 bits, 1977+)
+* AES (128-256 bits, 
+* IDEA (128 bit, 1991, patented?)
+
+---
+
+## 
 
 ---
 
