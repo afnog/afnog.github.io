@@ -752,14 +752,21 @@ ssh-keygen
 Copy the key to your partner's server:
 
 ```sh
-ssh-copy-id pcYY.sse.ws.afnog.org
+ssh-copy-id -i .ssh/id_rsa.pub pcYY.sse.ws.afnog.org
 ```
 
 Now try logging in. What do you notice?
 
+```sh
+ssh pcYY.sse.ws.afnog.org
+```
+
 --
 
 You should be prompted for your passphrase instead of a password:
+
+> Enter passphrase for key '/home/afnog/.ssh/id_rsa': 
+
 
 
 ---
