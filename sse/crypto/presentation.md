@@ -340,9 +340,6 @@ The exercise:
 * Give the message and hash to your partner to verify
 * Verify the message from your partner
 
-With a good hash function, it's reasonably safe to compare just the first
-few characters.
-
 ---
 
 ## Hash Analysis
