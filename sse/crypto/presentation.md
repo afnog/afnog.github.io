@@ -489,7 +489,7 @@ Questions:
 
 ---
 
-#### Certificate Exchange
+### Certificate Exchange
 
 Send the certificate (NOT the key) to your partner.
 
