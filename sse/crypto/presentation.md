@@ -732,8 +732,9 @@ ssh-keygen
 ### Questions
 
 * Why is a key with no passphrase dangerous?
-* Why is a passphrase (on a key) better than a password (on an account?)
+* Why is a passphrase (on a key) better than a password (on an account)?
 * What are the disadvantages?
+* Why not use `afnog` as the passphrase?
 
 ---
 
@@ -742,6 +743,7 @@ ssh-keygen
 1. Unprotected key allows login to server with no password!
 2. The passphrase is not sent to the server, only used to decrypt the key.
 3. You need an agent to cache your passphrase and forward through servers.
+4. So you can tell whether you're being asked for the password or the passphrase!
 
 ---
 
