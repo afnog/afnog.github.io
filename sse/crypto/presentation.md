@@ -506,6 +506,12 @@ Question:
 
 ---
 
+### Encryption
+
+* Write a message to your partner in a text file (e.g. `message3.txt`)
+
+---
+
 layout: false
 
 ## FIN
