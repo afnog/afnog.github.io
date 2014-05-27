@@ -284,8 +284,7 @@ sending and to decrypt it once it is received.
 * Examples: RSA, DSA
 * Theoretically possible to convert a public key back to private
 
-
-![Symmetric decryption](images/cryptography-overview-shorter-037.jpg)
+![Public key cryptography](images/security_concepts_asymmetric.png)
 
 Examples:
 
