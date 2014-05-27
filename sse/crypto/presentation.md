@@ -463,7 +463,7 @@ template: encryption-practical-1
 
 * Was the previous exercise using symmetric or asymmetric crypto? How do you know?
 * Using public key crypto?
-* What algorithm?
+* What algorithm did we use?
 
 ---
 
