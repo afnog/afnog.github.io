@@ -662,6 +662,18 @@ Host key verification failed.
   * On the client?
   * On the server?
 
+--
+
+For now, fix it on your client by running:
+
+```sh
+ssh-keygen -R pcYY.sse.ws.afnog.org
+```
+
+And test that you can SSH without this warning.
+
+* What do you see instead, and why?
+
 ---
 
 ### Key Authentication
