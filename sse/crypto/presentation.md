@@ -441,6 +441,10 @@ openssl aes-256-cbc -a -salt -in message2.txt -out message2.txt.enc
 openssl aes-256-cbc -d -a -in secrets.txt.enc -out secrets.txt.new
 ```
 
+???
+
+Credit: http://tombuntu.com/index.php/2007/12/12/simple-file-encryption-with-openssl/
+
 ---
 
 template: encryption-practical-1
