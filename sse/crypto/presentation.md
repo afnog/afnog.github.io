@@ -606,15 +606,23 @@ Why do we verify host keys?
 
 ### Host Key Demonstration
 
-* When you SSH to your partner's computer for the first time, what do you see?
+When you SSH to your partner's computer for the first time, what do you see?
 
 --
 
-	The authenticity of host 'pc34.sse.ws.afnog.org (196.200.219.134)' can't be established.
-	ECDSA key fingerprint is ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
-	Are you sure you want to continue connecting (yes/no)? 
+> The authenticity of host 'pc34.sse.ws.afnog.org (196.200.219.134)' can't be established.
+> ECDSA key fingerprint is ae:09:ce:83:09:fc:d5:ca:69:ae:df:7d:c6:92:1e:e5.
+> Are you sure you want to continue connecting (yes/no)? 
 
-* Have your parnet 
+To see what happens if it changes, replace your host key:
+
+```sh
+sudo /etc/rc.d/sshd keygen
+```
+
+Now what happens when you connect?
+
+sudo /etc/rc.d/sshd 
 
 
 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
