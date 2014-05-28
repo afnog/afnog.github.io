@@ -107,6 +107,8 @@ pcXX.sse.ws.afnog.org = <your_realm>
 
 ### Create the Kerberos database
 
+Run the following command to create the database:
+
 ```sh
 kdb5_util create -r <your_realm> -s
 ```
