@@ -62,6 +62,7 @@ sudo pkg install sssd
 ```
 
 ---
+
 ### System Configuration
 
 Edit `/etc/rc.conf` (using sudo) and add the line:
