@@ -112,10 +112,11 @@ layout: true
 
 Gather the following information:
 
-* Choose a `domain_name` for your domain.
-  * For example, `myname.afnog.guru`
-* Decide which host will be your master IPA server.
-  * For example, `pcXX.sse.ws.afnog.org`
+Choose a `domain_name` for your domain.
+* For example, `myname.afnog.guru`
+
+Decide which host will be your master IPA server.
+* For example, `pcXX.sse.ws.afnog.org`
 
 ---
 
