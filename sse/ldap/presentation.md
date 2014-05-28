@@ -75,7 +75,7 @@ Choose a realm name:
 
 ---
 
-```
+```sh
 sudo pkg install krb5
 ```
 
@@ -83,7 +83,7 @@ sudo pkg install krb5
 
 Edit `/etc/krb5.conf` (using sudo) and add these lines:
 
-```sh
+```
 [libdefaults]
 default_realm = <your_realm>
 dns_lookup_realm = true
