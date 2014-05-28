@@ -210,7 +210,7 @@ Edit `/etc/rc.conf` and add the following lines:
 
 ```
 slapd_enable="YES"
-slapd_flags='-h "ldapi://%252fvar%252frun%252fopenldap%252fldapi/ ldap://0.0.0.0/"'
+slapd_flags='-h "ldapi://%2fvar%2frun%2fopenldap%2fldapi/ ldap://0.0.0.0/"'
 slapd_sockets="/var/run/openldap/ldapi"
 ```
 
