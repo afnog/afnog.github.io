@@ -54,7 +54,6 @@ Please note:
 layout: true
 ## Installing FreeIPA
 ---
-
 ### Install the Packages
 
 ```sh
@@ -62,14 +61,7 @@ sudo pkg install sssd
 ```
 
 ---
-
-### Configuration Changes
-
-Edit `/boot/loader.conf` (using sudo) and add the line:
-
-```sh
-kern.maxfiles="25000"
-```
+### System Configuration
 
 Edit `/etc/rc.conf` (using sudo) and add the line:
 
@@ -77,13 +69,26 @@ Edit `/etc/rc.conf` (using sudo) and add the line:
 sssd_enable="YES"
 ```
 
-Then reboot the system:
+Copy the sample configuration for `sssd`:
 
 ```sh
-sudo reboot
+sudo cp /usr/local/etc/sssd/sssd.conf{.sample,}
+```
+
+Edit `/etc/pam.d/system` (using sudo), find the line that says:
+
+```sh
+auth            required        pam_unix.so
+```
+
+And add the following line before it:
+
+```sh
+auth            sufficient      /usr/local/lib/pam_sss.so
 ```
 
 ---
+### 
 
 layout: false
 
