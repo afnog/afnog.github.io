@@ -128,7 +128,10 @@ sssd_enable="YES"
 
 ### Configure the Service (1)
 
-Name your domain, for example `myname.afnog.guru`.
+Gather the following information:
+
+* Choose a `domain_name` for your domain, such as `myname.afnog.guru`.
+* Decide which host will be your master IPA server (`pcXX.sse.ws.afnog.org`)
 
 Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo) with these contents:
 
@@ -136,7 +139,7 @@ Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo) with these contents
 [domain/<domain_name>]
 cache_credentials = True
 krb5_store_password_if_offline = True
-ipa_domain = <domain_name>
+ipa_domain = pcXX.sse.ws.afnog.org
 id_provider = ipa
 auth_provider = ipa
 access_provider = ipa
