@@ -113,7 +113,8 @@ kdb5_util create -r <your_realm> -s
 
 * This can pause for several minutes.
 * Eventually you will be asked to choose a database master password.
-* Use `afnog` for this exercise (normally you'd choose something much stronger).
+* Use `afnog` as the password for this exercise.
+* Normally you'd choose something much stronger.
 
 ---
 layout: false
