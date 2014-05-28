@@ -53,7 +53,7 @@ Please note:
 * Domain controller for Linux and Unix machines.
 * Used on controlling servers and enrolled client machines.
 * Provides centralized structure for Linux/Unix environments.
-* Centralize identity management and identity policies.
+* Centralizes identity management and identity policies.
 * Uses native Linux (UNIX) applications and protocols.
 
 ---
