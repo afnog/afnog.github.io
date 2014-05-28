@@ -111,9 +111,9 @@ pcXX.sse.ws.afnog.org = <your_realm>
 kdb5_util create -r <your_realm> -s
 ```
 
-This can pause for several minutes. Eventually you will be asked to
-choose a database master password. Use `afnog` for this exercise,
-but normally you'd choose something much stronger.
+* This can pause for several minutes.
+* Eventually you will be asked to choose a database master password.
+* Use `afnog` for this exercise (normally you'd choose something much stronger).
 
 ---
 layout: false
