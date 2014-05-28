@@ -4,7 +4,7 @@ class: center, middle, title
 
 ## How to keep your data safe (a bit)
 
-.height_8em[![Chihuahua Security](https://c1.staticflickr.com/3/2313/2205272682_fd55c43296_z.jpg)]
+.height_8em[![Tree in Mist](https://farm8.staticflickr.com/7095/7230738190_3c6f7146e6_b.jpg)](https://www.flickr.com/photos/matthewpaulson/7230738190)
 
 ### Chris Wilson, [Aptivate](http://www.aptivate.org/), AfNOG 2014
 
