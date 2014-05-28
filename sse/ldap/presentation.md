@@ -169,6 +169,8 @@ chpass_provider = ipa
 ipa_server = _srv_ # use DNS SRV
 ```
 
+---
+
 ### Configure the Service (2)
 
 Continue adding to `/usr/local/etc/sssd/sssd.conf`:
