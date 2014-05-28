@@ -39,80 +39,25 @@ Please note:
 
 ## What we can talk about
 
-* What is an LDAP directory
-* How to use an LDAP directory
-* What is FreeIPA
-* Practical exercises
+* What is LDAP
+* What is Kerberos
+* Creating a Kerberos domain (KDC)
+* Add clients to Kerberos domain
+* Share user information using LDAP
 
 ---
 
-## What is FreeIPA?
+## What is LDAP
 
-* Domain controller for Linux and Unix machines.
-* Used on controlling servers and enrolled client machines.
-* Provides centralized structure for Linux/Unix environments.
-* Centralizes identity management and identity policies.
-* Uses native Linux (Unix) applications and protocols.
-
----
-layout: true
-## Control Levels
----
-
-### Low Control environment
-
-* Central user, password, and policy stores.
-* IT staff maintain the identities on one machine (the FreeIPA server).
-* Users and policies are uniformly applied to all machines.
-* Set different access levels for laptops and remote users.
+* A generic directory service.
+* Can store and retrieve any kind of information.
+* Frequently used as database backends for other applications.
+* Organises entries into a hierarchical *directory tree*.
+* Trees can be very simple, or very complex, with many branch points.
 
 ---
 
-### Medium Control environment
-
-* Replaces traditional fragmented management tools:
-  * NIS domain for machines;
-  * LDAP directory for users;
-  * Kerberos for authentication.
-* Reduces administrative overhead by integrating these services seamlessly.
-* Provides a single and simplified tool set.
-
----
-
-### Absent Control environment
-
-* Integrate Linux/Unix systems into Windows Active Directory forest.
-
----
-layout: false
-## Comparison with plain LDAP
-
-* 389 Directory Server:
-  * A generic directory service.
-  * Can store and retrieve any kind of information.
-  * Frequently used as database backends for other applications.
-  * Organises entries into a hierarchical *directory tree*.
-  * Trees can be very simple, or very complex, with many branch points.
-* FreeIPA:
-  * Very specific purpose and application.
-  * It is not a general LDAP directory, backend or policy server.
-  * It is not generic!
-
----
-
-## What's in the Box?
-
-[.height_8em[[FreeIPA Services](images/ipa-server.png)]](http://docs.fedoraproject.org/en-US/Fedora/15/html/FreeIPA_Guide/ipa-linux-services.html)
-
-* Primary FreeIPA server = domain controller
-  * Kerberos server and KDC for authentication.
-  * LDAP backend contains all of the domain information:
-    * users, client machines, and domain configuration.
-* Other services included for support:
-  * DNS for machine discovery and finding to other domain members.
-  * NTP to synchronize all domain clocks for logging and certificates.
-  * Certificate service provides certificates for Kerberos-aware services.
-* Unified tools to manage these services (CLI and web)
+## What is Kerberos
 
 ---
 
