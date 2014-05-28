@@ -116,13 +116,57 @@ sudo pkg install sssd
 
 ---
 
-### System Configuration
+### Enable the Service
 
 Edit `/etc/rc.conf` (using sudo) and add the line:
 
 ```sh
 sssd_enable="YES"
 ```
+
+---
+
+### Configure the Service (1)
+
+Name your domain, for example `myname.afnog.guru`.
+
+Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo) with these contents:
+
+```sh
+[domain/<domain_name>]
+cache_credentials = True
+krb5_store_password_if_offline = True
+ipa_domain = <domain_name>
+id_provider = ipa
+auth_provider = ipa
+access_provider = ipa
+ipa_hostname = <fqdn>
+chpass_provider = ipa
+ipa_server = _srv_ #our FreeIPA server has DNS SRV entries
+ldap_tls_cacert = <ldap tls CA cert location>
+enumerate = True #to enumerate users and groups
+```
+
+### Configure the Service (2)
+
+Continue adding to `/usr/local/etc/sssd/sssd.conf`:
+
+```sh
+[sssd]
+enumerate = True
+services = nss, pam, sudo
+config_file_version = 2
+domains = <domain_name>
+
+[nss]
+
+[pam]
+
+[sudo]
+```
+
+/usr/local/etc/sssd/sssd.conf
+
 
 Copy the sample configuration for `sssd`:
 
