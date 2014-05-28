@@ -78,10 +78,28 @@ Choose a realm name:
 ### Install the Packages
 
 ```sh
-sudo pkg install sssd
+sudo pkg install krb5
 ```
 
----
+### Configure local Kerberos
+
+Edit `/etc/krb5.conf` (using sudo) and add these lines:
+
+```sh
+[libdefaults]
+default_realm = REALM1.WS.NSRC.ORG
+dns_lookup_realm = true
+dns_lookup_kdc = true
+
+[realms]
+REALM1.WS.NSRC.ORG = {
+        kdc = pc1.ws.nsrc.org
+        admin_server = pc1.ws.nsrc.org
+}
+
+[domain_realm]
+pc1.ws.nsrc.org = REALM1.WS.NSRC.ORG
+```
 
 ### Enable the Service
 
