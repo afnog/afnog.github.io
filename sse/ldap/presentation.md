@@ -138,7 +138,7 @@ sssd_enable="YES"
 
 ### Configure the Service (1)
 
-Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo) with these contents:
+Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo):
 
 ```sh
 [domain/<domain_name>]
