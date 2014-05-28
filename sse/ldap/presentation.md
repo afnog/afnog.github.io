@@ -1,8 +1,8 @@
 class: center, middle, title
 
-# Cryptography and Security
+# LDAP Directory Services
 
-## How to keep your data safe (a bit)
+## How to simply run an LDAP server easily
 
 .height_8em[![Tree in Mist](https://farm8.staticflickr.com/7095/7230738190_3c6f7146e6_b.jpg)](https://www.flickr.com/photos/matthewpaulson/7230738190)
 
