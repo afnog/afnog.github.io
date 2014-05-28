@@ -155,6 +155,12 @@ The users (regular principals) have passwords instead of keys.
 
 ---
 
+### Create the Heimdal database
+
+Start the 
+
+---
+
 ### Create some principals (users)
 
 Start a `kadmin` interactive session (shell):
@@ -190,6 +196,28 @@ Start the Kerberos daemons:
 ```sh
 sudo /etc/rc.d/kerberos start
 sudo /etc/rc.d/kadmind start
+```
+
+---
+
+## Install OpenLDAP
+
+```sh
+sudo pkg install openldap-server
+```
+
+Edit `/etc/rc.conf` and add the following lines:
+
+```
+slapd_enable="YES"
+slapd_flags='-h "ldapi://%252fvar%252frun%252fopenldap%252fldapi/ ldap://0.0.0.0/"'
+slapd_sockets="/var/run/openldap/ldapi"
+```
+
+Start the server:
+
+```sh
+sudo /usr/local/etc/rc.d/slapd start
 ```
 
 ---
