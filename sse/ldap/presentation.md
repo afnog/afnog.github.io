@@ -149,8 +149,9 @@ Use `kadmin.local` (running as root) to create the first few principals:
 * a regular principal `student`;
 * a KDC admin principal `student/admin`.
 
-The host principal will have a key generated and stored in a file. The users
-(regular principals) have passwords instead of keys.
+The host principal will have a key generated and stored in a file.
+
+The users (regular principals) have passwords instead of keys.
 
 ---
 
