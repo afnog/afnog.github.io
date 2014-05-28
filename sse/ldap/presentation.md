@@ -2,7 +2,7 @@ class: center, middle, title
 
 # LDAP Directory Services
 
-## How to simply run an LDAP server easily
+## How to run an LDAP server and domain
 
 .height_8em[![Tree in Mist](https://farm8.staticflickr.com/7095/7230738190_3c6f7146e6_b.jpg)](https://www.flickr.com/photos/matthewpaulson/7230738190)
 
