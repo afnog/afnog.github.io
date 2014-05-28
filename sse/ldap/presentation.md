@@ -172,7 +172,7 @@ addprinc student
 addprinc student/admin
 ```
 
-Press Ctrl+D to end the session
+Press Ctrl+D to end the session.
 
 ---
 layout: false
