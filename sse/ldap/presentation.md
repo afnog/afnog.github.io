@@ -77,6 +77,10 @@ Copy the sample configuration for `sssd`:
 sudo cp /usr/local/etc/sssd/sssd.conf{.sample,}
 ```
 
+---
+
+### Enable PAM Integration
+
 Edit `/etc/pam.d/system` (using sudo), find the line that says:
 
 ```sh
