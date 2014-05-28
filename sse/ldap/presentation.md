@@ -137,6 +137,24 @@ Create the ACL file and grant admin rights to all */admin principals.
 */admin@<your_realm> *
 ```
 
+---
+
+### Create some principals (users)
+
+Use kadmin.local (running as root) to create the first few principals:
+
+* a host principal for the host itself;
+* a regular principal "student";
+* a KDC admin principal "student/admin"
+
+# kadmin.local
+addprinc -randkey host/pc1.ws.nsrc.org
+ktadd host/pc1.ws.nsrc.org
+addprinc student
+-- you'll be prompted to choose a password
+addprinc student/admin
+-- you'll be prompted to choose a password
+^D
 
 
 
