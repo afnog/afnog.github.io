@@ -18,8 +18,7 @@ Based on presentations by:
 * [Seth Lyons](https://forums.freebsd.org/viewtopic.php?f=39&t=46526)
 
 You can access this presentation at: http://afnog.github.io/sse/ldap/presentation
-
-Download or edit this presentation [on GitHub](https://github.com/afnog/sse/ldap/presentation.md).
+([edit](https://github.com/afnog/sse/ldap/presentation.md))
 
 ---
 
