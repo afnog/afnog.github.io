@@ -48,6 +48,15 @@ Please note:
 
 ---
 
+## What is FreeIPA?
+
+* Domain controller for Linux and Unix machines.
+* Used on controlling servers and enrolled client machines.
+* Provides centralized structure for Linux/Unix environments.
+* Uses native Linux applications and protocols.
+
+---
+
 ## Practicals
 
 ---
