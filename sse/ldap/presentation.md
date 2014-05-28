@@ -110,7 +110,7 @@ pcXX.sse.ws.afnog.org = <your_realm>
 Run this command to create the database:
 
 ```sh
-kdb5_util create -r <your_realm> -s
+sudo kdb5_util create -r <your_realm> -s
 ```
 
 * This can pause for several minutes.
