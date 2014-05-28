@@ -83,6 +83,8 @@ sudo pkg install krb5
 
 class: small
 
+### Configure Local Kerberos
+
 Edit `/etc/krb5.conf` (using sudo) and add these lines:
 
 ```
@@ -103,7 +105,7 @@ pcXX.sse.ws.afnog.org = <your_realm>
 
 ---
 
-Create the Kerberos database:
+### Create the Kerberos database
 
 ```sh
 kdb5_util create -r <your_realm> -s
