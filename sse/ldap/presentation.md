@@ -14,8 +14,8 @@ class: center, middle, title
 
 Based on presentations by:
 
-* [Marcus Adomey](http://www.afnog.org/afnog_chix2011/Thursday/MA/CryptographySlides.odp) (AfChix, Malawi, 2011)
-* [NSRC](https://nsrc.org/workshops/2013/nsrc-tenet-tut/raw-attachment/wiki/AgendaTrack2) (NSRC-TENET Workshop, South Africa, 2013)
+* [FreeIPA Guide](http://docs.fedoraproject.org/en-US/Fedora/15/html/FreeIPA_Guide/index.html)
+* [Seth Lyons](https://forums.freebsd.org/viewtopic.php?f=39&t=46526)
 
 You can access this presentation at: http://afnog.github.io/sse/crypto/presentation
 
@@ -77,6 +77,7 @@ layout: true
   * LDAP directory for users;
   * Kerberos for authentication.
 * Reduces administrative overhead by integrating these services seamlessly.
+* Provides a single and simplified tool set.
 
 ---
 
