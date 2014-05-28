@@ -141,7 +141,9 @@ Create the ACL file and grant admin rights to all */admin principals.
 
 ### Create some principals (users)
 
-Use `kadmin.local` (running as root) to create the first few principals:
+Kerberos calls its users *principals*.
+
+Use `kadmin.local` (running as root) to create the first few principals 
 
 * a host principal for the host itself;
 * a regular principal "student";
