@@ -75,7 +75,7 @@ Choose a realm name:
 
 ---
 
-```sh
+```
 sudo pkg install krb5
 ```
 
