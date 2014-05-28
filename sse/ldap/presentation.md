@@ -80,6 +80,7 @@ sudo pkg install krb5
 ```
 
 ---
+
 class: small
 
 Edit `/etc/krb5.conf` (using sudo) and add these lines:
