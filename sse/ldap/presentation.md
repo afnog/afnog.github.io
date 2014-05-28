@@ -102,6 +102,18 @@ pcXX.sse.ws.afnog.org = <your_realm>
 ```
 
 ---
+
+Create the Kerberos database:
+
+```sh
+kdb5_util create -r <your_realm> -s
+```
+
+# This can pause for several minutes. Eventually you will be asked to
+# choose a database master password. Use "abcd" for this exercise,
+# but normally you'd choose something much stronger.
+
+---
 layout: false
 
 ## FIN
