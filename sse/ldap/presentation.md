@@ -94,8 +94,6 @@ auth            sufficient      /usr/local/lib/pam_sss.so
 ```
 
 ---
-###
-
 layout: false
 
 ## FIN
