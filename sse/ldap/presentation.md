@@ -150,6 +150,13 @@ Edit `/etc/rc.conf` (using sudo) and add the line:
 sssd_enable="YES"
 ```
 
+Edit `/etc/nsswitch.conf` (using sudo) and change the `group` and `passwd` lines to match these:
+
+```sh
+group: files sss
+passwd: files sss
+```
+
 ---
 
 ### Configure the Service (1)
