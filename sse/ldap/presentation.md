@@ -57,6 +57,28 @@ Please note:
 * Uses native Linux (UNIX) applications and protocols.
 
 ---
+layout: true
+## Control Levels
+---
+
+### Low Control
+
+* Central user, password, and policy stores.
+* IT staff maintain the identities on one machine (the FreeIPA server).
+* Users and policies are uniformly applied to all machines.
+* Set different access levels for laptops and remote users.
+
+---
+
+### Medium Control
+
+* Replaces traditional fragmented management tools:
+  * NIS domain for machines;
+  * LDAP directory for users;
+  * Kerberos for authentication.
+* Reduces administrative overhead by integrating these services seamlessly.
+
+---
 
 ## Practicals
 
