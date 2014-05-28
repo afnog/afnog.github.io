@@ -53,14 +53,14 @@ Please note:
 * Used on controlling servers and enrolled client machines.
 * Provides centralized structure for Linux/Unix environments.
 * Centralizes identity management and identity policies.
-* Uses native Linux (UNIX) applications and protocols.
+* Uses native Linux (Unix) applications and protocols.
 
 ---
 layout: true
 ## Control Levels
 ---
 
-### Low Control
+### Low Control environment
 
 * Central user, password, and policy stores.
 * IT staff maintain the identities on one machine (the FreeIPA server).
@@ -69,7 +69,7 @@ layout: true
 
 ---
 
-### Medium Control
+### Medium Control environment
 
 * Replaces traditional fragmented management tools:
   * NIS domain for machines;
@@ -77,6 +77,24 @@ layout: true
   * Kerberos for authentication.
 * Reduces administrative overhead by integrating these services seamlessly.
 * Provides a single and simplified tool set.
+
+---
+
+### Absent Control environment
+
+* Integrate Linux/Unix systems into Windows Active Directory forest.
+
+---
+layout: false
+## Comparison with plain LDAP
+
+* 389 Directory Server:
+  * A generic directory service.
+  * Can store and retrieve any kind of information.
+  * Frequently used as database backends for other applications.
+  * Organises entries into a hierarchical *directory tree*.
+  * Trees can be very simple, or very complex, with many branch points.
+
 
 ---
 
