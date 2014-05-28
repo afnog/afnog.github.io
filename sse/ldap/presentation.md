@@ -110,8 +110,6 @@ layout: true
 
 ### Before you Start
 
-Gather the following information:
-
 Choose a `domain_name` for your domain.
 * For example, `myname.afnog.guru`
 
