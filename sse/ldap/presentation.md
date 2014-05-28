@@ -65,13 +65,19 @@ sudo pkg install sssd
 
 ### Configuration Changes
 
-* Edit `/boot/loader.conf` (using sudo) and add the line:
+Edit `/boot/loader.conf` (using sudo) and add the line:
 
 ```sh
 kern.maxfiles="25000"
 ```
 
-* Reboot the system:
+Edit `/etc/rc.conf` (using sudo) and add the line:
+
+```sh
+sssd_enable="YES"
+```
+
+Then reboot the system:
 
 ```sh
 sudo reboot
