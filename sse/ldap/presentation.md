@@ -166,6 +166,7 @@ auth_provider = ipa
 access_provider = ipa
 ipa_hostname = pcXX.sse.ws.afnog.org
 chpass_provider = ipa
+ipa_server = _srv_ # use DNS SRV
 ```
 
 ---
@@ -175,7 +176,6 @@ chpass_provider = ipa
 Continue adding to `/usr/local/etc/sssd/sssd.conf`:
 
 ```
-ipa_server = _srv_ # use DNS SRV
 ldap_tls_cacert = <ldap tls CA cert location>
 enumerate = True #to enumerate users and groups
 
