@@ -94,7 +94,10 @@ layout: false
   * Frequently used as database backends for other applications.
   * Organises entries into a hierarchical *directory tree*.
   * Trees can be very simple, or very complex, with many branch points.
-
+* FreeIPA:
+  * Very specific purpose and application.
+  * It is not a general LDAP directory, backend or policy server.
+  * It is not generic!
 
 ---
 
