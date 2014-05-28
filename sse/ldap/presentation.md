@@ -17,9 +17,9 @@ Based on presentations by:
 * [FreeIPA Guide](http://docs.fedoraproject.org/en-US/Fedora/15/html/FreeIPA_Guide/index.html)
 * [Seth Lyons](https://forums.freebsd.org/viewtopic.php?f=39&t=46526)
 
-You can access this presentation at: http://afnog.github.io/sse/crypto/presentation
+You can access this presentation at: http://afnog.github.io/sse/ldap/presentation
 
-Download or edit this presentation [on GitHub](https://github.com/afnog/sse/crypto/presentation.md).
+Download or edit this presentation [on GitHub](https://github.com/afnog/sse/ldap/presentation.md).
 
 ---
 
