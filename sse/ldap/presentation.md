@@ -109,9 +109,9 @@ Create the Kerberos database:
 kdb5_util create -r <your_realm> -s
 ```
 
-# This can pause for several minutes. Eventually you will be asked to
-# choose a database master password. Use "abcd" for this exercise,
-# but normally you'd choose something much stronger.
+This can pause for several minutes. Eventually you will be asked to
+choose a database master password. Use "abcd" for this exercise,
+but normally you'd choose something much stronger.
 
 ---
 layout: false
