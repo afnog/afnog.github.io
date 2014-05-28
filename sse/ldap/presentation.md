@@ -156,7 +156,7 @@ sssd_enable="YES"
 
 Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo):
 
-```sh
+```
 [domain/<domain_name>]
 cache_credentials = True
 krb5_store_password_if_offline = True
