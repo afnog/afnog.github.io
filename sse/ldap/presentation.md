@@ -123,6 +123,12 @@ sudo kdb5_util create -r <your_realm> -s
 
 ### Grant rights to admins
 
+Create the KDC directory:
+
+```sh
+sudo mkdir /etc/krb5kdc
+```
+
 Create the ACL file and grant admin rights to all */admin principals.
 
 Edit `/etc/krb5kdc/kadm5.acl` (using sudo) and add the following line:
