@@ -130,8 +130,10 @@ sssd_enable="YES"
 
 Gather the following information:
 
-* Choose a `domain_name` for your domain (`myname.afnog.guru`)
-* Decide which host will be your master IPA server (`pcXX.sse.ws.afnog.org`)
+* Choose a `domain_name` for your domain.
+  * For example, `myname.afnog.guru`
+* Decide which host will be your master IPA server.
+  * For example, `pcXX.sse.ws.afnog.org`
 
 Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo) with these contents:
 
