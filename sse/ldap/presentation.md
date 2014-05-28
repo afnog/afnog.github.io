@@ -109,12 +109,11 @@ layout: false
   * Kerberos server and KDC for authentication.
   * LDAP backend contains all of the domain information:
     * users, client machines, and domain configuration.
-
-The FreeIPA Server: Unifying Services
-Figure 1.1. The FreeIPA Server: Unifying Services
-
-Other services are included to provide support for the core identity/authentication functions. DNS is used for machine discovery and for connecting to other clients in the domain. NTP is used to synchronize all domain clocks so that logging, certificates, and operations can occur as expected. A certificate service provides certificates for Kerberos-aware services. All of these additional services work together under the control of the FreeIPA server.
-The FreeIPA server also has a set of tools which are used to manage all of the FreeIPA-associated services. Rather than managing the LDAP server, KDC, or DNS settings individually, using different tools on local machines, FreeIPA has a single management toolset (CLI and web UI) that allows centralized and cohesive administration of the domain.
+* Other services included for support:
+  * DNS for machine discovery and finding to other domain members.
+  * NTP to synchronize all domain clocks for logging and certificates.
+  * Certificate service provides certificates for Kerberos-aware services.
+* Unified tools to manage these services (CLI and web)
 
 ---
 
