@@ -147,7 +147,7 @@ Use `kadmin.local` (running as root) to create the first few principals:
 
 * a host principal for the host itself;
 * a regular principal "student";
-* a KDC admin principal "student/admin"
+* a KDC admin principal "student/admin".
 
 ---
 
