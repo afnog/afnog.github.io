@@ -73,9 +73,6 @@ layout: true
 Choose a realm name:
 * For example, `myname.afnog.guru`
 
-Decide which host will be your master IPA server.
-* For example, `pcXX.sse.ws.afnog.org`
-
 ---
 
 ### Install the Packages
