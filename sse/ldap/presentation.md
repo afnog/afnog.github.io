@@ -65,12 +65,12 @@ Please note:
 
 ---
 layout: true
-## Installing FreeIPA
+## Build a KDC
 ---
 
 ### Before you Start
 
-Choose a `domain_name` for your domain.
+Choose a realm name:
 * For example, `myname.afnog.guru`
 
 Decide which host will be your master IPA server.
