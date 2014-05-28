@@ -131,7 +131,7 @@ sudo mkdir /etc/krb5kdc
 
 Create the ACL file and grant admin rights to all */admin principals.
 
-Edit `/etc/krb5kdc/kadm5.acl` (using sudo) and add the following line:
+* Edit `/etc/krb5kdc/kadm5.acl` (using sudo) and add the following line:
 
 ```
 */admin@<your_realm> *
