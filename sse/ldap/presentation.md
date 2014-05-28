@@ -202,6 +202,13 @@ sudo /etc/rc.d/kadmind start
 
 ## Install OpenLDAP
 
+### Before you start
+
+* Decide the root of your tree, usually based on your domain:
+  * For example, `pcXX.sse.ws.afnog.org`
+* Reverse it, add `DC=` to each component, and separate with commas:
+  * For example, `DC=org,DC=afnog,DC=ws,DC=sse,DC=pcXX`
+
 ```sh
 sudo pkg install openldap-server
 ```
@@ -219,6 +226,12 @@ Start the server:
 ```sh
 sudo /usr/local/etc/rc.d/slapd start
 ```
+
+Edit `/usr/local/etc/openldap/slapd.conf`:
+
+* Find the `rootdn` line and change value to your manager DN
+
+and `password`
 
 ---
 layout: false
