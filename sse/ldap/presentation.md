@@ -175,6 +175,24 @@ addprinc student/admin
 Press Ctrl+D to end the session.
 
 ---
+
+### Start your Engines
+
+Edit `/etc/rc.conf` (with sudo) and add the following lines:
+
+```sh
+kerberos5_server_enable=YES
+kadmind5_server_enable=YES
+```
+
+Start the Kerberos daemons:
+
+```sh
+sudo /etc/rc.d/kerberos start
+sudo /etc/rc.d/kadmind start
+```
+
+---
 layout: false
 
 ## FIN
