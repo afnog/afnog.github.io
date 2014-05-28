@@ -92,13 +92,13 @@ dns_lookup_realm = true
 dns_lookup_kdc = true
 
 [realms]
-REALM1.WS.NSRC.ORG = {
-        kdc = pc1.ws.nsrc.org
-        admin_server = pc1.ws.nsrc.org
+<your_realm> = {
+        kdc = pcXX.sse.ws.afnog.org
+        admin_server = pcXX.sse.ws.afnog.org
 }
 
 [domain_realm]
-pc1.ws.nsrc.org = REALM1.WS.NSRC.ORG
+pcXX.sse.ws.afnog.org = <your_realm>
 ```
 
 ### Enable the Service
