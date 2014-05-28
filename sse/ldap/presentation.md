@@ -87,7 +87,7 @@ Edit `/etc/krb5.conf` (using sudo) and add these lines:
 
 ```sh
 [libdefaults]
-default_realm = REALM1.WS.NSRC.ORG
+default_realm = <your_realm>
 dns_lookup_realm = true
 dns_lookup_kdc = true
 
