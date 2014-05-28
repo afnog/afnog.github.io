@@ -147,6 +147,10 @@ Use kadmin.local (running as root) to create the first few principals:
 * a regular principal "student";
 * a KDC admin principal "student/admin"
 
+---
+
+### Create some principals (users)
+
 Start a `kadmin` interactive session (shell):
 
 ```sh
