@@ -147,16 +147,22 @@ Use kadmin.local (running as root) to create the first few principals:
 * a regular principal "student";
 * a KDC admin principal "student/admin"
 
-# kadmin.local
-addprinc -randkey host/pc1.ws.nsrc.org
-ktadd host/pc1.ws.nsrc.org
+Start a `kadmin` interactive session (shell):
+
+```sh
+sudo kadmin.local
+```
+
+Enter the following commands into it:
+
+```
+addprinc -randkey host/pcXX.sse.ws.afnog.org
+ktadd host/pcXX.sse.ws.afnog.org
 addprinc student
--- you'll be prompted to choose a password
 addprinc student/admin
--- you'll be prompted to choose a password
-^D
+```
 
-
+Press Ctrl+D to end the session
 
 ---
 layout: false
