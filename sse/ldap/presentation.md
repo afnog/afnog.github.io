@@ -120,6 +120,21 @@ sudo kdb5_util create -r <your_realm> -s
 * Record this password and keep it very safe!
 
 ---
+
+### Grant rights to admins
+
+Create the ACL file and grant admin rights to all */admin principals.
+
+Edit `/etc/krb5kdc/kadm5.acl` (using sudo) and add the following line:
+
+```
+*/admin@REALM1.WS.NSRC.ORG    *
+```
+
+
+
+
+---
 layout: false
 
 ## FIN
