@@ -75,15 +75,11 @@ Choose a realm name:
 
 ---
 
-### Install the Packages
-
 ```sh
 sudo pkg install krb5
 ```
 
 ---
-
-### Configure local Kerberos
 
 Edit `/etc/krb5.conf` (using sudo) and add these lines:
 
