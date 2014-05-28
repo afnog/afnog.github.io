@@ -144,11 +144,11 @@ Create the file `/usr/local/etc/sssd/sssd.conf` (using sudo):
 [domain/<domain_name>]
 cache_credentials = True
 krb5_store_password_if_offline = True
-ipa_domain = pcXX.sse.ws.afnog.org
+ipa_domain = <domain_name>
 id_provider = ipa
 auth_provider = ipa
 access_provider = ipa
-ipa_hostname = <fqdn>
+ipa_hostname = pcXX.sse.ws.afnog.org
 chpass_provider = ipa
 ipa_server = _srv_ #our FreeIPA server has DNS SRV entries
 ldap_tls_cacert = <ldap tls CA cert location>
