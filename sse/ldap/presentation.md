@@ -1,8 +1,8 @@
 class: center, middle, title
 
-# LDAP Directory Services
+# LDAP and Kerberos
 
-## How to run an LDAP server and domain
+## How to run an LDAP server and Kerberos domain
 
 .height_8em[[![Tree in Mist](https://farm8.staticflickr.com/7095/7230738190_3c6f7146e6_b.jpg)](https://www.flickr.com/photos/matthewpaulson/7230738190)]
 
@@ -14,8 +14,7 @@ class: center, middle, title
 
 Based on presentations by:
 
-* [FreeIPA Guide](http://docs.fedoraproject.org/en-US/Fedora/15/html/FreeIPA_Guide/index.html)
-* [Seth Lyons](https://forums.freebsd.org/viewtopic.php?f=39&t=46526)
+* [Brian Candler and NSRC](https://nsrc.org/workshops/2011/sanog17/wiki/Agenda) (SANOG 17)
 
 You can access this presentation at: http://afnog.github.io/sse/ldap/presentation
 ([edit](https://github.com/afnog/sse/ldap/presentation.md))
