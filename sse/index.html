@@ -594,6 +594,10 @@ presentations on the fly):</p>
 <pre><code>make watch
 </code></pre>
 
+<p>You can use <code>make sync</code> to run <code>lsyncd</code> (which you must have installed) to
+automatically <code>rsync</code> the content to the workshop server, http://www.ws.afnog.org.
+You will need to check the <code>SYNC_HOST</code> and <code>SYNC_DIR</code> in the <code>Makefile</code>,
+which must point to the destination host and directory <strong>which will be overwritten</strong>.</p>
 
 
 <script type="text/javascript">
