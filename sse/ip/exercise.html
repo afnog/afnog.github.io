@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../workshop.css" type="text/css" />
+	<link rel="stylesheet" href="css/sse.css" type="text/css" />
+	<link rel="copyright" title="Copyright and Usage Restrictions"
+		href="../00readme.html" type="text/html" />
+	<link rel="home" title="AfNOG Workshop web site"
+		href="http://www.ws.afnog.org/" type="text/html" />
+	<link rel="up" title="AfNOG 2014 Workshop Main Page"
+		href="../index.html" type="text/html" />
+	<title>SS-E - AfNOG 2014 Workshop</title>
+	<!--
+	Showdown - Markdown in Javascript
+	from http://www.showdown.im/
+	-->
+	<script type="text/javascript" src="js/showdown.js"></script>
+</head>
+<body>
+
+<div class="arrowlinks">
+  <a href="http://www.afnog.org/">AfNOG</a>
+  &gt;
+  <a href="http://www.ws.afnog.org/">Workshops</a>
+  &gt;
+  <a href="../index.html">2014</a>
+  &gt;
+  Track SS-E &mdash; Scalable Internet Services
+</div>
+
+<hr>
+
+<h1 id="internet-protocols">Internet Protocols</h1>
+
+<p>Chris Wilson, <a href="http://www.aptivate.org/">Aptivate</a>, AfNOG 2014</p>
+
+<h2 id="questions-to-get-you-thinking">Questions to get you thinking</h2>
+
+<ul>
+  <li>What is an IP address?</li>
+  <li>What is a port?</li>
+  <li>What is ARP?</li>
+  <li>Source and Destination Ports</li>
+  <li>Ports used by common services</li>
+  <li>What is Wireshark?</li>
+</ul>
+
+<h2 id="investigations">Investigations</h2>
+
+<h3 id="install-wireshark-on-your-computer">Install Wireshark on your computer</h3>
+
+<p>Some versions <a href="http://mini1.sse.ws.afnog.org/~inst/wireshark/">already downloaded</a>,
+otherwise go to http://www.wireshark.org/download.html.</p>
+
+<h3 id="capture-some-traffic">Capture some traffic</h3>
+
+<p>Start a capture (e.g. 1000 packets), look at the traffic and analyse it.</p>
+
+<p>Look out for:</p>
+
+<ul>
+  <li>Wireless (802.11)</li>
+  <li>ARP</li>
+  <li>DNS</li>
+  <li>UDP (Skype/VPN/unusual)</li>
+</ul>
+
+<p>Investigate the properties of the packets by expanding layers at the bottom.</p>
+
+<p>Investigate a DNS packet. What host is being looked up, by who and why?</p>
+
+<p>What’s the source MAC address of your incoming packets? And destination of
+your outgoing packets? Why?</p>
+
+<p>If you find something interesting/unusual, send a pcap file to the intructor.</p>
+
+<h3 id="learn-how-to-filter-captures">Learn how to filter captures</h3>
+
+<ul>
+  <li>What filter would you put in the capture box to select HTTP traffic?</li>
+  <li>How would you select HTTP traffic in the packet list view (main screen)?</li>
+</ul>
+
+<h3 id="reading-tcp-stream">Reading TCP Stream</h3>
+
+<ul>
+  <li>Start capturing and then browse a website.</li>
+  <li>Right click on an HTTP packet and view TCP stream.</li>
+  <li>Look at the HTTP headers: what do they mean?</li>
+</ul>
+
+<h3 id="drawing-graphs">Drawing Graphs</h3>
+
+<ul>
+  <li>Start a capture.</li>
+  <li>Set up charting with an unfiltered graph and a filtered one (e.g. http traffic).</li>
+  <li>Try downloading something and see what happens.</li>
+  <li>What speed do you get? What causes the dips in the transfer rate?</li>
+</ul>
+
+<h2 id="network-security">Network Security</h2>
+
+<h3 id="check-for-open-ports">Check for open ports</h3>
+
+<p><code>
+sudo pkg install nmap
+</code></p>
+
+<p>Find out which hosts are up on our LAN, and the whole of AfNOG. Try to identify them.</p>
+
+<p>Check for open ports:</p>
+
+<ul>
+  <li>On your virtual server</li>
+  <li>On your laptop</li>
+  <li>On a real server under your control</li>
+</ul>
+
+<p>What do the different states mean? open/closed/filtered</p>
+
+<p>What difference does it make if you stop your firewall?</p>
+
+<p>What can you do with these ports?</p>
+
+<p>Try connecting to one:</p>
+
+<ul>
+  <li>SSH port with <code>ssh</code></li>
+  <li>HTTP port with <code>fetch</code></li>
+  <li>DNS port with <code>dig</code></li>
+</ul>
+
+<p>What log messages do you get when someone hits these services?</p>
+
+<p>Do you see other such records?</p>
+
+
+<script type="text/javascript">
+var converter = new Showdown.converter();
+var markdownArea = document.getElementById('markdown');
+if (markdownArea)
+{
+	markdownArea.innerHTML = converter.makeHtml(markdownArea.innerHTML);
+}
+</script>
+
+<div class="bottomlinks">
+<p><a href="../index.html">Return to AfNOG Workshop Main Page</a></p>
+</div>
+
+</body>
+</html>
+
