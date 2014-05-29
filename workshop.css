@@ -1,0 +1,291 @@
+/*
+ * CSS style sheet for AFNOG Workshop
+ */
+
+/*
+ * Some browsers pretend to have a larger display area
+ * than they really have.  For example, mobile phones may
+ * pretend to have a display width of 800px even if their
+ * actual display is only 400px wide.  Most of our web pages
+ * are designed to adapt to narrow displays, so the browser
+ * behaviour is counter-productive.  Encourage the browser
+ * not to do that.
+ *
+ * XXX: Some browsers don't understand this CSS, and want
+ * <meta name="viewport" content="width=device-width">
+ * in the web page itself.
+ */
+@-viewport {
+    width: device-width;
+}
+
+/*
+ * Default font and colour.
+ */
+body {
+    color: black;
+    background-color: white;
+    font-family: sans-serif, Helvetica, Arial;
+}
+
+/*
+ * Lazy people can change nonstandard <foo align="center"> to
+ * standard <foo class="center"> (assuming that foo is a valid
+ * element name).
+ */
+.center { text-align: center; }
+
+/*
+ * To get a centred image that shrinks to fit a narrow browser window,
+ * use <div class="centered-image"><a ...><img ...></a></div>
+ *
+ * max-width:99% and height:auto lets the image shrink;
+ *
+ * I think there's a bug in firefox-1.9 that
+ * makes it incorrectly use zero height when images are disabled;
+ * this doesn't happen with normal images, but does happen when CSS
+ * uses max-width and height:auto.  The "min-height:2em" is to
+ * leave space fot the alt text even in the presence of this bug.
+ */
+.centered-image {
+    text-align: center;
+    max-width: 99%;
+}
+.centered-image img {
+    max-width: 100%;
+    height: auto;
+    min-height: 2em;
+}
+
+/*
+ * <img class="floatright"> makes a right-aligned image with text free
+ * to flow around it.  This is like <img align="right" border="0">,
+ * but we also add padding and a margin, to prevent the text from
+ * bumping into the image, and we set a maximum width.
+ */
+.floatright {
+    float: right;
+    clear: both;
+    margin: 0;
+    border: 0;
+    padding: 15px 10px 15px 20px; /* top, right, bottom, left */
+    max-width: 33%;
+}
+/* Special case for img inside div.floatright, whether or not the
+ * img has class=floatright:  float the div, but do not float the img.
+ * The expected use case is to have multiple images inside a single div,
+ * with a small vertical space separating the images.
+ */
+div.floatright * img.floatright,
+div.floatright * img,
+div.floatright > img.floatright,
+div.floatright > img {
+    float: none;
+    clear: both;
+    margin: 5px 0; /* top and bottom only, not left and right */
+    border: 0;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+}
+
+/*
+ * Logo in top right near header.
+ *
+ * Usage:
+ *   <div class="top-right-logo">
+ *     <img src="..." width="..." height="..." alt="...">
+ *   </div>
+ *   <div class="headers-with-right-logo-margin">
+ *     <h1 class="topheader">...</h1>
+ *   </div>
+ *
+ * The logo goes in a float with max-width 25%.  The headers wrap
+ * around that.
+ *
+ * The use of 'display: table' is intended to make the choice of
+ * whether an element has the full width (below the logo) or a narrower
+ * width (next to the logo) be made once per element, not once per line,
+ * so each line within the same element will have the same length.
+ *
+ * On very narrow displays, centre the picture instead of float right.
+ */
+.top-right-logo {
+    border: 0;
+    padding: 15px 10px 5px 10px; /* top, right, bottom, left */
+    float: right;
+    max-width: 25%;
+    min-width: 100px;
+}
+@media all and (max-width:220px) {
+  .top-right-logo {
+    float: none;
+    padding: 0 10px 5px 10px; /* top, right, bottom, left */
+    margin: 0 auto; /* centre it */
+    width: 100px;
+    max-width: 98%;
+  }
+}
+.top-right-logo > img {
+    max-width: 100%;
+    height: auto;
+}
+.headers-with-right-logo-margin {
+    /* margin-right: 20%; */
+}
+.headers-with-right-logo-margin h1 {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ * <div class="arrowlinks"> is for links at the top of a page, saying
+ * stuff like "AFNOG > Workshop > 2004 > Track > Topic".
+ */
+.arrowlinks {
+    text-align: left;
+    font-size: small; /* absolute size */
+}
+/* do not display in printed version */
+@media print {
+    .arrowlinks {
+	display: none;
+    }
+}
+
+/*
+ * <div class="sectionjumps"> is used for links at the
+ * top of a page like "[ Jump within this page: A | B | C ]".
+ */
+.sectionjumps {
+    font-size: small;
+    text-align: center;
+}
+/* do not display in printed version */
+@media print {
+    .sectionjumps {
+	display: none;
+    }
+}
+
+/*
+ * Inside .arrowlinks and .sectionjumps, avoid line breaks
+ * in the innermost elements.  These should usually be short
+ * words or like "Unix Intro" or "SI-E" or "Track SI-E".
+ * We usually mark the spaces as non-breaking in the HTML code,
+ * via &nbsp;, but marking the hyphens as non-breaking via with &#x2011;
+ * is too much trouble, so we do it with this CSS.
+ */
+.arrowlinks   * a,
+.sectionjumps * a
+{
+    white-space: nowrap;
+}
+
+/*
+ * <div class="bottomlinks"> is for links at the bottom of a page, saying
+ * stuff like "Return to AFNOG Workshop Main Page".
+ */
+.bottomlinks {
+    text-align: center;
+    font-size: medium; /* absolute size */
+}
+/* do not display in printed version */
+@media print {
+    .bottomlinks {
+	display: none;
+    }
+}
+
+/*
+ * <div class="bottombuttons"> is for buttons at the bottom of a page, saying
+ * stuff like "Valid HTML", Valid CSS", "Best viewed with any browser".
+ */
+.bottombuttons {
+    text-align: center;
+    font-size: medium; /* absolute size */
+}
+/* do not display in printed version */
+@media print {
+    .bottombuttons {
+	display: none;
+    }
+}
+
+/*
+ * <div class="copyright"> is used for copyright notices.
+ */
+.copyright {
+    font-size: medium;
+    font-weight: bold;
+}
+
+/*
+ * We want to centre <h1> and left-alight <h2>, <h3>, etc.
+ */
+h1 { text-align: center; }
+h2, h3, h4, h5, h6 { text-align: left; }
+
+/*
+ * The really important top level headers are marked with
+ * <h1 class="topheader">.
+ *
+ * Sometimes there are some less-important headers above them, to set
+ * the context.  These are marked with <h1 class="topcontext">.
+ *
+ * Sometimes there are some less-important subheaders below them,
+ * which we nevertheless want to mark with <h1> rather than <h2>.
+ * These are marked with <h1 class="topsubhead">.
+ *
+ * We render the "topcontext" and "topsubhead" in a smaller font
+ * than we use for "topheader".
+ */
+h1.topcontext, h1.topheader, h1.topsubhead {
+    text-align: center;
+    font-weight: bold;
+}
+h1.topcontext { font-size: large; }
+h1.topheader { font-size: xx-large; }
+h1.topsubhead { font-size: x-large; }
+/* on devices that have a small display size, make these headers smaller */
+@media all and (max-width:800px),
+       all and (max-height:600px)
+{
+    h1.topcontext { font-size: medium; }
+    h1.topheader { font-size: x-large; }
+    h1.topsubhead { font-size: large; }
+}
+
+/*
+ * class="todo" is used to mark things that need to be changed.
+ *         The result will be rendered with a reddish background.
+ * class="todo-note" is used to mark notes about things to do.
+ *         The result will be rendered as a block of red text.
+ * class="fixme" is the same as class="todo-note".
+ *
+ * Usage: <div class="todo-note">THIS IS OLD INFORMATION FROM 2003</div>
+ */
+.todo {
+    color: black;
+    background-color: #ff88ff;
+}
+.todo-note, .fixme {
+    color: black;
+    background-color: #ff88ff;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border: thick solid red;
+    margin: 10px;
+}
+
+/* do not underline or change colour of links in printed media */
+@media print {
+    a, a:link, a:visited, a:active, a:hover {
+	text-decoration: inherit;
+	color: inherit;
+	background-color: inherit;
+    }
+}

@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<link rel="stylesheet" href="../css/workshop.css" type="text/css">
+	<link rel="stylesheet" href="../workshop.css" type="text/css">
+	<link rel="stylesheet" href="css/sse.css" type="text/css">
 	<link rel="copyright" title="Copyright and Usage Restrictions"
 		href="../00readme.html" type="text/html">
 	<link rel="home" title="AfNOG Workshop web site"
@@ -15,110 +16,7 @@
 	Showdown - Markdown in Javascript
 	from http://www.showdown.im/
 	-->
-	<script type="text/javascript" src="showdown.js"></script>
-	<style>
-h2, a, a.visited
-{
-	color: #b40004;
-}
-h2, .bottomlinks
-{
-	/*
-	font-family: "Impact";
-	font-weight: normal;
-	*/
-	border-top: 4px solid #b40004;
-	margin-top: 1em;
-	padding-top: 1em;
-}
-h2 { margin: 1em 0 0.5em; }
-h3 { margin: 1em 0 0.2em; }
-p, ul, ol, table, h3, h4
-{
-	margin-left: 5%;
-}
-table, td, th
-{
-	border: 1px solid #dce7ed;
-	border-collapse: collapse;
-}
-table
-{
-	border-width: 2px;
-}
-th, td
-{
-	padding: 0.3em 0.5em;
-}
-th
-{
-	background: #dce7ed;
-}
-.timetable td
-{
-	background: white;
-}
-.timetable tr.break td
-{
-	background: white;
-	text-align: center;
-	color: #dce7ed;
-}
-.timetable .time
-{
-	font-weight: bold;
-}
-/*
-.session
-{
-	border-bottom: 1px solid #b40004;
-}
-*/
-h3
-{
-	border: 4px solid #b40004;
-	border-style: none none solid none;
-	background: #ecc0c1;
-	padding: 0.5em;
-}
-.presenter
-{
-	display: block;
-	margin: 0.5em 0;
-	border: 4px solid #d98082;
-	border-style: none none none solid;
-	padding: 0.5em;
-	font-weight: bold;
-	/*background: #f5e0e1;*/
-}
-h4
-{
-	border: 4px solid #ecc0c1;
-	border-style: none none none solid;
-	padding: 0.5em;
-	padding-left: 0;
-	margin: 1em 0 0;
-}
-.topics
-{
-	margin: 0 0 0.5em;
-	border: 4px solid #dce7ed;
-	border-style: none none none solid;
-	padding: 0.5em;
-	list-style-type: none;
-}
-.materials
-{
-	border-left: 4px solid #ecc0c1;
-	list-style-type: none;
-	margin: 0 0 1em;
-	padding: 0.5em;
-}
-.materials a
-{
-	display: block;
-}
-	</style>
+	<script type="text/javascript" src="js/showdown.js"></script>
 </head>
 <body>
 
@@ -138,19 +36,22 @@ h4
 
 <h2 id="track-ss-e-scalable-internet-services">Track SS-E: Scalable Internet Services</h2>
 
-<p>Jump within this page:</p>
+<div class="sectionjumps">
+  <p>Jump within this page:</p>
 
-<ul>
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#instructors">Instructors</a></li>
-  <li><a href="#timetable">Timetable</a></li>
-  <li><a href="#topics">Topics</a></li>
-  <li><a href="#management">Management</a></li>
-</ul>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#instructors">Instructors</a></li>
+    <li><a href="#timetable">Timetable</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#management">Management</a></li>
+  </ul>
+</div>
+<!-- sectionjumps -->
 
 <p><a href="photos/Class_Group_Photo.jpg" class="group-photo"><img src="photos/Class_Group_Photo_600.jpg" alt="[SS-E Group Photo]" /></a></p>
 
-<p>.intro[## Introduction]</p>
+<h2 id="introduction">Introduction</h2>
 
 <p>This course on Scalable Internet Services is part of the <a href="http://www.ws.afnog.org/afnog2014">AfNOG 2014 Workshop on Network Technology</a>, held in conjunction with the <a href="http://www.afnog.org/">AfNOG meeting</a>
 in Djibouti, May-June 2014.</p>
@@ -327,348 +228,214 @@ in Djibouti, May-June 2014.</p>
 	</tbody>
 </table>
 
-<h2 id="topics">Topics</h2>
-
-<h3 id="introduction">Introduction</h3>
-
-<h4 id="chris-wilsoncw"><a href="#CW">Chris Wilson</a></h4>
-
-<h6 id="presentationhttpafnoggithubiosseintropresentation"><a href="http://afnog.github.io/sse/intro/presentation">Presentation</a></h6>
-<p>###### <a href="https://www.surveymonkey.com/s/7Q88MH7">Opening Survey</a>
-###### <a href="http://afnog.github.io/sse/intro/opening-survey-results.pdf">Survey Results</a></p>
-
-<h3 id="apache">Apache</h3>
-
-<h4 id="evelyn-namaraen"><a href="#EN">Evelyn Namara</a></h4>
-
-<h6 id="apache-presentationpowerpoint">Apache Presentation/PowerPoint</h6>
-<p>###### <a href="http://afnog.github.io/sse/apache/apache_sse_exercises_apache+ssl.txt">Exercise1 - Apache Installation/SSL</a>
-###### <a href="http://afnog.github.io/sse/apache/apache_sse_exercises_Mysql &amp; PHP configs.txt">Exercise2 - MySQL/PHP/Wordpress Install</a>
-###### <a href="http://afnog.github.io/sse/apache/apache_sse_exercises_wordpress.txt">Exercise3 - Wordpress Configuration</a></p>
-
-<ul>
-  <li>Installing Apache22 from FreeBSD ports</li>
-  <li>Configure Apache with basic configuration</li>
-  <li>Start Apache http daemon and connect to local box</li>
-  <li>Verify local ssl certificate works</li>
-  <li>Configuring Apache with SSL</li>
-  <li>Example SSL Apache configuration file</li>
-  <li>Sample config for Virtual Hosting</li>
-  <li>Install MySQL, PHP, Wordpress</li>
-  <li>Configuring Wordpress</li>
-</ul>
-
-<h3 id="security-and-cryptography">Security and Cryptography</h3>
-
-<h4 id="chris-wilsoncw-1"><a href="#CW">Chris Wilson</a></h4>
-
-<h6 id="presentationhtmlhttpafnoggithubiossecryptopresentationpdfhttpafnoggithubiossecryptopresentationpdf">Presentation/<a href="http://afnog.github.io/sse/crypto/presentation">HTML</a>/<a href="http://afnog.github.io/sse/crypto/presentation.pdf">PDF</a></h6>
-
-<h3 id="dns">DNS</h3>
-
-<h4 id="joe-ableyja"><a href="#JA">Joe Abley</a></h4>
-
-<h5 id="fundamentals">Fundamentals</h5>
-
-<h6 id="powerpointdnsdns1-presentationppt"><a href="dns/dns1-presentation.ppt">PowerPoint</a></h6>
-<p>###### <a href="dns/dns1-presentation.pdf">PDF</a>
-###### <a href="dns/dns1-exercise.txt">Exercise</a></p>
-
-<p>Goal: to understand overall purpose and structure of DNS</p>
-
-<ul>
-  <li>IP addresses vs. names</li>
-  <li>DNS as a distributed, hierarchical database</li>
-  <li>Domain names and resource records:
-    <ul>
-      <li>A, PTR, MX, CNAME, TXT, SOA/NS</li>
-    </ul>
-  </li>
-  <li>Domain name lookup responses</li>
-  <li>Reverse DNS</li>
-  <li>DNS as client-server model
-    <ul>
-      <li>Resolver</li>
-      <li>Cache</li>
-      <li>Authoritative server</li>
-    </ul>
-  </li>
-  <li>Testing DNS (dig)</li>
-  <li>Understanding output from dig </li>
-  <li>Practical Exercises:
-    <ul>
-      <li>Configure Unix resolver</li>
-      <li>Use dig { A, other (e.g. MX), non-existent answer, reverse lookup }</li>
-      <li>Use tcpdump to show queries being sent to cache</li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="dns-caching-and-debugging">DNS Caching and Debugging</h5>
-<p>###### <a href="dns/dns2-presentation.ppt">PowerPoint</a>
-###### <a href="dns/dns2-presentation.pdf">PDF</a>
-###### <a href="dns/dns2-exercise1.txt">Exercise 1</a>
-###### <a href="dns/dns2-exercise2.txt">Exercise 2</a>
-###### <a href="dns/dns2-exercise3.txt">Exercise 3</a></p>
-
-<p>Goal: to understand operation of a recursive nameserver</p>
-
-<ul>
-  <li>Recap of previous session</li>
-  <li>DNS as a distributed database.</li>
-  <li>Resource record NS: referral of answer</li>
-  <li>Caching nameserver and root servers</li>
-  <li>Caching used to reduce load (esp. top level servers)</li>
-  <li>Issue of stale data in caches (problems with distributed systems).
-    <ul>
-      <li>TTL records on each record</li>
-      <li>Negative TTL in SOA</li>
-    </ul>
-  </li>
-  <li>Recursion and caching (dig +norec)</li>
-  <li>Demo: www.ticscali.co.uk</li>
-  <li>Practical Exercise:
-    <ul>
-      <li>Debugging DNS Worksheet (with dig +norec ):
-. Students work on their own examples</li>
-    </ul>
-  </li>
-  <li>Configuring a caching n Load Balancingameserver 
-    <ul>
-      <li>check /var/named/etc/namedb/named.conf</li>
-      <li>run tcpdump</li>
-      <li>rndc start</li>
-      <li>change /etc/resolv.conf to point to your nameserver</li>
-      <li>query two times - { Look at ‘aa’ flag, TTL, query time }</li>
-      <li>rndc flush</li>
-      <li>cache is authoritative for 127.0.0.1</li>
-    </ul>
-  </li>
-  <li>What sort of hardware would you choose when building a DNS cache?		</li>
-  <li>Improving the configuration of a cache NS </li>
-  <li>Managing a caching nameserver </li>
-  <li>Practical Exercise:
-    <ul>
-      <li>Building your own cache nameserver</li>
-      <li>Improving the configuration of the cache NS</li>
-    </ul>
-  </li>
-  <li>Question and Answer session</li>
-  <li>Summary</li>
-</ul>
-
-<h5 id="configuring-authoritative-name-servers">Configuring Authoritative Name Servers</h5>
-<p>###### <a href="dns/dns3-presentation.ppt">PowerPoint</a>
-###### <a href="dns/dns3-presentation.pdf">PDF</a></p>
-
-<p>Goal: to properly configure an authoritative nameserver	</p>
-
-<ul>
-  <li>Recap of caching NS	</li>
-  <li>DNS Replication </li>
-  <li>Outside world cannot tell the difference between master and slave </li>
-  <li>When does replication take place? </li>
-  <li>Two (2) Dangers with serial numbers </li>
-  <li>Configuration of Master &amp; Slave NS 
-    <ul>
-      <li>Format of Resource Records { SOA and NS } </li>
-    </ul>
-  </li>
-  <li>Ten (10) Common DNS Operational and Configuration Errors (RFC1912) </li>
-</ul>
-
-<h5 id="exercises">Exercises</h5>
-<p>###### <a href="dns/dns3-exercise.txt">Exercise</a></p>
-
-<p>Setting up authoritative name services for a domain</p>
-
-<ul>
-  <li>Master &amp; Slave nameserver exercises </li>
-</ul>
-
-<h5 id="delegation-and-reverse-dns">Delegation and Reverse DNS</h5>
-<p>###### <a href="dns/dns4-presentation.ppt">PowerPoint</a>
-###### <a href="dns/dns4-presentation.pdf">PDF</a></p>
-
-<ul>
-  <li>How do you delegate a subdomain?</li>
-  <li>Glue records</li>
-  <li>Reverse DNS
-    <ul>
-      <li>Subnets smaller than /24</li>
-    </ul>
-  </li>
-  <li>DNS Landmarks
-    <ul>
-      <li>Key organisations and people</li>
-    </ul>
-  </li>
-  <li>The Root Zone</li>
-  <li>Top-Level Domains
-    <ul>
-      <li>Generic and Country Code TLDs</li>
-    </ul>
-  </li>
-  <li>Registries, Registrars, Registrants</li>
-  <li>Nameserver Vendors</li>
-  <li>Conferences, Industry Groups</li>
-  <li>Mailing Lists</li>
-  <li>DNS Summary</li>
-  <li>Further reading</li>
-</ul>
-
-<h3 id="dnssec">DNSSEC</h3>
-<p>#### <a href="#JA">Joe Abley</a>
-###### <a href="dns/DNSSEC_High-Level_Awareness.pdf">Presentation/PDF</a>
-###### <a href="dns/DNSSEC_High-Level_Awareness.key">Presentation/Keynote</a>
-###### <a href="dns/dns5-exercise.txt">Exercise/Text</a></p>
-
-<p>DNSSEC High Level Awareness</p>
-
-<h3 id="radius">RADIUS</h3>
-<p>#### <a href="#CW">Chris Wilson</a>
-###### <a href="radius/radius_presentation.odp?raw=true">Presentation/OpenOffice</a>
-###### <a href="radius/radius_presentation_140528_cw.pdf?raw=true">Presentation/PDF</a></p>
-
-<h3 id="virtualization">Virtualization</h3>
-
-<h4 id="laban-mwangilm"><a href="#LM">Laban Mwangi</a></h4>
-<p>##### Presentation/<a href="https://github.com/afnog/sse/raw/master/virtualisation/docs/sse-virtualization-overview-2014.pdf">PDF</a>/<a href="https://github.com/afnog/sse/raw/master/virtualisation/docs/sse-virtualization-overview-2014.odp">OpenOffice</a>
-###### Virtualization Exercise (<a href="virtualisation/Readme.md">TXT</a>)
-###### Virtualization with KVM (<a href="virtualisation/afnog_2013_virtualization_kvm_cw_130610.pdf">PDF</a>/<a href="virtualisation/afnog_2013_virtualization_kvm_cw.odp">OpenOffice</a>)</p>
-
-<h3 id="load-balancing">Load Balancing</h3>
-<p>#### <a href="#LM">Laban Mwangi</a>
-###### <a href="loadbalancing/docs/sse-LB-overview.pdf">Presentation/PDF</a>
-###### <a href="loadbalancing/docs/sse-LB-overview.odp">Presentation/OpenOffice</a></p>
-
-<h3 id="firewalls">Firewalls</h3>
-
-<h4 id="kevin-chegekc"><a href="#KC">Kevin Chege</a></h4>
-
-<p>Goal: To understand firewalls and how the PF (Packet Filter) works</p>
-
-<ul>
-  <li>Block outgoing traffic on IPv6 and IPv4</li>
-  <li>Block incoming traffic on IPv6 and IPv4</li>
-  <li>Log the blocked traffic</li>
-</ul>
-
-<h6 id="freebsd-firewallshttpsgithubcomafnogsserawmasterfirewallsfreebsd-firewallspdf"><a href="https://github.com/afnog/sse/raw/master/firewalls/FreeBSD-firewalls.pdf">FreeBSD Firewalls</a></h6>
-<p>###### <a href="https://raw.githubusercontent.com/afnog/sse/master/firewalls/firewall_exercise-1.txt">PacketFilter Firewall Exercise-1</a>
-###### <a href="https://raw.githubusercontent.com/afnog/sse/master/firewalls/firewall-exercise-2.txt">PacketFilter Firewall Exercise-2</a></p>
-
-<h3 id="monitoring">Monitoring</h3>
-
-<h4 id="kevin-chegekc-1"><a href="#KC">Kevin Chege</a></h4>
-
-<h6 id="monitoring-ip-servicesnagiosnagiospdf"><a href="nagios/nagios.pdf">Monitoring IP Services</a></h6>
-<p>###### [Nagios Exercise-1] (monitoring/nagios-exercise1.txt)
-###### [Nagios Exercise-2] (monitoring/nagios-exercise2.txt)
-###### [Smokeping Exercise] (monitoring/smokeping-exercise1.txt)</p>
-
-<h3 id="exim">Exim</h3>
-
-<h4 id="chris-wilsoncw-2"><a href="#CW">Chris Wilson</a></h4>
-
-<h6 id="presentationpdfeximafnog2013eximpresentation130613pdf"><a href="exim/afnog_2013_exim_presentation_130613.pdf">Presentation/PDF</a></h6>
-<p>###### <a href="exim/afnog_2013_exim_presentation.odp">Presentation/OpenOffice</a>
-###### <a href="exim/eicar">EICAR Anti-Virus Test File</a>
-###### <a href="exim/spam.txt">Sample spam message</a></p>
-
-<h3 id="mail">Mail</h3>
-
-<h4 id="kevin-chegekc-2"><a href="#KC">Kevin Chege</a></h4>
-
-<h5 id="introduction-to-pop-and-imap">Introduction to POP and IMAP</h5>
-<p>###### <a href="mail/dovecot-intro.pdf">Presentation and Exercise/PDF</a>
-###### <a href="mail/dovecot-intro.ppt">Presentation and Exercise/PowerPoint</a></p>
-
-<ul>
-  <li>Dovecot - Server for POP and IMAP
-    <ul>
-      <li>What is Dovecot?</li>
-      <li>Installing dovecot from ports</li>
-      <li>Configuring Dovecot</li>
-      <li>Configuring POP3s and IMAPs</li>
-    </ul>
-  </li>
-</ul>
-
-<h6 id="presentation-and-exercisepdfmaildovecot-scalingpdf"><a href="mail/dovecot-scaling.pdf">Presentation and Exercise/PDF</a></h6>
-<p>###### <a href="mail/dovecot-scaling.ppt">Presentation and Exercise/PowerPoint</a>
-###### <a href="mail/dovecot-mysql-schema.sql">Dovecot Basic Mysql Schema</a></p>
-
-<ul>
-  <li>Dovecot - Virtual Users
-    <ul>
-      <li>Configuring Dovecot for Virtual users with Mysql</li>
-      <li>Configuring Exim for Virtual Users </li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="webmail-using-squirrelmail">Webmail using Squirrelmail</h5>
-
-<h6 id="presentationpdfmailsquirrelmailpdf"><a href="mail/squirrelmail.pdf">Presentation/PDF</a></h6>
-<p>###### <a href="mail/squirrelmail.ppt">Presentation/PowerPoint</a></p>
-
-<ul>
-  <li>Squirrelmail - Webmail IMAP
-    <ul>
-      <li>What is Squirrelmail</li>
-      <li>Installing Squirrelmail from ports/source</li>
-      <li>Configuring squirrelmail</li>
-      <li>Redirecting http to https</li>
-    </ul>
-  </li>
-</ul>
-
-<h5 id="scaling-mail-services">Scaling mail services</h5>
-
-<h6 id="mail-server-clusteringmailclusteringhtm"><a href="mail/clustering.htm">Mail Server Clustering</a></h6>
-<p>###### <a href="mail/scalability.htm">Mail Server Scalability</a></p>
-
-<ul>
-  <li>Mailserver scalability
-    <ul>
-      <li>Linear password files </li>
-      <li>Linear mbox files </li>
-      <li>Too many files in one directory </li>
-      <li>CPU limits </li>
-      <li>Disk performance </li>
-      <li>Keep your SMTP (smarthost) and POP3 services separate </li>
-    </ul>
-  </li>
-  <li>Notes and Clustering and NFS
-    <ul>
-      <li>Using Network File System (NFS)</li>
-      <li>Using Proxies </li>
-      <li>Load balancing </li>
-      <li>Database backends</li>
-      <li>FreeBSD NFS </li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="security-and-availability">Security and Availability</h3>
-
-<h4 id="laban-mwangilm-1"><a href="#LM">Laban Mwangi</a></h4>
-
-<h6 id="presentationpdfsecuritysse-sec-and-availabilitypdf"><a href="security/sse-sec-and-availability.pdf">Presentation/PDF</a></h6>
-<p>###### <a href="security/sse-sec-and-availability.odp">Presentation/ODP</a></p>
-
-<h3 id="configuration-management">configuration-management</h3>
-<p>#### <a href="#LM">Laban Mwangi</a></p>
-
-<h6 id="exerciseconfig-mgmtreadmemd"><a href="config-mgmt/Readme.md">Exercise</a></h6>
-
-<h3 id="closing-survey">Closing Survey</h3>
-
-<h4 id="joel-jaegglijj"><a href="#JJ">Joel Jaeggli</a></h4>
-
-<h6 id="survey-linkhttpwwwsurveymonkeycoms7td2j7t-online"><a href="http://www.surveymonkey.com/s/7TD2J7T">Survey link</a> (online)</h6>
-<p>###### <a href="survey/2013_exit_survey_results.pdf">Survey results</a> (PDF)</p>
+<div class="topics">
+  <h2 id="topics">Topics</h2>
+
+  <h3 id="introduction-1">Introduction</h3>
+
+  <h4 id="chris-wilsoncw"><a href="#CW">Chris Wilson</a></h4>
+
+  <ul>
+    <li><a href="http://afnog.github.io/sse/intro/presentation">Presentation</a></li>
+    <li><a href="https://www.surveymonkey.com/s/7Q88MH7">Opening Survey</a></li>
+    <li><a href="http://afnog.github.io/sse/intro/opening-survey-results.pdf">Survey Results</a></li>
+  </ul>
+
+  <h3 id="apache">Apache</h3>
+
+  <h4 id="evelyn-namaraen"><a href="#EN">Evelyn Namara</a></h4>
+
+  <ul>
+    <li>Apache Presentation/PowerPoint</li>
+    <li><a href="http://afnog.github.io/sse/apache/apache_sse_exercises_apache+ssl.txt">Exercise1 - Apache Installation/SSL</a></li>
+    <li><a href="http://afnog.github.io/sse/apache/apache_sse_exercises_Mysql &amp; PHP configs.txt">Exercise2 - MySQL/PHP/Wordpress Install</a></li>
+    <li><a href="http://afnog.github.io/sse/apache/apache_sse_exercises_wordpress.txt">Exercise3 - Wordpress Configuration</a></li>
+  </ul>
+
+  <h3 id="security-and-cryptography">Security and Cryptography</h3>
+
+  <h4 id="chris-wilsoncw-1"><a href="#CW">Chris Wilson</a></h4>
+
+  <ul>
+    <li>Presentation/<a href="http://afnog.github.io/sse/crypto/presentation">HTML</a>/<a href="http://afnog.github.io/sse/crypto/presentation.pdf">PDF</a></li>
+  </ul>
+
+  <h3 id="dns">DNS</h3>
+
+  <h4 id="joe-ableyja"><a href="#JA">Joe Abley</a></h4>
+
+  <h5 id="fundamentals">Fundamentals</h5>
+
+  <ul>
+    <li><a href="dns/dns1-presentation.ppt">PowerPoint</a></li>
+    <li><a href="dns/dns1-presentation.pdf">PDF</a></li>
+    <li><a href="dns/dns1-exercise.txt">Exercise</a></li>
+  </ul>
+
+  <h5 id="dns-caching-and-debugging">DNS Caching and Debugging</h5>
+
+  <ul>
+    <li><a href="dns/dns2-presentation.ppt">PowerPoint</a></li>
+    <li><a href="dns/dns2-presentation.pdf">PDF</a></li>
+    <li><a href="dns/dns2-exercise1.txt">Exercise 1</a></li>
+    <li><a href="dns/dns2-exercise2.txt">Exercise 2</a></li>
+    <li><a href="dns/dns2-exercise3.txt">Exercise 3</a></li>
+  </ul>
+
+  <h5 id="configuring-authoritative-name-servers">Configuring Authoritative Name Servers</h5>
+
+  <ul>
+    <li><a href="dns/dns3-presentation.ppt">PowerPoint</a></li>
+    <li><a href="dns/dns3-presentation.pdf">PDF</a></li>
+    <li><a href="dns/dns3-exercise.txt">Exercise</a></li>
+  </ul>
+
+  <h5 id="delegation-and-reverse-dns">Delegation and Reverse DNS</h5>
+
+  <ul>
+    <li><a href="dns/dns4-presentation.ppt">PowerPoint</a></li>
+    <li><a href="dns/dns4-presentation.pdf">PDF</a></li>
+  </ul>
+
+  <h3 id="dnssec">DNSSEC</h3>
+
+  <h4 id="joe-ableyja-1"><a href="#JA">Joe Abley</a></h4>
+
+  <p>Goal: DNSSEC High Level Awareness.</p>
+
+  <ul>
+    <li><a href="dns/DNSSEC_High-Level_Awareness.pdf">Presentation/PDF</a></li>
+    <li><a href="dns/DNSSEC_High-Level_Awareness.key">Presentation/Keynote</a></li>
+    <li><a href="dns/dns5-exercise.txt">Exercise/Text</a></li>
+  </ul>
+
+  <h3 id="radius">RADIUS</h3>
+
+  <h4 id="chris-wilsoncw-2"><a href="#CW">Chris Wilson</a></h4>
+
+  <ul>
+    <li><a href="radius/radius_presentation.odp?raw=true">Presentation/OpenOffice</a></li>
+    <li><a href="radius/radius_presentation_140528_cw.pdf?raw=true">Presentation/PDF</a></li>
+  </ul>
+
+  <h3 id="virtualization">Virtualization</h3>
+
+  <h4 id="laban-mwangilm"><a href="#LM">Laban Mwangi</a></h4>
+
+  <ul>
+    <li>Presentation/<a href="https://github.com/afnog/sse/raw/master/virtualisation/docs/sse-virtualization-overview-2014.pdf">PDF</a>/<a href="https://github.com/afnog/sse/raw/master/virtualisation/docs/sse-virtualization-overview-2014.odp">OpenOffice</a></li>
+    <li>Virtualization Exercise (<a href="virtualisation/Readme.md">TXT</a>)</li>
+    <li>Virtualization with KVM (<a href="virtualisation/afnog_2013_virtualization_kvm_cw_130610.pdf">PDF</a>/<a href="virtualisation/afnog_2013_virtualization_kvm_cw.odp">OpenOffice</a>)</li>
+  </ul>
+
+  <h3 id="load-balancing">Load Balancing</h3>
+
+  <h4 id="laban-mwangilm-1"><a href="#LM">Laban Mwangi</a></h4>
+
+  <ul>
+    <li><a href="loadbalancing/docs/sse-LB-overview.pdf">Presentation/PDF</a></li>
+    <li><a href="loadbalancing/docs/sse-LB-overview.odp">Presentation/OpenOffice</a></li>
+  </ul>
+
+  <h3 id="firewalls">Firewalls</h3>
+
+  <h4 id="kevin-chegekc"><a href="#KC">Kevin Chege</a></h4>
+
+  <p>Goal: To understand firewalls and how the PF (Packet Filter) works</p>
+
+  <ul>
+    <li>Block outgoing traffic on IPv6 and IPv4</li>
+    <li>Block incoming traffic on IPv6 and IPv4</li>
+    <li>
+      <p>Log the blocked traffic</p>
+    </li>
+    <li><a href="https://github.com/afnog/sse/raw/master/firewalls/FreeBSD-firewalls.pdf">FreeBSD Firewalls</a></li>
+    <li><a href="https://raw.githubusercontent.com/afnog/sse/master/firewalls/firewall_exercise-1.txt">PacketFilter Firewall Exercise-1</a></li>
+    <li><a href="https://raw.githubusercontent.com/afnog/sse/master/firewalls/firewall-exercise-2.txt">PacketFilter Firewall Exercise-2</a></li>
+  </ul>
+
+  <h3 id="monitoring">Monitoring</h3>
+
+  <h4 id="kevin-chegekc-1"><a href="#KC">Kevin Chege</a></h4>
+
+  <ul>
+    <li><a href="nagios/nagios.pdf">Monitoring IP Services</a></li>
+    <li>[Nagios Exercise-1] (monitoring/nagios-exercise1.txt)</li>
+    <li>[Nagios Exercise-2] (monitoring/nagios-exercise2.txt)</li>
+    <li>[Smokeping Exercise] (monitoring/smokeping-exercise1.txt)</li>
+  </ul>
+
+  <h3 id="exim">Exim</h3>
+
+  <h4 id="chris-wilsoncw-3"><a href="#CW">Chris Wilson</a></h4>
+
+  <ul>
+    <li><a href="exim/afnog_2013_exim_presentation_130613.pdf">Presentation/PDF</a>  </li>
+    <li><a href="exim/afnog_2013_exim_presentation.odp">Presentation/OpenOffice</a></li>
+    <li><a href="exim/eicar">EICAR Anti-Virus Test File</a></li>
+    <li><a href="exim/spam.txt">Sample spam message</a></li>
+  </ul>
+
+  <h3 id="mail">Mail</h3>
+
+  <h4 id="kevin-chegekc-2"><a href="#KC">Kevin Chege</a></h4>
+
+  <h5 id="introduction-to-pop-and-imap">Introduction to POP and IMAP</h5>
+
+  <ul>
+    <li><a href="mail/dovecot-intro.pdf">Presentation and Exercise/PDF</a></li>
+    <li><a href="mail/dovecot-intro.ppt">Presentation and Exercise/PowerPoint</a></li>
+  </ul>
+
+  <h5 id="installing-dovecot-server">Installing Dovecot Server</h5>
+
+  <ul>
+    <li><a href="mail/dovecot-scaling.pdf">Presentation and Exercise/PDF</a></li>
+    <li><a href="mail/dovecot-scaling.ppt">Presentation and Exercise/PowerPoint</a></li>
+    <li><a href="mail/dovecot-mysql-schema.sql">Dovecot Basic Mysql Schema</a></li>
+  </ul>
+
+  <h5 id="webmail-using-squirrelmail">Webmail using Squirrelmail</h5>
+
+  <ul>
+    <li><a href="mail/squirrelmail.pdf">Presentation/PDF</a></li>
+    <li><a href="mail/squirrelmail.ppt">Presentation/PowerPoint</a></li>
+  </ul>
+
+  <h5 id="scaling-mail-services">Scaling mail services</h5>
+
+  <ul>
+    <li><a href="mail/clustering.htm">Mail Server Clustering</a></li>
+    <li><a href="mail/scalability.htm">Mail Server Scalability</a></li>
+  </ul>
+
+  <h3 id="security-and-availability">Security and Availability</h3>
+
+  <h4 id="laban-mwangilm-2"><a href="#LM">Laban Mwangi</a></h4>
+
+  <ul>
+    <li><a href="security/sse-sec-and-availability.pdf">Presentation/PDF</a></li>
+    <li><a href="security/sse-sec-and-availability.odp">Presentation/ODP</a></li>
+  </ul>
+
+  <h3 id="configuration-management">Configuration Management</h3>
+
+  <h4 id="laban-mwangilm-3"><a href="#LM">Laban Mwangi</a></h4>
+
+  <ul>
+    <li><a href="config-mgmt/Readme.md">Exercise</a></li>
+  </ul>
+
+  <h3 id="closing-survey">Closing Survey</h3>
+
+  <h4 id="joel-jaegglijj"><a href="#JJ">Joel Jaeggli</a></h4>
+
+  <ul>
+    <li><a href="http://www.surveymonkey.com/s/7TD2J7T">Survey link</a> (online)</li>
+    <li><a href="survey/2013_exit_survey_results.pdf">Survey results</a> (PDF)</li>
+  </ul>
+</div>
+<!-- .topics -->
 
 <h2 id="management">Management</h2>
 
@@ -722,13 +489,13 @@ in Djibouti, May-June 2014.</p>
 
 <ul>
   <li>Student numbers and names</li>
-  <li>Classroom setup, networking, virtual machine images</li>
+  <li>Classroom setup, networking, virtual machine images, cable management</li>
   <li>Notices - door, timetable, complaints box, wifi password</li>
   <li>Introductory talk - welcome, topic poll, complaints box</li>
   <li>Time management during the workshop (breaks, lunch, etc)</li>
   <li>Set alarms for break times</li>
-  <li>Ensuring that every topic has an instructor and enough time allocated</li>
-  <li>Ensuring that participants are receiving any assistance necessary</li>
+  <li>Ensure that every topic has an instructor and enough time allocated</li>
+  <li>Ensure that participants are receiving any assistance necessary</li>
   <li>Student name verification for certificates</li>
   <li>Coordinate the class group photo</li>
   <li>Liaise with the secretariat on any other issues that may be required</li>
@@ -737,15 +504,10 @@ in Djibouti, May-June 2014.</p>
   <li>Download and serve any files needed, e.g. FreeBSD ISO images (for virtualisation) and packages (for pkg_add mirror)</li>
 </ul>
 
-<h4 id="todo">TODO</h4>
+<h3 id="todo">TODO</h3>
 
 <ul>
   <li>Student numbers and names</li>
-  <li>Power strips: do we have enough? tape them down</li>
-  <li>Set up desktop/backup PCs</li>
-  <li>Distribute the Wifi password</li>
-  <li>Nagios config for all PCs</li>
-  <li>Phones to silent</li>
 </ul>
 
 <h3 id="meta-about-this-site">Meta (about this site)</h3>
