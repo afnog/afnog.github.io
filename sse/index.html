@@ -560,9 +560,23 @@ in <a href="http://sparkleshare.org/">SparkleShare</a>).</p>
 generated HTML files), you can specify it as a command-line argument to Make:</p>
 
 <pre><code>make DST_DIR=/tmp/site
+</code></pre>
 
-sudo gem install jekyll execjs therubyracer
-make
+<p>You will need to install Jekyll to generate the HTML files:</p>
+
+<pre><code>sudo gem install jekyll execjs therubyracer
+</code></pre>
+
+<p>Then run <code>make</code> to build them once, in the destination directory:</p>
+
+<pre><code>make
+</code></pre>
+
+<p>Or run <code>make watch</code> to tell Jekyll to stay running, watch for source files
+changing, and generate a new HTML file when they do (ideal for modifying
+presentations on the fly):</p>
+
+<pre><code>make watch
 </code></pre>
 
 
