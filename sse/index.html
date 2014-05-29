@@ -512,14 +512,14 @@ in Djibouti, May-June 2014.</p>
 
 <h3 id="meta-about-this-site">Meta (about this site)</h3>
 
-<p>Source code (Markdown):</p>
+<h4 id="source-code-markdown">Source code (Markdown)</h4>
 
 <ul>
   <li>Latest master is in <a href="https://github.com/afnog/sse">GitHub</a>.</li>
   <li>Clone an offline copy with Markdown source (no HTML) at <code>git@github.com:afnog/sse.git</code>.</li>
 </ul>
 
-<p>Generated HTML:</p>
+<h4 id="generated-html">Generated HTML</h4>
 
 <ul>
   <li>Created with <a href="https://github.com/dreverri/gollum-site">gollum-site</a> from the source code.</li>
@@ -528,7 +528,23 @@ in Djibouti, May-June 2014.</p>
   <li>Clone an offline copy (HTML, not Markdown) at <code>git@github.com:afnog/afnog.github.io.git</code>.</li>
 </ul>
 
-<p>Generating the HTML:</p>
+<h4 id="presentations">Presentations</h4>
+
+<p>Presentations use a special format to invoke <a href="http://remarkjs.com/">remark</a>
+on the Markdown source files:</p>
+
+<ul>
+  <li>The Markdown source is called <code>presentation.md</code> (so there can be only one
+per directory).</li>
+  <li>In the same directory is a file called <code>index.md</code>, which tells Jekyll to
+use a specific layout (template file) to generate the HTML:
+<code>_layouts/presentation.html</code>.</li>
+  <li>This file is generic and the same for all presentations. It loads the Remark
+source code, and then loads the <code>presentation.md</code> file from the same
+directory using AJAX.</li>
+</ul>
+
+<h4 id="generating-the-html">Generating the HTML</h4>
 
 <p>If you’re using Ruby 1.8, you may need to
 <a href="https://leonard.io/blog/2012/05/installing-ruby-1-9-3-on-ubuntu-12-04-precise-pengolin/">install Ruby 1.9</a>
