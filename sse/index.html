@@ -539,7 +539,12 @@ since it assumes that you have both https://github.com/afnog/sse/ and
 https://github.com/afnog/afnog.github.io/ checked out side-by-side (for example
 in <a href="http://sparkleshare.org/">SparkleShare</a>).</p>
 
-<pre><code>sudo gem install jekyll execjs therubyracer
+<p>If you want it to overwrite a different directory (where it will write the
+generated HTML files), you can specify it as a command-line argument to Make:</p>
+
+<pre><code>make DST_DIR=/tmp/site
+
+sudo gem install jekyll execjs therubyracer
 make
 </code></pre>
 
