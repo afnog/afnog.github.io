@@ -3,12 +3,12 @@ Dovecot Setup
 1. Make a copy of the existing dovecot file and add the following to the file we will use
 
 	cd /usr/local/etc
-	sudo cp dovecot.conf dovecot.conf.orig
+	sudo mv dovecot.conf dovecot.conf.orig
 	sudo ee dovecot.conf
 
 ###########
 protocols = imap imaps
-disable_plaintext_auth = no
+disable_plaintext_auth = yes
 log_path = /var/log/dovecot
 ssl_cert_file = /usr/local/etc/apache22/server.crt
 ssl_key_file = /usr/local/etc/apache22/server.key
