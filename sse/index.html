@@ -613,6 +613,22 @@ in Djibouti, May-June 2014.</p>
   <li>JA on 25/05 at 0900</li>
 </ul>
 
+<h3 id="equipment">Equipment</h3>
+
+<p>To host this track you will probably need the following equipment:</p>
+
+<ul>
+  <li>2 x Mac Minis or similar, quad core i7 2Ghz+, 16GB Ram, 250 GB SSD (to host 16 virtual machines each)</li>
+  <li>Projector: VGA required, HDMI optional, screen/wall. Mac VGA and HDMI adaptors.</li>
+  <li>Wifi: ideally wired and wireless on the same SSID with /24.</li>
+  <li>Wired Ethernet ports: probably 4-8 ports for people with broken wireless and for instructors in our classroom.</li>
+  <li>Power strips: 12 x 4 socket.</li>
+  <li>Spare machines: 4 x reasonable desktop/laptop with 1 GB RAM and permission to reformat and install Ubuntu or FreeBSD.</li>
+  <li>Sun shading: to be able to read the projected screen and not overheat in our
+rooms.</li>
+  <li>White board, pens and eraser: at least 3 pens in 2 different colours.</li>
+</ul>
+
 <h3 id="administration">Administration</h3>
 
 <p>All done by CW unless anyone else wants to.</p>
@@ -711,10 +727,11 @@ presentations on the fly):</p>
 
 <h3 id="publishing-the-html">Publishing the HTML</h3>
 
-<p>You can use <code>make sync</code> to run <code>lsyncd</code> (which you must have installed) to
-automatically <code>rsync</code> the content to the workshop server, http://www.ws.afnog.org.
-You will need to check the <code>SYNC_HOST</code> and <code>SYNC_DIR</code> in the <code>Makefile</code>,
-which must point to the destination host and directory <strong>which will be overwritten</strong>.</p>
+<p>You can use <code>make sync</code> to run <code>lsyncd</code> (which you must have installed, for
+example with <code>brew install lsyncd</code>) to automatically <code>rsync</code> the content to the
+workshop server, http://www.ws.afnog.org.  You will need to check the
+<code>SYNC_HOST</code> and <code>SYNC_DIR</code> in the <code>Makefile</code>, which must point to the
+destination host and directory <strong>which will be overwritten</strong>.</p>
 
 <pre><code>make sync
 </code></pre>
