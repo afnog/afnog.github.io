@@ -139,7 +139,16 @@ Decisions that can't be made based on one packet:
 
 ---
 
-## Showing current rules
+## Listing current rules
+
+We use the `iptables` command to interact with the firewall (in the kernel).
+
+This command is to:
+
+* `L`ist all the rules,
+* in the `filter` table (default),
+* not resolving `n`umeric addresses,
+* `v`erbosely (showing packet and byte counters):
 
 	$ sudo iptables -L -nv
 
@@ -151,6 +160,10 @@ Decisions that can't be made based on one packet:
 
 	Chain OUTPUT (policy ACCEPT 36 packets, 1980 bytes)
 	 pkts bytes target     prot opt in     out     source       destination         
+
+???
+
+This shows 3 chains (INPUT, FORWARD and OUTPUT) with no rules in any of them.
 
 ---
 
