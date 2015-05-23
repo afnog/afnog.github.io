@@ -10,9 +10,9 @@
 		href="../00readme.html" type="text/html" />
 	<link rel="home" title="AfNOG Workshop web site"
 		href="http://www.ws.afnog.org/" type="text/html" />
-	<link rel="up" title="AfNOG 2014 Workshop Main Page"
+	<link rel="up" title="AfNOG 2015 Workshop Main Page"
 		href="../index.html" type="text/html" />
-	<title>SS-E - AfNOG 2014 Workshop</title>
+	<title>SS-E - AfNOG 2015 Workshop</title>
 	<!--
 	Showdown - Markdown in Javascript
 	from http://www.showdown.im/
@@ -26,7 +26,7 @@
   &gt;
   <a href="http://www.ws.afnog.org/">Workshops</a>
   &gt;
-  <a href="../index.html">2014</a>
+  <a href="../index.html">2015</a>
   &gt;
   Track SS-E &mdash; Scalable Internet Services
 </div>
@@ -654,24 +654,43 @@ rooms.</li>
 
 <ul>
   <li>Student numbers and names</li>
+  <li>Apache, Load Balancing, Virtualisation, Monitoring/Nagios, RADIUS - update (to Debian?)</li>
+  <li>DNS - has jabley updated?</li>
+  <li>Security - SSL certificate generation</li>
 </ul>
 
 <h2 id="meta-about-this-site">Meta (about this site)</h2>
+
+<h3 id="quick-start-editing">Quick Start (editing)</h3>
+
+<ul>
+  <li>Request write access to the repositories below, or clone them (and use the clone URLs instead)</li>
+  <li>Install SparkleShare</li>
+  <li>Add <code>git@github.com:afnog/sse.git</code> to it</li>
+  <li>Add <code>git@github.com:afnog/afnog.github.io.git</code> to it</li>
+  <li>Install Jekyll: <code>sudo gem install jekyll execjs therubyracer</code></li>
+  <li>Run <code>make serve</code></li>
+  <li>Edit the Markdown files in <code>~/SparkleShare/sse/.../*.md</code></li>
+  <li>View the results in your browser at http://localhost:4000/…/*.html</li>
+</ul>
 
 <h3 id="source-code-markdown">Source code (Markdown)</h3>
 
 <ul>
   <li>Latest master is in <a href="https://github.com/afnog/sse">GitHub</a>.</li>
+  <li>Edit online using GitHub’s web editor, or:</li>
   <li>Clone an offline copy with Markdown source (no HTML) at <code>git@github.com:afnog/sse.git</code>.</li>
 </ul>
 
 <h3 id="generated-html">Generated HTML</h3>
 
 <ul>
-  <li>Created with Jekyll</li>
+  <li>HTML files are auto-generated from Markdown by Jekyll - do not edit by hand!</li>
+  <li>All files except *.md (Markdown files) are copied literally from the source (<code>sse</code>) repository.</li>
   <li>Possibly outdated copy in <a href="https://github.com/afnog/afnog.github.io">GitHub</a>.</li>
   <li><a href="http://afnog.github.io/sse/">Browsable online</a> at http://afnog.github.io/sse/.</li>
   <li>Clone an offline copy (HTML, not Markdown) at <code>git@github.com:afnog/afnog.github.io.git</code>.</li>
+  <li>Some variables are stored in <code>_config.yml</code>, e.g. the year, and used with <code>2015</code> in HTML and Markdown files.</li>
 </ul>
 
 <h3 id="presentations">Presentations</h3>
