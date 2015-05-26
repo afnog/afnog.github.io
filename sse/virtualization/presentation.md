@@ -133,7 +133,7 @@ Use Virtual Media Manager to:
 Then reattach to virtual machine:
 
 * Settings > Storage > Controller: SATA
-* Click *Add new attachment" icon below
+* Click *Add new attachment* icon below
 * Choose *Add hard disk*
 * *Choose existing disk*
 * Choose the *Trusty Openstack* disk image
@@ -142,16 +142,19 @@ Then reattach to virtual machine:
 
 ## Create new virtual machines
 
-* Create "Trusty OpenStack Controller"
-  * 1024 MB RAM, use existing disk image
-  * Configure network devices:
-    * Interface 1: Management
-* Create "Trusty OpenStack Network"
-  * 1024 MB RAM, use existing disk image
-  * Configure network devices:
-    * Interface 1: Management
-    * Interface 2: Tunnel
-    * Interface 3: External
+Create "Trusty OpenStack Controller":
+
+* 1024 MB RAM, use existing disk image
+* Configure network devices:
+  * Interface 1: Management
+
+Create "Trusty OpenStack Network":
+
+* 1024 MB RAM, use existing disk image
+* Configure network devices:
+  * Interface 1: Management
+  * Interface 2: Tunnel
+  * Interface 3: External
 
 ---
 class: center, middle, inverse
