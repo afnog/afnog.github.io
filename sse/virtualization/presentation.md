@@ -57,6 +57,8 @@ the installation guide linked above.
 ---
 ## Create Networks
 
+Open *Settings > Network*:
+
 .center.height_8em[![Adding NAT networks](add-networks.png)]
 
 * Create four NAT networks:
