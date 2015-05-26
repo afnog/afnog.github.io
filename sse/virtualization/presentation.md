@@ -67,7 +67,6 @@ Open *Settings > Network*:
   * "Tunnel" - 10.196.3.0/24
   * "Storage" - 10.196.4.0/24
 
-
 ---
 ## Create a Virtual Machine
 
