@@ -1,6 +1,8 @@
+class: center, middle
+
 # Virtualization with OpenStack
 
-.height_8em[[![Virtualization](vmw-virtualization-defined.jpg)](http://www.vmware.com/virtualization/virtualization-basics/how-virtualization-works)]
+.center.height_8em[[![Virtualization](vmw-virtualization-defined.jpg)](http://www.vmware.com/virtualization/virtualization-basics/how-virtualization-works)]
 
 ### Chris Wilson, AfNOG 2015
 
@@ -8,10 +10,13 @@ You can access this presentation at: http://afnog.github.io/sse/virtualization/
 ([edit](https://github.com/afnog/sse/firewalls/virtualization.md))
 
 ---
+background-image: url(openstack_havana_conceptual_arch.png)
 
-## What?
+???
 
-.fill[[![OpenStack Havana Architecture](openstack_havana_conceptual_arch.png)](http://docs.openstack.org/kilo/install-guide/install/apt/content/ch_overview.html)]
+What are we going to do?
+
+Create an OpenStack cluster using virtual host machines.
 
 ---
 
