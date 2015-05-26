@@ -1,6 +1,3 @@
-name: inverse
-layout: true
-class: center, middle, inverse
 ---
 
 # Virtualization with OpenStack
@@ -46,7 +43,7 @@ http://docs.openstack.org/kilo/install-guide/install/apt/content/index.html
 * You can find installers and packages at: https://www.virtualbox.org/wiki/Downloads
 
 ---
-
+template: inverse
 ## FIN
 
 Any questions?
