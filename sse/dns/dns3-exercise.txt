@@ -15,18 +15,18 @@ it uses other resolvers itself:
 
 Change the nameservers to the following:
 
-  nameserver 196.200.223.10
+  nameserver 197.4.15.10
 
 Do not leave the "nameserver 127.0.0.1" line in the file.
 
-Then edit named.conf and disable recursion:
+Then stop Unbound from running:
 
->    # vi /usr/local/etc/namedb/named.conf
+    # service unbound stop
 
-  options {
-    recursion no;
-    allow-query { any; };
-  };
+We can only have one piece of software listening to requests on
+port 53 at any time, so in order to let BIND9 work as an authoritative
+server on the same address we need to first stop Unbound working
+as a recursive server.
 
 We are now ready to start.
 
@@ -38,18 +38,18 @@ Exercise
     (Do not choose any of the pc names, e.g. `pc23`, as your subdomain,
     because that would be confusing)
 
-*   Check that the directories you need exist. If they don't, create them:
+*   Install BIND9:
 
-        # mkdir /usr/local/etc/namedb/master
-        # mkdir /usr/local/etc/namedb/slave
-        # chown bind /usr/local/etc/namedb/slave 
+        # apt-get install bind9
 
 *   Find someone who will agree to be slave for your domain. You must choose
     someone on a DIFFERENT table to you. (Remember RFC2182: secondaries must
     be on remote networks). You can have more than one slave if you wish.
 
-*   Create your zone file in `/usr/local/etc/namedb/master/xxxxx.afnog.guru.`
-    (where xxxxxx is your chosen domain)
+*   Create your zone file in `/var/cache/bind/master/xxxxx.afnog.guru`
+    (where xxxxxx is your chosen domain). You will need to be root for
+    this to work. You will also need to create the directory
+    /var/cache/bind/master (/var/cache/bind is already there).
 
     >   $TTL 10m
     >   @       IN     SOA    pcXX.sse.ws.afnog.org.  yourname.example.com. (
@@ -74,42 +74,39 @@ Exercise
     it easier to fix problems in the classroom. For a production domain you
     would use higher values, e.g. `$TTL 1d`
 
-*   Edit `/usr/local/etc/namedb/named.conf` to configure your machine as
+*   Edit `/etc/bind/named.conf.local` to configure your machine as
     master for your domain (see slides for information how to do this).
-    It's probably easier to add your "zone" configuration lines right
-    at the end of the named.conf file, to avoid confusion (remember, the
-    FreeBSD package installs a weirdly big named.conf by default)
 
 *   Check that your config file and zone file are valid, and then reload 
     the nameserver daemon:
 
         # named-checkconf
         # named-checkzone xxxxx.afnog.guru. \
-			/usr/local/etc/namedb/master/xxxxx.bogus.gh.
+			/var/cache/bind/master/xxxxx.bogus.gh.
 
 *   If there are any errors, correct them*
 
         # rndc reload
-        # tail /var/log/messages
+        # tail /var/log/syslog
 
 *   If there are any errors, correct them*. Some configuration errors can
     cause the daemon to die completely, in which case you may have to
     start it again:
 
-        # /etc/rc.d/named restart
+        # service bind9 restart
 
 *   Assist your slaves to configure themselves as slave for your domain, 
     and configure yourself as a slave if asked to do so by another table.
     Again, the instructions for how to do this are on the slides. If you
     have changed your `named.conf` so that you are a slave for someone
-    else, make sure there are no errors in `/var/log/messages` after you
+    else, make sure there are no errors in `/var/log/syslog` after you
     do `rndc reload`.
 
 *   Check that you and your slaves are giving authoritative answers for
     your domain:
 
-        # dig +norec @196.200.219.X xxxxx.afnog.guru. soa
-        # dig +norec @192.200.219.Y xxxxx.afnog.guru. soa
+        # dig +norec @pcXX.sse.ws.afnog.org xxxxx.afnog.guru. soa
+        # dig +norec @pcYY.sse.ws.afnog.org xxxxx.afnog.guru. soa
 
     Check that you get an AA (authoritative answer) from both, and that
     the serial numbers match.
@@ -135,7 +132,7 @@ Exercise
       requesting delegation for
     - The slave(s) are not on the same desk as you
 
-*   Once you have delegation, try to resolve www.xxxxx.bogus.gh.:
+*   Once you have delegation, try to resolve www.xxxxx.afnog.guru.:
 
     - On your own machine
     - On someone else's machine (who is not slave for you)

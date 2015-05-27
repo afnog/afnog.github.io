@@ -6,7 +6,7 @@ DNS Exercise 1.1
 Create /etc/resolv.conf containing:
 
 search sse.ws.afnog.org
-nameserver 196.200.223.10
+nameserver 197.4.15.10
 
 
 
@@ -46,7 +46,8 @@ COMMAND					RESULT			TTL (1st)	TTL (2nd)
 
 
 
-2b. 	Now send some queries to another caching server. How long did it take each answer to be received?
+2b.     Now send some queries to another caching server. How long
+did it take each answer to be received?
 
 COMMAND								RESULT
 ===========================					==============
@@ -86,6 +87,9 @@ Now try the short form of dig using the '-x' flag for reverse lookups:
 In a separate window, run the following command (you must be 'root')
 
 # tcpdump -n -s 0 -v udp port 53
+
+(if tcpdump is not installed, you can install it by typing "apt-get
+install tcpdump" as root)
 
 This shows all packets going in and out of your machine for UDP port 53
 (DNS). Now go to another window and repeat some of the 'dig' queries
