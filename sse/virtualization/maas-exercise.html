@@ -62,16 +62,16 @@ If they are, please choose a different one in the following examples.</p>
 <p>Open VirtualBox Preferences &gt; Network &gt; Host-Only Adaptors. Ensure that you have at least two listed:
 vboxnet0 and vboxnet1. If not, click on the Add button to the right of the list to create them.</p>
 
-<p>Double-click on <em>vboxnet1</em> and disable the DHCP server:</p>
-
-<p><img src="virtualbox-disable-host-network-dhcp.png" alt="Disabling the DHCP server" /></p>
-
-<p>Then configure the matching interface on your host OS as follows:</p>
+<p>Double-click on <em>vboxnet1</em> and change the address of the Host Network Adaptor:</p>
 
 <ul>
   <li>IP address: 192.168.57.2</li>
   <li>Subnet mask: 255.255.255.0</li>
 </ul>
+
+<p>Then disable the DHCP server:</p>
+
+<p><img src="virtualbox-disable-host-network-dhcp.png" alt="Disabling the DHCP server" /></p>
 
 <p>Create a new VM called MAAS Controller. Give it 1 GB RAM and a 40 GB VDI disk,
 dynamically sized.</p>
