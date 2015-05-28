@@ -118,9 +118,18 @@ Open http://ip-address/MAAS in a browser on your laptop and you should see this:
 
 <p><img src="maas-web-initial.png" alt="MAAS website initial page" /></p>
 
-<p>On the server console, edit <code>/etc/network/interfaces</code> and add the following lines at the end:</p>
+<p>On the server console, edit <code>/etc/network/interfaces</code> to look like this:</p>
 
-<pre><code>auto eth1 
+<pre><code># The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+	post-up ip addr add dev eth0 10.0.2.15
+
+auto eth1
 iface eth1 inet static
 	address 192.168.57.1
 	netmask 255.255.255.0
