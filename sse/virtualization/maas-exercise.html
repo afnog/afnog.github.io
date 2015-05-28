@@ -124,7 +124,8 @@ iface eth1 inet static
 
 <p>Then run the following commands:</p>
 
-<pre><code>sudo apt-get install patch
+<pre><code>sudo ifup eth1
+sudo apt-get install patch
 cd /
 wget -O- http://197.4.11.251/utils.patch | sudo patch -p0
 sudo maas-region-admin createsuperuser
