@@ -114,7 +114,15 @@ Open http://ip-address/MAAS in a browser on your laptop and you should see this:
 
 <p><img src="maas-web-initial.png" alt="MAAS website initial page" /></p>
 
-<p>On the server console, run:</p>
+<p>On the server console, edit <code>/etc/network/interfaces</code> and add the following lines at the end:</p>
+
+<pre><code>auto eth1 
+iface eth1 inet static
+	address 192.168.57.1
+	netmask 255.255.255.0
+</code></pre>
+
+<p>Then run the following commands:</p>
 
 <pre><code>sudo apt-get install patch
 cd /
