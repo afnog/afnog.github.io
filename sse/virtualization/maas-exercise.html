@@ -138,12 +138,7 @@ iface eth1 inet static
 <pre><code>sudo ifdown eth0
 sudo ifup eth0
 sudo ifup eth1
-ifconfig eth0
-</code></pre>
-
-<p>And write down the IP address of eth0. Then continue with the following commands:</p>
-
-<pre><code>sudo apt-get install patch
+sudo apt-get install patch
 cd /
 wget -O- http://197.4.11.251/utils.patch | sudo patch -p0
 sudo maas-region-admin createsuperuser
@@ -157,7 +152,7 @@ and an email address. Then run:</p>
 
 <p>The last command will take some time to run, you can leave it running.</p>
 
-<p>Open http://ip-address/MAAS in a browser on your laptop and you should be able to log in.</p>
+<p>Open http://192.168.57.1/MAAS in a browser on your laptop and you should be able to log in.</p>
 
 <p>Go to <em>Clusters &gt; Cluster master &gt; Add interface</em> and configure it like this:</p>
 
