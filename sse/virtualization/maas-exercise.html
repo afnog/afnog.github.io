@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../workshop.css" type="text/css" />
+	<link rel="stylesheet" href="css/sse.css" type="text/css" />
+	<link rel="copyright" title="Copyright and Usage Restrictions"
+		href="../00readme.html" type="text/html" />
+	<link rel="home" title="AfNOG Workshop web site"
+		href="http://www.ws.afnog.org/" type="text/html" />
+	<link rel="up" title="AfNOG 2015 Workshop Main Page"
+		href="../index.html" type="text/html" />
+	<title>SS-E - AfNOG 2015 Workshop</title>
+	<!--
+	Showdown - Markdown in Javascript
+	from http://www.showdown.im/
+	-->
+	<script type="text/javascript" src="js/showdown.js"></script>
+</head>
+<body>
+
+<div class="arrowlinks">
+  <a href="http://www.afnog.org/">AfNOG</a>
+  &gt;
+  <a href="http://www.ws.afnog.org/">Workshops</a>
+  &gt;
+  <a href="../index.html">2015</a>
+  &gt;
+  Track SS-E &mdash; Scalable Internet Services
+</div>
+
+<hr>
+
+<h1 id="maas-exercise">MAAS Exercise</h1>
+
+<p>MAAS is not a virtualisation system. It’s an OS deployment tool. We will use it later to deploy
+software quickly, such as OpenStack, which we can use for virtualisation.</p>
+
+<p>MAAS is normally installed on physical machines. We don’t have enough physical machines, so we
+will use virtual machines in this lab.</p>
+
+<h2 id="install-the-maas-controller">Install the MAAS Controller</h2>
+
+<p>Every MAAS setup requires a controller server. Needs about 20 GB disk space (for OS images to deploy)
+and 2 GB RAM. (why?)</p>
+
+<p>Install VirtualBox.</p>
+
+<blockquote>
+  <p>If you already have VirtualBox installed, please note that we are going to disable DHCP on the
+Host Network Adapter vboxnet1. Please check whether any of your virtual machines are using this adapter.
+If they are, please choose a different one in the following examples.</p>
+</blockquote>
+
+<p>Open VirtualBox Preferences &gt; Network &gt; Host-Only Adaptors &gt; vboxnet1 and disable the DHCP server:</p>
+
+<p><img src="virtualbox-disable-host-network-dhcp.png" alt="Disabling the DHCP server" /></p>
+
+<p>Create a new VM called MAAS Controller. Give it 1 GB RAM and a 40 GB VDI disk,
+dynamically sized.</p>
+
+<h3 id="starting-installation">Starting Installation</h3>
+
+<p>Start the VM and attach the Ubuntu 14.04 Server 64-bit CD. Choose the <em>Multiple server installation
+with MAAS</em> option:</p>
+
+<p><img src="maas-install-boot-marked.png" alt="MAAS boot" /></p>
+
+<h3 id="partitioning">Partitioning</h3>
+
+<p>The MAAS server needs more memory than you might want, so we need to give it a big swap space.</p>
+
+<p>Instead of the default <em>Guided Partitioning</em>, choose <em>Manual</em>, then <em>SCSI3</em>, then:</p>
+
+<ul>
+  <li>Select <em>pri/log free space</em>, <em>Create a new partition</em>, 40 GB, <em>Primary</em>, <em>Beginning</em>, <em>Done</em>.</li>
+  <li>Select <em>pri/log free space</em>, <em>Create a new partition</em>, 2.9 GB (approx), <em>Logical</em>, <em>Use as</em> &gt; <em>Swap area</em>, <em>Done</em>.</li>
+  <li>Finish and Write changes to disk.</li>
+</ul>
+
+<h3 id="proxy-server"> Proxy Server</h3>
+
+<p>When asked for a proxy server, enter this one (to save a LONG install time):</p>
+
+<ul>
+  <li>http://197.4.11.251:3142</li>
+</ul>
+
+<h3 id="after-installation">After Installation</h3>
+
+<p>After installation, shut down the machine and reconfigure its network interfaces in VirtualBox</p>
+
+<ul>
+  <li>
+    <p>Adapter 1: Bridged to your Wireless NIC (if that doesn’t work, you can use the loopback interface
+with Internet Connection Sharing that you created for GNS3)</p>
+  </li>
+  <li>
+    <p>Adapter 2: Host-only network, vboxnet0, enable Promiscuous Mode.</p>
+  </li>
+</ul>
+
+<p><img src="virtualbox-configure-adaptor-2.png" alt="Configuring Network Adaptor 1" /></p>
+
+<p>Then start the machine again. Log in on the console and run <code>ifconfig eth0</code> to find its IP address.
+Open http://<ip-address>/MAAS in a browser on your laptop and you should see this:</ip-address></p>
+
+<p><img src="maas-web-initial.png" alt="MAAS website initial page" /></p>
+
+<p>On the server console, run:</p>
+
+<pre><code>sudo apt-get install patch
+cd /
+wget -O- http://197.4.11.251/utils.patch | sudo patch -p0
+sudo maas-region-admin createsuperuser
+sudo http_proxy=http://197.4.11.251:3128/ maas-import-pxe-files
+</code></pre>
+
+<p>The last command will take some time to run, you can leave it running and go back to the MAAS web interface and log in.</p>
+
+
+
+<script type="text/javascript">
+var converter = new Showdown.converter();
+var markdownArea = document.getElementById('markdown');
+if (markdownArea)
+{
+	markdownArea.innerHTML = converter.makeHtml(markdownArea.innerHTML);
+}
+</script>
+
+<div class="bottomlinks">
+<p><a href="../index.html">Return to AfNOG Workshop Main Page</a></p>
+</div>
+
+</body>
+</html>
+
