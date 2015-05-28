@@ -113,12 +113,7 @@ with Internet Connection Sharing that you created for GNS3)</p>
 
 <p><img src="virtualbox-configure-adaptor-2.png" alt="Configuring Network Adaptor 1" /></p>
 
-<p>Then start the machine again. Log in on the console and run <code>ifconfig eth0</code> to find its IP address.
-Open http://ip-address/MAAS in a browser on your laptop and you should see this:</p>
-
-<p><img src="maas-web-initial.png" alt="MAAS website initial page" /></p>
-
-<p>On the server console, edit <code>/etc/network/interfaces</code> to look like this:</p>
+<p>Then start the machine again. Log in on the console and edit <code>/etc/network/interfaces</code> to look like this:</p>
 
 <pre><code># The loopback network interface
 auto lo
@@ -137,15 +132,24 @@ iface eth1 inet static
 
 <p>Then run the following commands:</p>
 
-<pre><code>sudo ifup eth1
-sudo apt-get install patch
+<pre><code>sudo ifdown eth0
+sudo ifup eth0
+sudo ifup eth1
+ifconfig eth0
+</code></pre>
+
+<p>And write down the IP address of eth0. Then continue with the following commands:</p>
+
+<pre><code>sudo apt-get install patch
 cd /
 wget -O- http://197.4.11.251/utils.patch | sudo patch -p0
 sudo maas-region-admin createsuperuser
 sudo http_proxy=http://197.4.11.251:3128/ maas-import-pxe-files
 </code></pre>
 
-<p>The last command will take some time to run, you can leave it running and go back to the MAAS web interface and log in.</p>
+<p>The last command will take some time to run, you can leave it running.</p>
+
+<p>Open http://ip-address/MAAS in a browser on your laptop and you should be able to log in.</p>
 
 <p>Go to <em>Clusters &gt; Cluster master &gt; Add interface</em> and configure it like this:</p>
 
