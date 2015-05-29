@@ -234,7 +234,7 @@ Node                     DTotal DFree MTotal MNode MFree Pinst Sinst
 ganeti1.sse.ws.afnog.org  40.0G 28.8G   2.0G  1.9G  126M     0     0
 </code></pre>
 
-<blockquote>
+<blockquote class="warning">
   <p><strong>Warning:</strong> If you see question marks in all the columns after the node name, like this:</p>
 
   <pre><code>$ sudo gnt-node list
@@ -255,8 +255,7 @@ the cluster. You can fix it by modifying the cluster settings on the node:</p>
   <pre><code>$ sudo gnt-cluster modify -H xen-pvm:xen_cmd=xl
 </code></pre>
 
-  <p>and check that the <code>gnt-node list</code> now shows the correct information for your node.
-{.warning}</p>
+  <p>and check that the <code>gnt-node list</code> now shows the correct information for your node.</p>
 </blockquote>
 
 <p>You should also make sure that the <code>MFree</code> column shows at least 1 GB free (not
