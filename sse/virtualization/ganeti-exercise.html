@@ -38,67 +38,73 @@
 
 <hr>
 
-<h1 id="maas-exercise">MAAS Exercise</h1>
+<h1 id="ganeti-exercise">Ganeti Exercise</h1>
 
-<p>MAAS is not a virtualisation system. It’s an OS deployment tool. We will use it later to deploy
-software quickly, such as OpenStack, which we can use for virtualisation.</p>
+<p><a href="https://code.google.com/p/ganeti/">Ganeti</a> is a virtual machine cluster
+management tool developed by Google. The solution stack uses either Xen or KVM
+as the virtualization platform, LVM for disk management, and optionally DRBD
+for disk replication across physical hosts.</p>
 
-<p>MAAS is normally installed on physical machines. We don’t have enough physical machines, so we
-will use virtual machines in this lab.</p>
+<p>We will install Ganeti in a virtual machine, configure it to use the Xen
+hypervisor, and use it to create and manage some virtual machines.</p>
 
-<h2 id="install-the-maas-controller">Install the MAAS Controller</h2>
+<p>Normally you would install this on your physical hosts. We are using it in a
+VirtualBox virtual machine which is pretending to be our physical host, because
+we don’t have enough physical boxes for everyone. This forces us to use Xen
+(which is slower than KVM) because we can’t use KVM inside a VirtualBox virtual
+machine. You could use either for a real deployment. The installation process
+is slightly different. KVM is not covered here.</p>
 
-<p>Every MAAS setup requires a controller server. Needs about 20 GB disk space (for OS images to deploy)
-and 2 GB RAM. (why?) The controller should really have two NICs: one for the outside world, and one that
-it controls DHCP on, to communicate with all the controlled nodes.</p>
+<h2 id="installing-the-first-host-machine">Installing the first host machine</h2>
 
-<p>Install VirtualBox.</p>
+<p>Install VirtualBox or make sure you are running version 4.3 or higher.</p>
 
-<blockquote>
-  <p>If you already have VirtualBox installed, please note that we are going to disable DHCP on the
-Host Network Adapter vboxnet1. Please check whether any of your virtual machines are using this adapter.
-If they are, please choose a different one in the following examples.</p>
-</blockquote>
+<p>Open VirtualBox Preferences &gt; Network &gt; Host-Only Adaptors. Ensure that you
+have at least two listed: vboxnet0 and vboxnet1. If not, click on the Add
+button to the right of the list to create them.</p>
 
-<p>Open VirtualBox Preferences &gt; Network &gt; Host-Only Adaptors. Ensure that you have at least two listed:
-vboxnet0 and vboxnet1. If not, click on the Add button to the right of the list to create them.</p>
-
-<p>Double-click on <em>vboxnet1</em> and change the address of the Host Network Adaptor:</p>
+<p>Double-click on <em>vboxnet0</em> and check that the IP addresses are as follows:</p>
 
 <ul>
-  <li>IP address: 192.168.57.2</li>
+  <li>IP address: 192.168.56.1</li>
   <li>Subnet mask: 255.255.255.0</li>
 </ul>
 
-<p>Then disable the DHCP server:</p>
+<p>And check that the DHCP server is enabled and configured for:</p>
 
-<p><img src="virtualbox-disable-host-network-dhcp.png" alt="Disabling the DHCP server" /></p>
+<ul>
+  <li>Server address: 192.168.56.1</li>
+  <li>Server mask: 255.255.255.0</li>
+  <li>Lower address bound: 192.168.56.100</li>
+  <li>Upper address bound: 192.168.56.200</li>
+</ul>
 
-<p>Then <strong>exit and restart VirtualBox</strong>, otherwise this change will not take effect, as we discovered after an hour of debugging!</p>
+<p><img src="virtualbox-disable-host-network-dhcp.png" alt="Enabling the DHCP server" /></p>
 
-<p>Create a new VM called MAAS Controller. Give it 1 GB RAM and a 40 GB VDI disk,
+<p>If you have made any changes, then <strong>exit and restart VirtualBox</strong>, otherwise
+this change will not take effect, as we discovered after an hour of debugging!</p>
+
+<p>Create a new VM called Ganeti Demo. Give it 2 GB RAM and a 40 GB VDI disk,
 dynamically sized.</p>
 
 <h3 id="starting-installation">Starting Installation</h3>
 
-<p>Start the VM and attach the Ubuntu 14.04 Server 64-bit CD. Choose the <em>Multiple server installation
-with MAAS</em> option:</p>
-
-<p><img src="maas-install-boot-marked.png" alt="MAAS boot" /></p>
-
-<h3 id="maas-option">MAAS Option</h3>
-
-<p>When asked which MAAS server to use, choose <em>Create a new MAAS server on this instance</em>.</p>
+<p>Start the VM and attach the Ubuntu 14.04 Server 64-bit CD. Read the following sections
+<strong>before</strong> you start the installation, and use them at the appropriate times during the
+installation.</p>
 
 <h3 id="partitioning">Partitioning</h3>
 
-<p>The MAAS server needs more memory than you might want, so we need to give it a big swap space.</p>
-
-<p>Instead of the default <em>Guided Partitioning</em>, choose <em>Manual</em>, then <em>SCSI3</em>, then:</p>
+<p>The server should use LVM for disk space, so instead of the default <em>Guided Partitioning</em>, choose <em>Manual</em>, then <em>SCSI3</em>, then:</p>
 
 <ul>
   <li>Select <em>pri/log free space</em>, <em>Create a new partition</em>, 40 GB, <em>Primary</em>, <em>Beginning</em>, <em>Done</em>.</li>
-  <li>Select <em>pri/log free space</em>, <em>Create a new partition</em>, 2.9 GB (approx), <em>Logical</em>, <em>Use as</em> &gt; <em>Swap area</em>, <em>Done</em>.</li>
+  <li>Select the new partition, choose <em>Use as &gt; Physical volume for LVM</em>.</li>
+  <li>Select <em>Configure LVM volumes</em></li>
+  <li>Enter a name for the new main volume group, for example <code>Disk1</code>.</li>
+  <li>Create a logical volume of 8 GB, <em>Name &gt; Root, Use as &gt; ext4 filesystem, Mount point &gt; / (root)</em>.</li>
+  <li>Create a logical volume of 4 GB, <em>Name &gt; Swap, Use as &gt; swap</em>.</li>
+  <li>Leave the rest of the volume group as unallocated free space.</li>
   <li>Finish and Write changes to disk.</li>
 </ul>
 
@@ -109,6 +115,11 @@ with MAAS</em> option:</p>
 <ul>
   <li>http://197.4.11.251:3142</li>
 </ul>
+
+<p>Please enter this carefully and check it. Using the wrong value will make it
+impossible for you to install any packages.  Of course, if you are not at the
+AfNOG workshop then this server will no longer exist, so use a local proxy
+server or leave it blank.</p>
 
 <h3 id="after-installation">After Installation</h3>
 
@@ -133,7 +144,7 @@ iface eth0 inet dhcp
 
 auto eth1
 iface eth1 inet static
-	address 192.168.57.1
+	address 192.168.56.10
 	netmask 255.255.255.0
 </code></pre>
 
