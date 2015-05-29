@@ -324,7 +324,11 @@ include the key that you generated above, for example:</p>
 <pre><code>WEB_MGR_API_KEY = "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
 </code></pre>
 
-<p>And then create the directory and set permissions:</p>
+<p>Save the file, and check the configuration for errors:</p>
+
+<pre><code>cd /opt/ganeti_webmgr
+sudo -u www-data venv/bin/python -c "import ganeti_webmgr.ganeti_web.settings"
+</code></pre>
 
 
 
