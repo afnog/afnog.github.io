@@ -177,10 +177,15 @@ really be in the DNS as well, but for the purposes of this exercise
 <p>Then <code>reboot</code> the host, log in again and run the following commands:</p>
 
 <pre><code>sudo apt-get dist-upgrade	
-sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap
+sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap xen-hypervisor-amd64
 </code></pre>
 
-<p>Start following the <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html">Ganeti installation tutorial¶</a>,
+<p>Edit <code>/etc/xen/xend-config.sxp</code> and change the following setting:</p>
+
+<pre><code>(enable-dom0-ballooning no)
+</code></pre>
+
+<p>Start following the <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html">Ganeti installation tutorial</a>,
 skipping the following sections:</p>
 
 <ul>
@@ -189,7 +194,6 @@ skipping the following sections:</p>
   <li>KVM userspace access</li>
   <li>Configuring the network</li>
   <li>Configuring LVM</li>
-  <li>Installing Ganeti: skip to <a href="#initializing-the-cluster">#Initializing the Cluster</a> below.</li>
   <li>Installing Ganeti: skip to <a href="#initializing-the-cluster">#Initializing the Cluster</a> below.</li>
 </ul>
 
@@ -216,8 +220,32 @@ you want to use for VNC access to consoles.</p>
 
 <pre><code>$ sudo gnt-node list
 Node                     DTotal DFree MTotal MNode MFree Pinst Sinst
+ganeti1.sse.ws.afnog.org  40.0G 28.8G   2.0G  1.9G  126M     0     0
+</code></pre>
+
+<blockquote>
+  <p><strong>Warning:</strong> If you see question marks in all the columns after the node name, like this:</p>
+
+  <pre><code>$ sudo gnt-node list
+Node                     DTotal DFree MTotal MNode MFree Pinst Sinst
 ganeti1.sse.ws.afnog.org      ?     ?      ?     ?     ?     0     0
 </code></pre>
+
+  <p>that means that Ganeti cannot retrieve information about your node. Check the node daemon logfile
+<code>/var/log/ganeti/node-daemon.log</code> for possible error messages. For example, if you find this error:</p>
+
+  <pre><code>ERROR Can't retrieve xen hypervisor information (exited with exit code 1): ERROR:  A different toolstack (xl) have been selected!
+</code></pre>
+
+  <p>that means that Ganeti is trying to use the old <code>xm</code> command to get information, instead of the new <code>xl</code> command,
+and not getting any information. You probably forgot to add the option <code>-H xen-pvm:xen_cmd=xl</code> when you created
+the cluster. You can fix it by modifying the cluster settings on the node:</p>
+
+  <pre><code>$ sudo gnt-cluster modify -H xen-pvm:xen_cmd=xl
+</code></pre>
+
+  <p>and check that the <code>gnt-node list</code> now shows the correct information for your node.</p>
+</blockquote>
 
 <p>Continue following the installation instructions from <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#testing-the-setup">Testing the setup</a></p>
 
