@@ -197,11 +197,26 @@ skipping the following sections:</p>
 <p>Run the following command, substituting the cluster name you added to
 <code>/etc/hosts</code> instead of <code>cluster1...</code>:</p>
 
-<pre><code>sudo gnt-cluster init --vg-name Main --enabled-hypervisors=xen-hvm,xen-pvm cluster1.sse.ws.afnog.org
+<pre><code>sudo gnt-cluster init --vg-name Main --enabled-hypervisors=xen-pvm cluster1.sse.ws.afnog.org
 </code></pre>
+
+<p><strong>Note:</strong> Normally you would use either <code>xen-hvm</code> or <code>kvm</code> as the hypervisor,
+instead of <code>xen-pvm</code> above. In this case we must use <code>xen-pvm</code> because we are
+doing this inside a virtual machine, so we can’t use the virtualisation CPU
+instructions because VirtualBox is already using them to run the Ganeti host
+node (VirtualBox guest).</p>
 
 <p>Create the file <code>/etc/ganeti/vnc-cluster-password</code> containing the password that
 you want to use for VNC access to consoles.</p>
+
+<h3 id="testing-the-setup">Testing the Setup</h3>
+
+<p>Check that the <code>gnt-node list</code> command shows your node:</p>
+
+<pre><code>$ sudo gnt-node list
+Node                     DTotal DFree MTotal MNode MFree Pinst Sinst
+ganeti1.sse.ws.afnog.org      ?     ?      ?     ?     ?     0     0
+</code></pre>
 
 <p>Continue following the installation instructions from <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#testing-the-setup">Testing the setup</a></p>
 
