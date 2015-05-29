@@ -125,7 +125,7 @@ impossible for you to install any packages.  Of course, if you are not at the
 AfNOG workshop then this server will no longer exist, so use a local proxy
 server or leave it blank.</p>
 
-<h3 id="after-installation">After Installation</h3>
+<h3 id="network-re-configuration">Network Re-Configuration</h3>
 
 <p>After installation, shut down the machine and reconfigure its network interfaces in VirtualBox</p>
 
@@ -157,6 +157,8 @@ iface xenbr0 inet static
 	bridge_stp off
 	bridge_fd 0
 </code></pre>
+
+<p>Also edit <code>/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
 
 <p>Then <code>reboot</code> the host, log in again and run the following commands:</p>
 
