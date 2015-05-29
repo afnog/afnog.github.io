@@ -357,6 +357,35 @@ if path not in sys.path:
     application = django.core.handlers.wsgi.WSGIHandler()
 </code></pre>
 
+<p>Create the file <code>/etc/apache2/sites-enabled/ganeti.conf</code> with the following contents:</p>
+
+<pre><code>WSGIPythonHome /opt/ganeti_webmgr/venv
+WSGISocketPrefix /var/run/wsgi
+WSGIRestrictEmbedded On
+
+&lt;VirtualHost *:80&gt;
+	ServerAdmin your-email-address@example.com
+	ServerName ganeti-server.local
+
+	# Static content needed by Django
+	Alias /static "/opt/ganeti_webmgr/collected_static/"
+	&lt;Location "/static"&gt;
+		Order allow,deny
+		Allow from all
+		SetHandler None
+	&lt;/Location&gt;
+
+	# Django settings - AFTER the static media stuff
+	WSGIScriptAlias / /opt/ganeti_webmgr/wsgi.py
+	WSGIDaemonProcess ganeti processes=1 threads=10 display-name='%{GROUP}' deadlock-timeout=30
+	WSGIApplicationGroup %{GLOBAL}
+	WSGIProcessGroup ganeti
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+&lt;/VirtualHost&gt;
+</code></pre>
 
 
 <script type="text/javascript">
