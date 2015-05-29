@@ -194,10 +194,14 @@ skipping the following sections:</p>
 
 <h3 id="initializing-the-cluster">Initializing the Cluster</h3>
 
-<p>Follow the instructions in <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#initializing-the-cluster">Initializing the
-Cluster</a>,
-but use the cluster name that you placed in <code>/etc/hosts</code> as the cluster name
-for the <code>gnt-cluster init</code> command.</p>
+<p>Run the following command, substituting the cluster name you added to
+<code>/etc/hosts</code> instead of <code>cluster1...</code>:</p>
+
+<pre><code>sudo gnt-cluster init --vg-name Main --enabled-hypervisors=xen-hvm,xen-pvm cluster1.sse.ws.afnog.org
+</code></pre>
+
+<p>Create the file <code>/etc/ganeti/vnc-cluster-password</code> containing the password that
+you want to use for VNC access to consoles.</p>
 
 
 
