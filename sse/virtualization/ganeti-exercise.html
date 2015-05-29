@@ -174,9 +174,18 @@ for the cluster name, instead of editing <code>/etc/hosts</code>. Your hostname 
 really be in the DNS as well, but for the purposes of this exercise
 (non-production deployment) it doesn’t matter too much.</p>
 
-<p>Then <code>reboot</code> the host, log in again and run the following commands:</p>
+<p>Edit <code>/etc/default/grub</code> and add the following line:</p>
 
-<pre><code>sudo apt-get dist-upgrade	
+<pre><code>GRUB_CMDLINE_XEN_DEFAULT="dom0_mem=min:384M,max:384M"
+</code></pre>
+
+<p>This restricts the master domain to 256 MB RAM, which will make it slow, but give us more RAM free
+for guests. In your own configurations you should probably allocate more RAM to the host (domain 0)!</p>
+
+<p>Then run the following commands:</p>
+
+<pre><code>sudo update-grub
+sudo apt-get dist-upgrade	
 sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap xen-hypervisor-amd64
 </code></pre>
 
@@ -184,6 +193,8 @@ sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap xen-hyper
 
 <pre><code>(enable-dom0-ballooning no)
 </code></pre>
+
+<p>Then <code>reboot</code> the host and log in again.</p>
 
 <p>Start following the <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html">Ganeti installation tutorial</a>,
 skipping the following sections:</p>
@@ -246,6 +257,13 @@ the cluster. You can fix it by modifying the cluster settings on the node:</p>
 
   <p>and check that the <code>gnt-node list</code> now shows the correct information for your node.</p>
 </blockquote>
+
+<p>You should also make sure that the <code>MFree</code> column shows at least 1 GB free (not
+126 MB as in the example output above). This ensures that there is enough RAM
+free in the hypervisor to create new guests. Otherwise you won’t be able to do
+much with your new hypervisor. If it doesn’t show enough free RAM, check that
+you have <a href="http://askubuntu.com/a/191489/49566">reconfigured GRUB and run
+<code>update-grub</code></a>.</p>
 
 <p>Continue following the installation instructions from <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#testing-the-setup">Testing the setup</a></p>
 
