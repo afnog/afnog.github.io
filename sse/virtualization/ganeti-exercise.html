@@ -321,7 +321,13 @@ sudo cp settings.py.dist settings.py
 
 <p>Change the line to:</p>
 
-<pre><code>'NAME': '/var/lib/ganeti/ganeti_webmgr.db',
+<pre><code>'NAME': '/var/lib/ganeti_webmgr/ganeti.db',
+</code></pre>
+
+<p>And then create the directory and set permissions:</p>
+
+<pre><code>sudo mkdir /var/lib/ganeti_webmgr
+sudo chown www-data /var/lib/ganeti_webmgr
 </code></pre>
 
 
