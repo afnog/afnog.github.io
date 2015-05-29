@@ -366,6 +366,7 @@ WSGIRestrictEmbedded On
 &lt;VirtualHost *:80&gt;
 	ServerAdmin your-email-address@example.com
 	ServerName ganeti-server.local
+	ServerAlias 192.168.56.10
 
 	# Static content needed by Django
 	Alias /static "/opt/ganeti_webmgr/collected_static/"
@@ -384,6 +385,10 @@ WSGIRestrictEmbedded On
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
 	LogLevel warn
+
+	&lt;Location /&gt;
+		Require all granted
+	&lt;/Location&gt;
 &lt;/VirtualHost&gt;
 </code></pre>
 
