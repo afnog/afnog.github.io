@@ -49,7 +49,8 @@ will use virtual machines in this lab.</p>
 <h2 id="install-the-maas-controller">Install the MAAS Controller</h2>
 
 <p>Every MAAS setup requires a controller server. Needs about 20 GB disk space (for OS images to deploy)
-and 2 GB RAM. (why?)</p>
+and 2 GB RAM. (why?) The controller should really have two NICs: one for the outside world, and one that
+it controls DHCP on, to communicate with all the controlled nodes.</p>
 
 <p>Install VirtualBox.</p>
 
