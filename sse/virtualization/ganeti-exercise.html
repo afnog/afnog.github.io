@@ -161,8 +161,15 @@ iface xenbr0 inet static
 <p>Then <code>reboot</code> the host, log in again and run the following commands:</p>
 
 <pre><code>sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap
-sudo ln -s /usr/lib/ganeti/vif-ganeti /etc/xen/scripts/vif-ganeti
 </code></pre>
+
+<p>Start following the <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html">Ganeti installation tutorial¶</a>,
+skipping the following sections:</p>
+
+<ul>
+  <li>Anything to do with KVM (we’re using Xen instead)</li>
+  <li>Installing RBD: skip to <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#installing-gluster">Installing Gluster</a> instead.</li>
+</ul>
 
 
 
