@@ -158,7 +158,16 @@ iface xenbr0 inet static
 	bridge_fd 0
 </code></pre>
 
-<p>Also edit <code>/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
+<p>Edit <code>/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
+
+<p>Edit <code>/etc/hosts</code> and ensure that it contains the IP address and hostname of
+your host. You will also need to choose a name (hostname) and IP address for
+your cluster, which must be different. For example:</p>
+
+<pre><code>127.0.0.1       localhost
+192.168.56.10   ganeti1.sse.ws.afnog.org
+192.168.56.11   cluster1.sse.ws.afnog.org
+</code></pre>
 
 <p>Then <code>reboot</code> the host, log in again and run the following commands:</p>
 
@@ -174,8 +183,16 @@ skipping the following sections:</p>
   <li>KVM userspace access</li>
   <li>Configuring the network</li>
   <li>Configuring LVM</li>
-  <li>Installing Ganeti: skip to <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#initializing-the-cluster">Initializing the Cluster</a></li>
+  <li>Installing Ganeti: skip to <a href="#initializing-the-cluster">#Initializing the Cluster</a> below.</li>
+  <li>Installing Ganeti: skip to <a href="#initializing-the-cluster">#Initializing the Cluster</a> below.</li>
 </ul>
+
+<h3 id="initializing-the-cluster">Initializing the Cluster</h3>
+
+<p>Follow the instructions in <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#initializing-the-cluster">Initializing the
+Cluster</a>,
+but use the cluster name that you placed in <code>/etc/hosts</code> as the cluster name
+for the <code>gnt-cluster init</code> command.</p>
 
 
 
