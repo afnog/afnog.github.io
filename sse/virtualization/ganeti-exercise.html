@@ -328,7 +328,11 @@ WEB_MGR_API_KEY: "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
 
 <pre><code>cd /opt/ganeti_webmgr
 sudo -u www-data venv/bin/python manage.py syncdb --migrate
+sudo -u www-data venv/bin/python manage.py runserver 0.0.0.0:8000
 </code></pre>
+
+<p>This will start the debugging webserver on port 8000, so you can check that everything is working
+by visiting http://192.168.56.1:8000.</p>
 
 
 
