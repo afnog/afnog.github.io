@@ -277,9 +277,26 @@ you have <a href="http://askubuntu.com/a/191489/49566">reconfigured GRUB and run
 
 <p>Continue following the installation instructions from <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#testing-the-setup">Testing the setup</a></p>
 
+<h3 id="enable-remote-api">Enable Remote API</h3>
+
+<p>Choose a username and password for your remote account (<code>jack</code> and <code>mypassword</code> in this case) and
+generate a hash using <code>echo</code> and <code>openssl md5</code> like this:</p>
+
+<pre><code>$ echo -n 'jack:Ganeti Remote API:mypassword' | openssl md5
+(stdin)= 5ede44dba4dd4e9ce3909246515b2cdc
+</code></pre>
+
+<p>Insert them both into <code>/var/lib/ganeti/rapi/user</code>, prefixing the password hash
+with <code>{ha1}</code>, and giving this user <code>write</code> permissions:</p>
+
+<pre><code>jack	{ha1}5ede44dba4dd4e9ce3909246515b2cdc	write
+</code></pre>
+
 <h3 id="install-the-web-manager">Install the Web Manager</h3>
 
-<p>Download the <a href="https://code.osuosl.org/projects/ganeti-webmgr/files">latest release</a>, for example 0.11.0. We have a local copy which you can download here:</p>
+<p>Download the <a href="https://code.osuosl.org/projects/ganeti-webmgr/files">latest
+release</a>, for example
+0.11.0. We have a local copy which you can download here:</p>
 
 <pre><code>wget http://197.4.11.251/ganeti_webmgr-0.11.0.tar.gz
 </code></pre>
