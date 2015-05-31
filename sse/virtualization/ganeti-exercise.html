@@ -268,11 +268,11 @@ much with your new hypervisor. If it doesn’t show enough free RAM, check that
 you have <a href="http://askubuntu.com/a/191489/49566">reconfigured GRUB and run
 <code>update-grub</code></a>.</p>
 
-<p>Add an entry to <code>/etc/hosts</code> for a host to use for burnin testing, for example <code>burnin.example</code>.</p>
+<p>Add an entry to <code>/etc/hosts</code> for a host to use for burnin testing, for example <code>burnin.example.com</code>.</p>
 
 <p>Run the <code>burnin</code> test to make sure that everything is working properly:</p>
 
-<pre><code>sudo /usr/lib/ganeti/tools/burnin -o debootstrap+default -t plain --disk-size 1024 burnin.example -vv
+<pre><code>sudo /usr/lib/ganeti/tools/burnin -o debootstrap+default -t plain --disk-size 1024 burnin.example.com -vv
 </code></pre>
 
 <p>Continue following the installation instructions from <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#testing-the-setup">Testing the setup</a></p>
