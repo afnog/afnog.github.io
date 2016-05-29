@@ -10,9 +10,9 @@
 		href="../00readme.html" type="text/html" />
 	<link rel="home" title="AfNOG Workshop web site"
 		href="http://www.ws.afnog.org/" type="text/html" />
-	<link rel="up" title="AfNOG 2015 Workshop Main Page"
+	<link rel="up" title="AfNOG 2016 Workshop Main Page"
 		href="../index.html" type="text/html" />
-	<title>SS-E - AfNOG 2015 Workshop</title>
+	<title>SS-E - AfNOG 2016 Workshop</title>
 	<!--
 	Showdown - Markdown in Javascript
 	from http://www.showdown.im/
@@ -31,7 +31,7 @@
   &gt;
   <a href="http://www.ws.afnog.org/">Workshops</a>
   &gt;
-  <a href="../../index.html">2015</a>
+  <a href="../../index.html">2016</a>
   &gt;
   <a href="../">Track SS-E &mdash; Scalable Internet Services</a>
 </div>
@@ -95,7 +95,7 @@ installation.</p>
 
 <h3 id="hostname">Hostname</h3>
 
-<p>You must use a fully qualified hostname, for example <code>ganeti.pcXX.sse.ws.afnog.org</code>.</p>
+<p>You must use a fully qualified hostname, for example <code class="highlighter-rouge">ganeti.pcXX.sse.ws.afnog.org</code>.</p>
 
 <h3 id="partitioning">Partitioning</h3>
 
@@ -105,14 +105,14 @@ installation.</p>
   <li>Select <em>pri/log free space</em>, <em>Create a new partition</em>, 40 GB, <em>Primary</em>, <em>Beginning</em>, <em>Done</em>.</li>
   <li>Select the new partition, choose <em>Use as &gt; Physical volume for LVM</em>.</li>
   <li>Select <em>Configure LVM volumes</em></li>
-  <li>Enter a name for the new main volume group, for example <code>xenvg</code>.</li>
+  <li>Enter a name for the new main volume group, for example <code class="highlighter-rouge">xenvg</code>.</li>
   <li>Create a logical volume of 8 GB, <em>Name &gt; Root, Use as &gt; ext4 filesystem, Mount point &gt; / (root)</em>.</li>
   <li>Create a logical volume of 4 GB, <em>Name &gt; Swap, Use as &gt; swap</em>.</li>
   <li>Leave the rest of the volume group as unallocated free space.</li>
   <li>Finish and Write changes to disk.</li>
 </ul>
 
-<h3 id="proxy-server"> Proxy Server</h3>
+<p>### Proxy Server</p>
 
 <p>When asked for a proxy server, enter this one (to save a LONG install time):</p>
 
@@ -139,9 +139,9 @@ server or leave it blank.</p>
 
 <p><img src="virtualbox-configure-adaptor-2.png" alt="Configuring Network Adaptor 1" /></p>
 
-<p>Then start the machine again. Log in on the console and edit <code>/etc/network/interfaces</code> to look like this:</p>
+<p>Then start the machine again. Log in on the console and edit <code class="highlighter-rouge">/etc/network/interfaces</code> to look like this:</p>
 
-<pre><code># The loopback network interface
+<div class="highlighter-rouge"><pre class="highlight"><code># The loopback network interface
 auto lo
 iface lo inet loopback
 
@@ -160,44 +160,49 @@ iface xen-br0 inet static
 	bridge_stp off
 	bridge_fd 0
 </code></pre>
+</div>
 
-<p>Edit <code>/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
+<p>Edit <code class="highlighter-rouge">/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
 
-<p>Edit <code>/etc/hosts</code> and ensure that it contains the IP address and hostname of
+<p>Edit <code class="highlighter-rouge">/etc/hosts</code> and ensure that it contains the IP address and hostname of
 your host. You will also need to choose a name (hostname) and IP address for
 your cluster, which must be different. For example:</p>
 
-<pre><code>127.0.0.1       localhost
+<div class="highlighter-rouge"><pre class="highlight"><code>127.0.0.1       localhost
 192.168.56.10   ganeti1.sse.ws.afnog.org
 192.168.56.11   cluster1.sse.ws.afnog.org
 </code></pre>
+</div>
 
 <p>Normally you would add DNS entries for all of these. Feel free to use the DNS
-for the cluster name, instead of editing <code>/etc/hosts</code>. Your hostname should
+for the cluster name, instead of editing <code class="highlighter-rouge">/etc/hosts</code>. Your hostname should
 really be in the DNS as well, but for the purposes of this exercise
 (non-production deployment) it doesn’t matter too much.</p>
 
-<p>Edit <code>/etc/default/grub</code> and add the following line:</p>
+<p>Edit <code class="highlighter-rouge">/etc/default/grub</code> and add the following line:</p>
 
-<pre><code>GRUB_CMDLINE_XEN_DEFAULT="dom0_mem=min:384M,max:384M"
+<div class="highlighter-rouge"><pre class="highlight"><code>GRUB_CMDLINE_XEN_DEFAULT="dom0_mem=min:384M,max:384M"
 </code></pre>
+</div>
 
 <p>This restricts the master domain to 256 MB RAM, which will make it slow, but give us more RAM free
 for guests. In your own configurations you should probably allocate more RAM to the host (domain 0)!</p>
 
 <p>Then run the following commands:</p>
 
-<pre><code>sudo update-grub
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo update-grub
 sudo apt-get dist-upgrade	
 sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap xen-hypervisor-amd64
 </code></pre>
+</div>
 
-<p>Edit <code>/etc/xen/xend-config.sxp</code> and change the following setting:</p>
+<p>Edit <code class="highlighter-rouge">/etc/xen/xend-config.sxp</code> and change the following setting:</p>
 
-<pre><code>(enable-dom0-ballooning no)
+<div class="highlighter-rouge"><pre class="highlight"><code>(enable-dom0-ballooning no)
 </code></pre>
+</div>
 
-<p>Then <code>reboot</code> the host and log in again.</p>
+<p>Then <code class="highlighter-rouge">reboot</code> the host and log in again.</p>
 
 <p>Start following the <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html">Ganeti installation tutorial</a>,
 skipping the following sections:</p>
@@ -214,83 +219,91 @@ skipping the following sections:</p>
 <h3 id="initializing-the-cluster">Initializing the Cluster</h3>
 
 <p>Run the following command, substituting the cluster name you added to
-<code>/etc/hosts</code> instead of <code>cluster1...</code>:</p>
+<code class="highlighter-rouge">/etc/hosts</code> instead of <code class="highlighter-rouge">cluster1...</code>:</p>
 
-<pre><code>sudo gnt-cluster init --vg-name Main --enabled-hypervisors=xen-pvm -H xen-pvm:xen_cmd=xl cluster1.sse.ws.afnog.org
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-cluster init --vg-name Main --enabled-hypervisors=xen-pvm -H xen-pvm:xen_cmd=xl cluster1.sse.ws.afnog.org
 </code></pre>
+</div>
 
-<p><strong>Note:</strong> Normally you would use either <code>xen-hvm</code> or <code>kvm</code> as the hypervisor,
-instead of <code>xen-pvm</code> above. In this case we must use <code>xen-pvm</code> because we are
+<p><strong>Note:</strong> Normally you would use either <code class="highlighter-rouge">xen-hvm</code> or <code class="highlighter-rouge">kvm</code> as the hypervisor,
+instead of <code class="highlighter-rouge">xen-pvm</code> above. In this case we must use <code class="highlighter-rouge">xen-pvm</code> because we are
 doing this inside a virtual machine, so we can’t use the virtualisation CPU
 instructions because VirtualBox is already using them to run the Ganeti host
 node (VirtualBox guest).</p>
 
-<p>Create the file <code>/etc/ganeti/vnc-cluster-password</code> containing the password that
+<p>Create the file <code class="highlighter-rouge">/etc/ganeti/vnc-cluster-password</code> containing the password that
 you want to use for VNC access to consoles.</p>
 
 <h3 id="testing-the-setup">Testing the Setup</h3>
 
-<p>Check that the <code>gnt-node list</code> command shows your node:</p>
+<p>Check that the <code class="highlighter-rouge">gnt-node list</code> command shows your node:</p>
 
-<pre><code>$ sudo gnt-node list
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo gnt-node list
 Node                     DTotal DFree MTotal MNode MFree Pinst Sinst
 ganeti1.sse.ws.afnog.org  40.0G 28.8G   2.0G  1.9G  126M     0     0
 </code></pre>
+</div>
 
 <blockquote class="warning">
   <p><strong>Warning:</strong> If you see question marks in all the columns after the node name, like this:</p>
 
-  <pre><code>$ sudo gnt-node list
+  <div class="highlighter-rouge"><pre class="highlight"><code>$ sudo gnt-node list
 Node                     DTotal DFree MTotal MNode MFree Pinst Sinst
 ganeti1.sse.ws.afnog.org      ?     ?      ?     ?     ?     0     0
 </code></pre>
+  </div>
 
   <p>that means that Ganeti cannot retrieve information about your node. Check the node daemon logfile
-<code>/var/log/ganeti/node-daemon.log</code> for possible error messages. For example, if you find this error:</p>
+<code class="highlighter-rouge">/var/log/ganeti/node-daemon.log</code> for possible error messages. For example, if you find this error:</p>
 
-  <pre><code>ERROR Can't retrieve xen hypervisor information (exited with exit code 1): ERROR:  A different toolstack (xl) have been selected!
+  <div class="highlighter-rouge"><pre class="highlight"><code>ERROR Can't retrieve xen hypervisor information (exited with exit code 1): ERROR:  A different toolstack (xl) have been selected!
 </code></pre>
+  </div>
 
-  <p>that means that Ganeti is trying to use the old <code>xm</code> command to get information, instead of the new <code>xl</code> command,
-and not getting any information. You probably forgot to add the option <code>-H xen-pvm:xen_cmd=xl</code> when you created
+  <p>that means that Ganeti is trying to use the old <code class="highlighter-rouge">xm</code> command to get information, instead of the new <code class="highlighter-rouge">xl</code> command,
+and not getting any information. You probably forgot to add the option <code class="highlighter-rouge">-H xen-pvm:xen_cmd=xl</code> when you created
 the cluster. You can fix it by modifying the cluster settings on the node:</p>
 
-  <pre><code>sudo gnt-cluster modify -H xen-pvm:xen_cmd=xl
+  <div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-cluster modify -H xen-pvm:xen_cmd=xl
 </code></pre>
+  </div>
 
-  <p>and check that the <code>gnt-node list</code> now shows the correct information for your node.</p>
+  <p>and check that the <code class="highlighter-rouge">gnt-node list</code> now shows the correct information for your node.</p>
 </blockquote>
 
-<p>You should also make sure that the <code>MFree</code> column shows at least 1 GB free (not
+<p>You should also make sure that the <code class="highlighter-rouge">MFree</code> column shows at least 1 GB free (not
 126 MB as in the example output above). This ensures that there is enough RAM
 free in the hypervisor to create new guests. Otherwise you won’t be able to do
 much with your new hypervisor. If it doesn’t show enough free RAM, check that
 you have <a href="http://askubuntu.com/a/191489/49566">reconfigured GRUB and run
-<code>update-grub</code></a>.</p>
+<code class="highlighter-rouge">update-grub</code></a>.</p>
 
-<p>Add an entry to <code>/etc/hosts</code> for a host to use for burnin testing, for example <code>burnin.example.com</code>.</p>
+<p>Add an entry to <code class="highlighter-rouge">/etc/hosts</code> for a host to use for burnin testing, for example <code class="highlighter-rouge">burnin.example.com</code>.</p>
 
-<p>Run the <code>burnin</code> test to make sure that everything is working properly:</p>
+<p>Run the <code class="highlighter-rouge">burnin</code> test to make sure that everything is working properly:</p>
 
-<pre><code>sudo /usr/lib/ganeti/tools/burnin -o debootstrap+default -t plain --disk-size 1024 burnin.example.com -vv
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo /usr/lib/ganeti/tools/burnin -o debootstrap+default -t plain --disk-size 1024 burnin.example.com -vv
 </code></pre>
+</div>
 
 <p>Continue following the installation instructions from <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#testing-the-setup">Testing the setup</a></p>
 
 <h3 id="enable-remote-api">Enable Remote API</h3>
 
-<p>Choose a username and password for your remote account (<code>jack</code> and <code>mypassword</code> in this case) and
-generate a hash using <code>echo</code> and <code>openssl md5</code> like this:</p>
+<p>Choose a username and password for your remote account (<code class="highlighter-rouge">jack</code> and <code class="highlighter-rouge">mypassword</code> in this case) and
+generate a hash using <code class="highlighter-rouge">echo</code> and <code class="highlighter-rouge">openssl md5</code> like this:</p>
 
-<pre><code>$ echo -n 'jack:Ganeti Remote API:mypassword' | openssl md5
+<div class="highlighter-rouge"><pre class="highlight"><code>$ echo -n 'jack:Ganeti Remote API:mypassword' | openssl md5
 (stdin)= 5ede44dba4dd4e9ce3909246515b2cdc
 </code></pre>
+</div>
 
-<p>Insert them both into <code>/var/lib/ganeti/rapi/user</code>, prefixing the password hash
-with <code>{ha1}</code>, and giving this user <code>write</code> permissions:</p>
+<p>Insert them both into <code class="highlighter-rouge">/var/lib/ganeti/rapi/user</code>, prefixing the password hash
+with <code class="highlighter-rouge"><span class="p">{</span><span class="err">ha1</span><span class="p">}</span></code>, and giving this user <code class="highlighter-rouge">write</code> permissions:</p>
 
-<pre><code>jack	{ha1}5ede44dba4dd4e9ce3909246515b2cdc	write
+<div class="highlighter-rouge"><pre class="highlight"><code>jack	{ha1}5ede44dba4dd4e9ce3909246515b2cdc	write
 </code></pre>
+</div>
 
 <h3 id="install-the-web-manager">Install the Web Manager</h3>
 
@@ -298,12 +311,13 @@ with <code>{ha1}</code>, and giving this user <code>write</code> permissions:</p
 release</a>, for example
 0.11.0. We have a local copy which you can download here:</p>
 
-<pre><code>wget http://197.4.11.251/ganeti_webmgr-0.11.0.tar.gz
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://197.4.11.251/ganeti_webmgr-0.11.0.tar.gz
 </code></pre>
+</div>
 
 <p>Then run the following commands to install it:</p>
 
-<pre><code>sudo apt-get install fabric python-virtualenv python-dev libffi-dev libssl-dev patch apache2 libapache2-mod-wsgi
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install fabric python-virtualenv python-dev libffi-dev libssl-dev patch apache2 libapache2-mod-wsgi
 sudo mkdir -p /opt
 tar xzvf ganeti_webmgr-0.11.0.tar.gz
 sudo mv ganeti_webmgr-0.11.0 /opt/ganeti_webmgr
@@ -316,45 +330,51 @@ cd ganeti_webmgr/ganeti_web/settings
 cp settings.py.dist ../settings.py
 sudo chown -R www-data /opt/ganeti_webmgr
 </code></pre>
+</div>
 
 <p>Apply a patch to make Fabric download Ganeti’s dependencies using a proxy. This should only 
 be done at an AfNOG workshop, or an environment where you are forced to use a proxy:</p>
 
-<pre><code>wget http://197.4.11.251/ganeti.patch | sudo patch -p0
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://197.4.11.251/ganeti.patch | sudo patch -p0
 </code></pre>
+</div>
 
 <p>Then deploy the web interface:</p>
 
-<pre><code>sudo -i sh -c 'cd /opt/ganeti_webmgr; fab deploy'
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo -i sh -c 'cd /opt/ganeti_webmgr; fab deploy'
 </code></pre>
+</div>
 
 <p>Run this command to generate a new secret key:</p>
 
-<pre><code>openssl rand -base64 24
+<div class="highlighter-rouge"><pre class="highlight"><code>openssl rand -base64 24
 </code></pre>
+</div>
 
-<p>Edit <code>config/config.yml</code> and add the following lines at the end:</p>
+<p>Edit <code class="highlighter-rouge">config/config.yml</code> and add the following lines at the end:</p>
 
-<pre><code>SECRET_KEY: "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
+<div class="highlighter-rouge"><pre class="highlight"><code>SECRET_KEY: "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
 WEB_MGR_API_KEY: "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
 </code></pre>
+</div>
 
-<p>Also change the <code>EMAIL_HOST</code> and <code>DEFAULT_FROM_EMAIL</code> lines, so that their values refer to your outbound server and your email address.</p>
+<p>Also change the <code class="highlighter-rouge">EMAIL_HOST</code> and <code class="highlighter-rouge">DEFAULT_FROM_EMAIL</code> lines, so that their values refer to your outbound server and your email address.</p>
 
 <p>Save the file, and check the configuration for errors:</p>
 
-<pre><code>cd /opt/ganeti_webmgr
+<div class="highlighter-rouge"><pre class="highlight"><code>cd /opt/ganeti_webmgr
 sudo -u www-data venv/bin/python manage.py syncdb --migrate
 sudo -u www-data venv/bin/python manage.py runserver 0.0.0.0:8000
 </code></pre>
+</div>
 
 <p>This will start the debugging webserver on port 8000, so you can check that everything is working
 by visiting http://192.168.56.10:8000. You should get a white page with a login and password box,
 but no styling (colours, images, etc.) If not, check the console output for error messages.</p>
 
-<p>Create the file <code>/opt/ganeti_webmgr/wsgi.py</code> with the following contents:</p>
+<p>Create the file <code class="highlighter-rouge">/opt/ganeti_webmgr/wsgi.py</code> with the following contents:</p>
 
-<pre><code>import os
+<div class="highlighter-rouge"><pre class="highlight"><code>import os
 import sys
 
 path = '/opt/ganeti_webmgr'
@@ -373,10 +393,11 @@ if path not in sys.path:
     import django.core.handlers.wsgi
     application = django.core.handlers.wsgi.WSGIHandler()
 </code></pre>
+</div>
 
-<p>Create the file <code>/etc/apache2/sites-enabled/ganeti.conf</code> with the following contents:</p>
+<p>Create the file <code class="highlighter-rouge">/etc/apache2/sites-enabled/ganeti.conf</code> with the following contents:</p>
 
-<pre><code>WSGIPythonHome /opt/ganeti_webmgr/venv
+<div class="highlighter-rouge"><pre class="highlight"><code>WSGIPythonHome /opt/ganeti_webmgr/venv
 WSGISocketPrefix /var/run/wsgi
 WSGIRestrictEmbedded On
 
@@ -408,18 +429,20 @@ WSGIRestrictEmbedded On
 	&lt;/Location&gt;
 &lt;/VirtualHost&gt;
 </code></pre>
+</div>
 
 <p>Now you should be able to access http://192.168.56.10/ (without the :8000 port specification)
 and see the login page with graphics:</p>
 
 <p><img src="ganeti-login.png" alt="Ganeti Login Screen" /></p>
 
-<p>Log in using the superuser account that you created during the <code>syncdb</code>
+<p>Log in using the superuser account that you created during the <code class="highlighter-rouge">syncdb</code>
 command, or if you have forgotten the details, run this command to create a new
 one:</p>
 
-<pre><code>sudo -u www-data venv/bin/python manage.py createsuperuser
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo -u www-data venv/bin/python manage.py createsuperuser
 </code></pre>
+</div>
 
 <p>Choose <em>Clusters</em> from the menu on the left, and then click <em>Add Cluster</em> in the top right.
 Enter the following details:</p>
