@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../../../workshop.css" type="text/css" />
+	<link rel="stylesheet" href="../../css/sse.css" type="text/css" />
+	<link rel="copyright" title="Copyright and Usage Restrictions"
+		href="../00readme.html" type="text/html" />
+	<link rel="home" title="AfNOG Workshop web site"
+		href="http://www.ws.afnog.org/" type="text/html" />
+	<link rel="up" title="AfNOG 2016 Workshop Main Page"
+		href="../index.html" type="text/html" />
+	<title>SS-E - AfNOG 2016 Workshop</title>
+	<!--
+	Showdown - Markdown in Javascript
+	from http://www.showdown.im/
+	-->
+	<script type="text/javascript" src="../../js/showdown.js"></script>
+	<style type="text/javascript">
+	pre {
+		font-size: 120%;
+	}
+	</style>
+</head>
+<body>
+
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
+
+<div class="arrowlinks">
+  <a href="http://www.afnog.org/">AfNOG</a>
+  &gt;
+  <a href="http://www.ws.afnog.org/">Workshops</a>
+  &gt;
+  <a href="../../../index.html">2016</a>
+  &gt;
+  <a href="../../">Track SS-E &mdash; Scalable Internet Services</a>
+</div>
+
+<hr>
+
+<h1 id="guest-configuration">Guest Configuration</h1>
+
+<p>Using Debian 8 (Jessie). Setup the guest for AfNOG, starting from a (virtual) console:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>adduser afnog
+apt install nano sudo openssh-server vim iputils-ping less
+usermod -G sudo afnog
+ifconfig 
+# Get the IP address assigned by the DHCP server
+</code></pre>
+</div>
+
+<p>You should now be able to SSH in as user <code class="highlighter-rouge">afnog</code> to complete the installation.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ssh afnog@&lt;dynamic-ip&gt;
+mkdir .ssh
+sudo mkdir /root/.ssh
+</code></pre>
+</div>
+
+<p>Sudo edit <code class="highlighter-rouge">/etc/network/interfaces</code> and make it look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+	# Please check the following values are appropriate for your network:
+	address 196.200.219.100
+	netmask 255.255.255.0
+	gateway 196.200.219.1
+</code></pre>
+</div>
+
+<p>Restart networking (on the guest) and reconnect using the new IP (196.200.219.100).</p>
+
+<p>Copy an SSH key into the guest:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>scp ~/.ssh/id_rsa.pub afnog@196.200.219.100:.ssh/authorized_keys
+ssh afnog@196.200.219.100 sudo cp .ssh/authorized_keys /root/.ssh/authorized_keys
+</code></pre>
+</div>
+
+<p>(Unless already present in <code class="highlighter-rouge">/etc/apt/apt.conf</code>:) sudo edit <code class="highlighter-rouge">/etc/apt/apt.conf.d/01proxy</code> and add:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Acquire::http::Proxy "http://196.200.219.2:3142";
+</code></pre>
+</div>
+
+<p>Run <code class="highlighter-rouge">apt update</code> and <code class="highlighter-rouge">apt upgrade</code> on the guest.</p>
+
+
+
+<script type="text/javascript">
+var converter = new Showdown.converter();
+var markdownArea = document.getElementById('markdown');
+if (markdownArea)
+{
+	markdownArea.innerHTML = converter.makeHtml(markdownArea.innerHTML);
+}
+</script>
+
+<div class="bottomlinks">
+<p><a href="https://github.com/afnog/sse/blob/master/setup/guest/index.md">Edit this page on GitHub</a></p>
+<p><a href="../index.html">Return to AfNOG Workshop Main Page</a></p>
+</div>
+
+</body>
+</html>
+

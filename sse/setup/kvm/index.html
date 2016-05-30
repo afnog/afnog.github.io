@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../../../workshop.css" type="text/css" />
+	<link rel="stylesheet" href="../../css/sse.css" type="text/css" />
+	<link rel="copyright" title="Copyright and Usage Restrictions"
+		href="../00readme.html" type="text/html" />
+	<link rel="home" title="AfNOG Workshop web site"
+		href="http://www.ws.afnog.org/" type="text/html" />
+	<link rel="up" title="AfNOG 2016 Workshop Main Page"
+		href="../index.html" type="text/html" />
+	<title>SS-E - AfNOG 2016 Workshop</title>
+	<!--
+	Showdown - Markdown in Javascript
+	from http://www.showdown.im/
+	-->
+	<script type="text/javascript" src="../../js/showdown.js"></script>
+	<style type="text/javascript">
+	pre {
+		font-size: 120%;
+	}
+	</style>
+</head>
+<body>
+
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
+
+<div class="arrowlinks">
+  <a href="http://www.afnog.org/">AfNOG</a>
+  &gt;
+  <a href="http://www.ws.afnog.org/">Workshops</a>
+  &gt;
+  <a href="../../../index.html">2016</a>
+  &gt;
+  <a href="../../">Track SS-E &mdash; Scalable Internet Services</a>
+</div>
+
+<hr>
+
+<h1 id="vm-setup-using-libvirt-and-kvm">VM setup using Libvirt and KVM</h1>
+
+<p>Using Ubuntu 16.04. Follow <a href="../server/">server setup</a> first to configure the server.</p>
+
+<p>Install libvirt and KVM:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install libvirt-bin qemu-kvm virtinst libosinfo-bin
+</code></pre>
+</div>
+
+<p>Create a gold master guest image:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>osinfo-query os
+
+sudo virt-install --connect qemu:///system     --virt-type kvm --name SSE-Gold \
+	--os-variant=debian8 --ram 512 --vcpus 1 --disk path=SSE-Gold.img,size=20 \
+	--cdrom iso/debian-8.4.0-i386-DVD-1.iso --network=bridge=br0 \
+	--graphics type=vnc,port=5901,listen=0.0.0.0,password=foo
+</code></pre>
+</div>
+
+<p>Connect to the server using a VNC client to complete the installation. E.g. 196.200.223.144:5901.</p>
+
+<p>During installation, say Yes to using a network mirror, and set the HTTP proxy to
+http://196.200.223.144:3142/. For Software Selection, enable only SSH Server and
+standard system utilities, disable the desktop.</p>
+
+<p>Follow <a href="../guest/">guest setup</a> to configure the gold master guest, but
+<strong>leave the network configuration alone</strong> (configured by DHCP, the default).</p>
+
+<p>Shut down the master and make a copy:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo virsh shutdown SSE-Gold
+sudo mkdir -p /data/vm
+sudo cp SSE-Gold.img /data/vm/SSE-Gold-Master.img
+</code></pre>
+</div>
+
+<p>Clone some VMs, with specific MAC addresses:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for pc in {1..32}; do
+	hostname=pc$pc
+	domainname=$hostname.sse.ws.afnog.org
+	macaddr=`echo $domainname | md5sum | sed -e 's/^\(..\)\(..\)\(..\)\(..\).*/52:54:\1:\2:\3:\4/'`
+	image=/data/vm/$hostname.img
+	sudo qemu-img create -f qcow2 -o backing_file=/data/vm/SSE-Gold-Master.img $image
+	sudo virt-install --connect qemu:///system     --virt-type kvm --name $hostname \
+		--os-variant=debian8 --ram 512 --vcpus 1 --disk path=$image,format=qcow2 \
+		--network=bridge=br0,mac=$macaddr --import --noautoconsole \
+		--serial tcp,host=:$[2200+$pc],mode=bind,protocol=telnet --noautoconsole
+	sudo virsh autostart $hostname
+done
+</code></pre>
+</div>
+
+<p>Once they have all booted, fix their hostnames:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for pc in {1..32}; do
+	ssh -to StrictHostKeyChecking=no root@196.200.219.$[200+$pc] \
+	"echo pc$pc.sse.ws.afnog.org | sudo tee /etc/hostname; 
+	"'sudo hostname `cat /etc/hostname`'
+done
+</code></pre>
+</div>
+
+
+<script type="text/javascript">
+var converter = new Showdown.converter();
+var markdownArea = document.getElementById('markdown');
+if (markdownArea)
+{
+	markdownArea.innerHTML = converter.makeHtml(markdownArea.innerHTML);
+}
+</script>
+
+<div class="bottomlinks">
+<p><a href="https://github.com/afnog/sse/blob/master/setup/kvm/index.md">Edit this page on GitHub</a></p>
+<p><a href="../index.html">Return to AfNOG Workshop Main Page</a></p>
+</div>
+
+</body>
+</html>
+

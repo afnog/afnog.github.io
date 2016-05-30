@@ -1,10 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
      "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="../workshop.css" type="text/css" />
+	<link rel="stylesheet" href="./../workshop.css" type="text/css" />
 	<link rel="stylesheet" href="./css/sse.css" type="text/css" />
 	<link rel="copyright" title="Copyright and Usage Restrictions"
 		href="../00readme.html" type="text/html" />
@@ -18,13 +22,18 @@
 	from http://www.showdown.im/
 	-->
 	<script type="text/javascript" src="./js/showdown.js"></script>
-	<style>
+	<style type="text/javascript">
 	pre {
 		font-size: 120%;
 	}
 	</style>
 </head>
 <body>
+
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
 
 <div class="arrowlinks">
   <a href="http://www.afnog.org/">AfNOG</a>
@@ -38,9 +47,9 @@
 
 <hr>
 
-<h1 id="internet-protocols">Internet Protocols</h1>
+<h1 id="internet-protocols-and-network-security">Internet Protocols and Network Security</h1>
 
-<p>Chris Wilson, <a href="http://www.aptivate.org/">Aptivate</a>, AfNOG 2014</p>
+<p>Chris Wilson, AfNOG 2016</p>
 
 <h2 id="questions-to-get-you-thinking">Questions to get you thinking</h2>
 
@@ -50,6 +59,7 @@
   <li>What is ARP?</li>
   <li>Source and Destination Ports</li>
   <li>Ports used by common services</li>
+  <li>What is a firewall?</li>
   <li>What is Wireshark?</li>
 </ul>
 
@@ -57,8 +67,8 @@
 
 <h3 id="install-wireshark-on-your-computer">Install Wireshark on your computer</h3>
 
-<p>Some versions <a href="http://mini1.sse.ws.afnog.org/~inst/wireshark/">already downloaded</a>,
-otherwise go to http://www.wireshark.org/download.html.</p>
+<p>Some versions <a href="http://sse-mini1.mtg.afnog.org/wireshark/">already downloaded</a>,
+otherwise go to the <a href="http://www.wireshark.org/download.html">Wireshark website</a>.</p>
 
 <h3 id="capture-some-traffic">Capture some traffic</h3>
 
@@ -110,18 +120,26 @@ your outgoing packets? Why?</p>
 
 <h3 id="check-for-open-ports">Check for open ports</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo pkg install nmap
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install nmap
 </code></pre>
 </div>
 
 <p>Find out which hosts are up on our LAN, and the whole of AfNOG. Try to identify them.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>nmap -sP 196.200.219.0/24
+</code></pre>
+</div>
 
 <p>Check for open ports:</p>
 
 <ul>
   <li>On your virtual server</li>
   <li>On your laptop</li>
-  <li>On a real server under your control</li>
+  <li>
+    <p>On a real server under your control</p>
+
+    <p>nmap -sS 196.200.219.2</p>
+  </li>
 </ul>
 
 <p>What do the different states mean? open/closed/filtered</p>
@@ -153,6 +171,7 @@ if (markdownArea)
 </script>
 
 <div class="bottomlinks">
+<p><a href="https://github.com/afnog/sse/blob/master/ip/exercise.md">Edit this page on GitHub</a></p>
 <p><a href="../index.html">Return to AfNOG Workshop Main Page</a></p>
 </div>
 

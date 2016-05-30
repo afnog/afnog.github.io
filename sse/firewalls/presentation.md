@@ -4,12 +4,14 @@ class: center, middle
 
 .height_8em[[![Firewall](firewall.jpg)](http://www.uits.arizona.edu/services/firewalls)]
 
-### Chris Wilson, AfNOG 2015
+### Chris Wilson, AfNOG 2016
 
 Based on a previous talk by Kevin Chege with thanks!
 
 You can access this presentation at: http://afnog.github.io/sse/firewalls/
-([edit](https://github.com/afnog/sse/firewalls/presentation.md))
+or http://www.ws.afnog.org/afnog2016/sse/firewalls/index.html
+([edit](https://github.com/afnog/sse/firewalls/presentation.md) |
+[download PDF](http://www.ws.afnog.org/afnog2016/sse/firewalls/presentation.pdf))
 
 ---
 
@@ -109,6 +111,23 @@ Decisions that can't be made based on one packet:
 
 ---
 
+## What do firewalls filter?
+
+.fill[![TCP exchange of packets](tcp-exchange.png)]
+
+???
+
+This shows the packets that might be exchanged in a short HTTP session.
+
+* What is port XX?
+* What is port 80?
+* Where is the name of the website? How does the server know which website to serve in response?
+* Which of these packets can a firewall filter?
+  * On the client side?
+  * On the server side?
+
+---
+
 ## Typical features
 
 * Rulesets (lists of rules, read in order)
@@ -143,6 +162,7 @@ Decisions that can't be made based on one packet:
 
 We use the `iptables` command to interact with the firewall (in the kernel):
 
+	$ sudo apt install iptables
 	$ sudo iptables -L -nv
 
 	Chain INPUT (policy ACCEPT 119 packets, 30860 bytes)
@@ -180,10 +200,16 @@ Configure your firewall to allow ICMP packets.
 
 What effect will this have?
 
+What are the numbers?
+
 ???
 
-No effect for now, because the policy is also ACCEPT. However you will see
+It will **-A**ppend a rule to the `INPUT` chain, which will match incoming packets.
+It will have no effect for now, because the policy is also ACCEPT. However you will see
 *icmp* packets accounted against the rule, instead of the chain.
+
+The first two numbers show that 0 packets (totalling 0 bytes) have matched this rule
+(since it was created or the packet counters were last reset).
 
 ---
 
@@ -236,13 +262,13 @@ Is that what you expected?
 Some people would have expected that pings would be dropped.
 
 * Hint: look at the number of packets matching the DROP rule
-* Why did no packets match? the ACCEPT rule came first
+* Why did no packets match? The ACCEPT rule came first!
 
 ---
 
 ## Rule precedence
 
-Add a DROP rule **before** the ACCEPT rule:
+Insert a DROP rule **before** the ACCEPT rule with `-I`:
 
 	$ sudo iptables -I INPUT -p icmp -j DROP
 
@@ -252,6 +278,10 @@ Add a DROP rule **before** the ACCEPT rule:
 	    0     0 DROP       icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
 	   10   840 ACCEPT     icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
 	    0     0 DROP       icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
+
+---
+
+## Rule precedence testing
 
 	$ ping -c1 127.0.0.1
 	PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
@@ -297,155 +327,163 @@ Check the results:
 
 ---
 
+## Persistent Rules
 
-* Theory followed by practical exercises
-* Help us to help you!
-* Complaints box
-* Please set phones to silent
-* Please close your laptops during theory sessions
-
-???
-
-Please tell us if you don't understand. You're not the only one.
-
-Please don't distract others - tell us if you're bored!
-
-Suggestion: if someone's phone rings, they have to do a dance for us :)
+What happens when you reboot?
 
 ---
 
-## Timetable
+## Persistent Rules
 
-* 06:30-08:00: Breakfast at the hotel (Kempinski)
-* 07:45, 08:00, 08:15 and 08:30: Buses to the venue (Palace du Peuple)
-* 09:00: Workshops start
-* 11:00: tea break
-* 14:00-15:00: lunch at the venue (Palace du Peuple)
-* 16:30: tea break
-* 18:30: dinner at the venue (Palace du Peuple)
-* 19:30, 19:45, 20:00 and 20:15: buses to hotel (Kempinski)
+What happens when you reboot?
 
-Updates on the [NSRC wiki](https://nsrc.org/workshops/2014/afnog/wiki/Timetable).
+The rules that we created are only in the kernel's memory. They will be lost on reboot.
 
----
+How can we make them permanent? Could be as simple as:
 
-## Meals
+	/sbin/iptables-save > /etc/default/iptables
+	/sbin/iptables-restore < /etc/default/iptables
 
-* Breakfast at the hotel (Kempinski): 06:30-08:00
-* Lunch at the Palace du Peuple: 14:00-15:00
-* Dinner at the Palace du Peuple: 18:30-20:30
-
-Please be back in class on time from breaks!
+Or install `iptables-persistent` which automates this a little.
 
 ---
 
-## Extra Charges
+## Connection Tracking
 
-AfNOG will not pay for any extra charges on your hotel room, such as:
+Every packet is tracked by default (made into a connection).
 
-* phone calls
-* food and drinks (including room service)
-* laundry
+You can see them with `conntrack -L`:
 
-Beware the hotel prices!
+	sudo /usr/sbin/conntrack -L
+	tcp      6 431999 ESTABLISHED src=196.200.216.99 dst=196.200.219.140 sport=58516 dport=22
+	src=196.200.219.140 dst=196.200.216.99 sport=22 dport=58516 [ASSURED] mark=0 use=1
 
----
-
-## Inventory
-
-You should have received:
-
-* Name badges
-* Folder with notepad, pen, information pack
-
-Take your name badge to meals at the Palace du Peuple!
+What does this mean?
 
 ---
 
-## Gifts
+## Connection Tracking
 
-At the end you will receive:
+	sudo /usr/sbin/conntrack -L
+	tcp      6 431999 ESTABLISHED src=196.200.216.99 dst=196.200.219.140 sport=58516 dport=22
+	src=196.200.219.140 dst=196.200.216.99 sport=22 dport=58516 [ASSURED] mark=0 use=1
 
-* A USB stick with some O'Reilly eBooks
-* Possibly a FreeBSD CD-ROM
-
-Please share with your colleagues back at home.
-
-## Community
-
-What did Sunday said about community?
-
-???
-
-* Who will you share your knowledge with?
-* How can you continue to learn and improve your skills after the event?
-
-Build a local community, be active, organise an event and invite people!
-
-Make a plan, share the work, think about what you have to give and what you
-can gain by sharing. Who is married here? Why did you get married? Is it
-worth it?
+* ESTABLISHED is the connection state
+  * What are valid states?
+* src=196.200.216.99 is the source address of the tracked connection
+* dst=196.200.219.140 is the destination address
+  * Which one is the address of this host? Will it always be?
+* sport=58516: source port
+* dport=22: destination port
+* Another set of addresses: what is this?
 
 ---
 
-## Electronic Resources
+## Connection Tracking
 
-Web site: http://www.ws.afnog.org/afnog2014/
+How do we use it?
 
-AfNOG Mailing List:
+* `iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT`
+  * You normally want this!
 
-* Q&A on Internet operational and technical issues.
-* No foul language or disrespect for other participants.
-* No blatant product marketing.
-* No political postings.
-
-Please [subscribe](http://www.afnog.org/mailman/listinfo/afnog/) while at
-the Workshop:
-
-* So we can help you if you have problems subscribing.
-* Please raise any questions related to the workshop content.
+Can you see any problems?
 
 ---
 
-## Safety
+## Connection Tracking Problems
 
-Please be careful in class:
+What happens if someone hits your server with this?
 
-* trip on power cords
-* pull cables out of sockets
-* knock equipment off tables
-* fall from leaning back too far in your chair
+	sudo hping3 --faster --rand-source -p 22 196.200.219.140 --syn
 
----
-
-## Learning Environment
-
-* 34 virtual servers (named pc1 – pc34)
-  * DNS names are pc1.sse.ws.afnog.org (etc)
-* Use your own laptops for:
-  * Web browsing
-  * Control your virtual machines
-  * Virtualisation exercises
-* Wireless Internet
-  * Use the AIS network if possible, otherwise AIS-bgn
-  * Password for both is "`success!`"
+Or if you run a server that has thousands of clients?
 
 ---
 
-## Servers
+## Connection Tracking Problems
 
-* FreeBSD-10.0 OS installed
-* sudo and bash installed, ports tree updated
-* Use SSH to access your server (e.g. Putty for Windows)
-* Login with afnog/afnog
-* Use sudo to execute commands as root
-* Don't change passwords
-* Don't "close security holes"
-* Don't `shutdown` your server (there's no power button!)
-* Your servers are accessible over the Internet
+Add a rule to block all connection tracking to a particular port:
+
+	sudo /sbin/iptables -t raw -A PREROUTING -p tcp --dport 22 -j NOTRACK
+
+Write your rules so that connection tracking is **not needed** (allow traffic both ways).
+
+You probably want to do this for your DNS server. How?
+
+---
+
+## Connection Tracking Problems
+
+Add a rule to block all connection tracking to a particular port:
+
+	sudo /sbin/iptables -t raw -A PREROUTING -p tcp --dport 22 -j NOTRACK
+
+Write your rules so that connection tracking is **not needed** (allow traffic both ways).
+
+You probably want to do this for your DNS server. How?
+
+	sudo /sbin/iptables -t raw -A PREROUTING -p udp --dport 53 -j NOTRACK
+
+---
+
+## Standard simple rule set
+
+This is one of the first things I set up on any new box:
+
+	iptables -P INPUT ACCEPT
+	iptables -F INPUT
+	iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT
+	iptables -A INPUT -i lo -j ACCEPT
+	iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+	iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix 'Rejected INPUT '
+
+Check that I can access the server without triggering a "Rejected INPUT" message in the logs, and then
+lock it down:
+
+	iptables -P INPUT DROP
+
+---
+
+## Exercise
+
+Install `nmap`:
+
+	sudo apt install nmap
+
+Scan your system:
+
+	sudo nmap -sS pcXX.sse.ws.afnog.org
+
+* Which ports are open?
+* How would you block them?
+
+You will probably lock yourself out of your PC. That is OK, we can fix it :)
+
+* As long as the changes have NOT been made permanent, we can reboot the system to restore access.
+
+---
+
+## Exercise
+
+The correct answer is:
+
+	iptables -I INPUT 2 -p tcp --dport 22 -j DROP
+
+Which prevents new connections, but as long as rule 1 allows ESTABLISHED connections
+you will not be locked out (unless you lose your connection).
+
+The output of `iptables -L -nv` should look like:
+
+	Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+	 pkts bytes target prot opt in out source    destination         
+	  151 11173 ACCEPT all  --  *  *   0.0.0.0/0 0.0.0.0/0   state ESTABLISHED
+	    0     0        tcp  --  *  *   0.0.0.0/0 0.0.0.0/0   tcp dpt:22
 
 ---
 
 ## FIN
 
 Any questions?
+
+(yeah, right!)
