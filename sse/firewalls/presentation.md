@@ -1,19 +1,23 @@
-class: center, middle
+class: center, middle, inverse
 
 # Linux Firewalls
 
-.height_8em[[![Firewall](firewall.jpg)](http://www.uits.arizona.edu/services/firewalls)]
+.height_12em[[![Firewall](firewall.jpg)](http://www.uits.arizona.edu/services/firewalls)]
 
 ### Chris Wilson, AfNOG 2016
 
+---
+
+## About this presentation
+
 Based on a previous talk by Kevin Chege with thanks!
 
-.smaller.left[
+You can access this presentation at:
+
 * Online: http://afnog.github.io/sse/firewalls/
 * Local: http://www.ws.afnog.org/afnog2016/sse/firewalls/index.html
 * Github: https://github.com/afnog/sse/blob/master/firewalls/presentation.md
 * Download PDF: http://www.ws.afnog.org/afnog2016/sse/firewalls/presentation.pdf
-]
 
 ---
 
@@ -483,6 +487,7 @@ The output of `iptables -L -nv` should look like:
 	    0     0        tcp  --  *  *   0.0.0.0/0 0.0.0.0/0   tcp dpt:22
 
 ---
+class: center, middle, inverse
 
 ## FIN
 

@@ -1,22 +1,23 @@
-class: center, middle
+class: center, middle, inverse
 
 # Apache
 
-.height_8em[[![Apache](geronimo.jpg)](http://www.greatdreams.com/apache/apache-index.htm)]
+.height_12em[[![Apache](geronimo.jpg)](http://www.greatdreams.com/apache/apache-index.htm)]
 
 ### Chris Wilson, AfNOG 2016
 
+---
+
+## About this presentation
+
 Based on a previous talk by Joel Jaeggli with thanks!
 
-You can access this presentation at: http://afnog.github.io/sse/apache/
-([edit](https://github.com/afnog/sse/apache/presentation.md))
+You can access this presentation at:
 
-.smaller.left[
 * Online: http://afnog.github.io/sse/apache/
 * Local: http://www.ws.afnog.org/afnog2016/sse/apache/index.html
 * Github: https://github.com/afnog/sse/blob/master/apache/presentation.md
 * Download PDF: http://www.ws.afnog.org/afnog2016/sse/apache/presentation.pdf
-]
 
 ---
 
@@ -344,7 +345,7 @@ Create the file `/var/www/html/test.php` with the following contents:
 
 Load it in your browser at <http://pcXX.sse.ws.afnog.org/test.php>. You should see this:
 
-.height_12em[![phpinfo output](phpinfo.png)]
+.height_8em.center[![phpinfo output](phpinfo.png)]
 
 ---
 class: pre-compact
@@ -432,16 +433,16 @@ Use this command to generate a new Certificate Signing Request (CSR):
 
 	$ sudo openssl req -new -key server.key -out server.csr
 
-This will prompt for some information. Most doesn't matter, but the CommonName
-is the name of the Website you will use to access the Apache server. In this case
-you will access your PC using its hostname, i.e. `pcXX.sse.ws.afnog.org`, where
-XX is your computer number.
+This will prompt for some information, which will appear in the certificate.
+
+The Common Name **must match** the hostname that you will use to access the
+Apache server, for example `pcXX.sse.ws.afnog.org`, where XX is your computer number.
 
 ---
 
 ## Configuring SSL
 
-### Self-sign your own certificate
+### Self-sign your certificate
 
 Use this command to sign the certificate with the same public key (a
 self-signed certificate):
@@ -481,8 +482,9 @@ Open <https://pcXX.sse.ws.afnog.org> in your browser. What do you see?
 
 ## Testing SSL
 
-You may need to click on *Advanced* and then *Proceed to pcXX.sse.ws.afnog.org (unsafe)*
-(or something like that) to get to the site.
+You must bypass this warning to open the page.
+
+* On Chrome: click on *Advanced* and then *Proceed to pcXX.sse.ws.afnog.org (unsafe)*.
 
 .height_8em.center[![Test page with SSL warning](test-page-with-ssl-warning.png)]
 
@@ -506,6 +508,7 @@ What about the red padlock? Click on it, and then *Details* and *View Certificat
 .height_18em.center[![Add a certificate to trusted list](add-certificate-trust.png)]
 
 ---
+class: center, middle, inverse
 
 ## FIN
 

@@ -7,6 +7,7 @@
 Copy preconfigured files for Mailwatch from the instructor’s server. The only changes made to these files was to add the MySQL username and password to allow MailWatch to connect to the database.
 
 	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/*.pm /usr/share/MailScanner/perl/custom/
+	$sudo chmod ugo+x /usr/share/MailScanner/perl/custom/
 
 
 
@@ -34,13 +35,15 @@ Save and Exit the file
 Copy preconfigured MailScanner.conf file. A number of changes made, please go through it.
 	
 	$sudo mv /etc/MailScanner/MailScanner.conf /etc/MailScanner/MailScanner.conf.backup
-	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/MailScanner.conf /etc/MailScanner/
+	$sudo scp afnog@pc37.sse.ws.afnog.org:/home/afnog/MailScanner.conf /etc/MailScanner/
 	
 Prepare MailScanner directories (they may already exist)
 	
 	$sudo mkdir /var/spool/MailScanner/spamassassin && sudo chown postfix:postfix /var/spool/MailScanner/spamassassin
-	$sudo chown postfix:www-data /var/spool/MailScanner/incoming
+	$sudo chown postfix:clamav /var/spool/MailScanner/incoming
 	$sudo chown postfix:www-data /var/spool/MailScanner/quarantine
+	
+	
 
 
 3. Get clamav updates (they take a long time and we will use a local copy)
@@ -57,9 +60,12 @@ freshclam after installation. Type "freshclam" to see how updates are fetched.
 ================================
 
 Update spamassassin:
-Just incase it did not corretly install:
+Just incase it did not corretly install (it failed on mine for some reason):
 
 	$sudo apt-get install spamassassin
+
+Fetch an update to the rules 
+
 	$sudo sa-update
 
 Enable SpamAssassin 
@@ -247,7 +253,7 @@ Type quit to exit
 ====================
 
 
-
+echo "This is my email, hello" | mail -s "This is a test message" kevin.chege@gmail.com
 
 
 9. LOGIN TO MAILWATCH

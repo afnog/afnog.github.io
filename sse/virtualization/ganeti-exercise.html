@@ -98,35 +98,53 @@ dynamically sized.</p>
 
 <h3 id="starting-installation">Starting Installation</h3>
 
-<p>Start the VM and attach the Ubuntu 14.04 Server 64-bit CD. Read the following sections
+<p>Start the VM and attach the Ubuntu 16.04 Server 64-bit CD. Read the following sections
 <strong>before</strong> you start the installation, and use them at the appropriate times during the
 installation.</p>
 
-<h3 id="hostname">Hostname</h3>
+<h4 id="hostname">Hostname</h4>
 
 <p>You must use a fully qualified hostname, for example <code class="highlighter-rouge">ganeti.pcXX.sse.ws.afnog.org</code>.</p>
 
-<h3 id="partitioning">Partitioning</h3>
+<h4 id="partitioning">Partitioning</h4>
 
 <p>The server should use LVM for disk space, so instead of the default <em>Guided Partitioning</em>, choose <em>Manual</em>, then <em>SCSI3</em>, then:</p>
 
 <ul>
   <li>Select <em>pri/log free space</em>, <em>Create a new partition</em>, 40 GB, <em>Primary</em>, <em>Beginning</em>, <em>Done</em>.</li>
   <li>Select the new partition, choose <em>Use as &gt; Physical volume for LVM</em>.</li>
-  <li>Select <em>Configure LVM volumes</em></li>
-  <li>Enter a name for the new main volume group, for example <code class="highlighter-rouge">xenvg</code>.</li>
-  <li>Create a logical volume of 8 GB, <em>Name &gt; Root, Use as &gt; ext4 filesystem, Mount point &gt; / (root)</em>.</li>
-  <li>Create a logical volume of 4 GB, <em>Name &gt; Swap, Use as &gt; swap</em>.</li>
-  <li>Leave the rest of the volume group as unallocated free space.</li>
-  <li>Finish and Write changes to disk.</li>
+  <li>Select <em>Configure the Logical Volume Manager</em>:
+    <ul>
+      <li>Select <em>Create volume group</em></li>
+      <li>Enter a name for the new main volume group, for example <code class="highlighter-rouge">xenvg</code>. Select device <code class="highlighter-rouge">/dev/sda1</code>.</li>
+      <li>Create a logical volume of 8 GB, *Name &gt; Root.</li>
+      <li>Create a logical volume of 4 GB, *Name &gt; Swap.</li>
+      <li>Select <em>Finish</em>.</li>
+    </ul>
+  </li>
+  <li>Select <em>LVM VG xenvg, LV Root</em> -&gt; <em>#1 8.0 GB</em>:
+    <ul>
+      <li>Select <em>Use as &gt; Ext4 journalling filesystem</em>.</li>
+      <li>Select <em>Mount point &gt; / (root)</em>.</li>
+      <li>Select <em>Done setting up the partition</em>.</li>
+    </ul>
+  </li>
+  <li>Select <em>LVM VG xenvg, LV Swap</em> -&gt; <em>#1 4.0 GB</em>:
+    <ul>
+      <li>Select <em>Use as &gt; swap area</em>.</li>
+      <li>Select <em>Done setting up the partition</em>.</li>
+    </ul>
+  </li>
+  <li>Select <em>Finish partitioning and write changes to disk</em>.</li>
 </ul>
 
-<p>### Proxy Server</p>
+<h4 id="proxy-server">Proxy Server</h4>
 
-<p>When asked for a proxy server, enter this one (to save a LONG install time):</p>
+<p>If you are following this exercise at an AfNOG event, please enter this proxy
+server name when prompted, to save a LONG install time:</p>
 
 <ul>
-  <li>http://197.4.11.251:3142</li>
+  <li><a href="http://196.200.223.144:3142">http://196.200.223.144:3142</a></li>
 </ul>
 
 <p>Please enter this carefully and check it. Using the wrong value will make it
@@ -135,7 +153,11 @@ AfNOG workshop then this server will no longer exist, so use a local proxy
 server or leave it blank.</p>
 
 <p>While the installation proceeds, familiarise yourself with the terminology of
-<a href="http://docs.ganeti.org/ganeti/2.13/html/admin.html">Ganeti</a>.</p>
+<a href="http://docs.ganeti.org/ganeti/2.15/html/admin.html#ganeti-terminology">Ganeti</a>.</p>
+
+<h4 id="packages">Packages</h4>
+
+<p>Install the OpenSSH Server.</p>
 
 <h3 id="network-re-configuration">Network Re-Configuration</h3>
 
@@ -148,28 +170,38 @@ server or leave it blank.</p>
 
 <p><img src="virtualbox-configure-adaptor-2.png" alt="Configuring Network Adaptor 1" /></p>
 
-<p>Then start the machine again. Log in on the console and edit <code class="highlighter-rouge">/etc/network/interfaces</code> to look like this:</p>
+<p>Then start the machine again. Log in on the console and install some packages:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install bridge-utils
+</code></pre>
+</div>
+
+<p>Then edit <code class="highlighter-rouge">/etc/network/interfaces</code> to look like this:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code># The loopback network interface
 auto lo
 iface lo inet loopback
 
 # The primary network interface
-auto eth0
-iface eth0 inet dhcp
+auto enp0s3
+iface enp0s3 inet dhcp
 
-auto eth1
-iface eth1 inet manual
+auto enp0s8
+iface enp0s8 inet static
+	address 0.0.0.0
+	netmask 255.255.255.255
 
 auto xen-br0
 iface xen-br0 inet static
 	address 192.168.56.10
 	netmask 255.255.255.0
-	bridge_ports eth1
+	bridge_ports enp0s8
 	bridge_stp off
 	bridge_fd 0
 </code></pre>
 </div>
+
+<h3 id="hostnames-and-dns">Hostnames and DNS</h3>
 
 <p>Edit <code class="highlighter-rouge">/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
 
@@ -178,8 +210,8 @@ your host. You will also need to choose a name (hostname) and IP address for
 your cluster, which must be different. For example:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>127.0.0.1       localhost
-192.168.56.10   ganeti1.sse.ws.afnog.org
-192.168.56.11   cluster1.sse.ws.afnog.org
+192.168.56.10   ganeti.pcXX.sse.ws.afnog.org
+192.168.56.11   cluster.pcXX.sse.ws.afnog.org
 </code></pre>
 </div>
 
@@ -188,20 +220,23 @@ for the cluster name, instead of editing <code class="highlighter-rouge">/etc/ho
 really be in the DNS as well, but for the purposes of this exercise
 (non-production deployment) it doesn’t matter too much.</p>
 
-<p>Edit <code class="highlighter-rouge">/etc/default/grub</code> and add the following line:</p>
+<h3 id="configure-xen">Configure Xen</h3>
+
+<p>Edit <code class="highlighter-rouge">/etc/default/grub</code> and add the following line to enable Xen (you would
+not need this for a KVM cluster in production):</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>GRUB_CMDLINE_XEN_DEFAULT="dom0_mem=min:384M,max:384M"
 </code></pre>
 </div>
 
-<p>This restricts the master domain to 256 MB RAM, which will make it slow, but give us more RAM free
+<p>This restricts the master domain to 384 MB RAM, which will make it slow, but give us more RAM free
 for guests. In your own configurations you should probably allocate more RAM to the host (domain 0)!</p>
 
 <p>Then run the following commands:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo update-grub
 sudo apt-get dist-upgrade	
-sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap xen-hypervisor-amd64
+sudo apt-get install xen-hypervisor-amd64 xen-system-amd64
 </code></pre>
 </div>
 
@@ -213,16 +248,53 @@ sudo apt-get install ganeti2 ganeti-htools ganeti-instance-debootstrap xen-hyper
 
 <p>Then <code class="highlighter-rouge">reboot</code> the host and log in again.</p>
 
-<p>Start following the <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html">Ganeti installation tutorial</a>,
+<h3 id="install-drbd">Install DRBD</h3>
+
+<p>The Ganeti manual has instructions for this, but they are confusing and out-of-date for Ubuntu 16.04,
+so we skip that step and do it here instead:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install drbd-utils
+</code></pre>
+</div>
+
+<p>Edit <code class="highlighter-rouge">/etc/modprobe.d/drbd.conf</code> and make it look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>options drbd minor_count=128 usermode_helper=/bin/true
+</code></pre>
+</div>
+
+<p>Edit <code class="highlighter-rouge">/etc/modules</code> and add the following line at the end:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drbd
+</code></pre>
+</div>
+
+<p>Load the kernel module (driver) now:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo modprobe drbd
+</code></pre>
+</div>
+
+<h3 id="continue-ganeti-installation">Continue Ganeti installation</h3>
+
+<p>Start by running the following commands:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install ganeti ganeti-instance-debootstrap
+</code></pre>
+</div>
+
+<p>Then start following the <a href="http://docs.ganeti.org/ganeti/2.15/html/install.html">Ganeti installation tutorial</a>,
 skipping the following sections:</p>
 
 <ul>
   <li>Anything to do with KVM (we’re using Xen instead)</li>
-  <li>Installing RBD: skip to <a href="http://docs.ganeti.org/ganeti/2.13/html/install.html#installing-gluster">Installing Gluster</a> instead.</li>
+  <li>Installing DRBD (we already did that)</li>
+  <li>Installing RBD: skip to
+<a href="http://docs.ganeti.org/ganeti/2.15/html/install.html#installing-gluster">Installing Gluster</a> instead.</li>
   <li>KVM userspace access</li>
   <li>Configuring the network</li>
   <li>Configuring LVM</li>
-  <li>Installing Ganeti: skip to <a href="#initializing-the-cluster">#Initializing the Cluster</a> below.</li>
+  <li>Installing Ganeti: stop following at this point.</li>
 </ul>
 
 <h3 id="initializing-the-cluster">Initializing the Cluster</h3>
@@ -230,9 +302,12 @@ skipping the following sections:</p>
 <p>Run the following command, substituting the cluster name you added to
 <code class="highlighter-rouge">/etc/hosts</code> instead of <code class="highlighter-rouge">cluster1...</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-cluster init --vg-name Main --enabled-hypervisors=xen-pvm -H xen-pvm:xen_cmd=xl cluster1.sse.ws.afnog.org
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo mkdir /root/.ssh
+sudo gnt-cluster init --vg-name xenvg --enabled-hypervisors=xen-pvm -H xen-pvm:xen_cmd=xl cluster.pcXX.sse.ws.afnog.org
 </code></pre>
 </div>
+
+<p>The <code class="highlighter-rouge">gnt-cluster</code> command should take a few minutes to complete.</p>
 
 <p><strong>Note:</strong> Normally you would use either <code class="highlighter-rouge">xen-hvm</code> or <code class="highlighter-rouge">kvm</code> as the hypervisor,
 instead of <code class="highlighter-rouge">xen-pvm</code> above. In this case we must use <code class="highlighter-rouge">xen-pvm</code> because we are
@@ -287,7 +362,11 @@ much with your new hypervisor. If it doesn’t show enough free RAM, check that
 you have <a href="http://askubuntu.com/a/191489/49566">reconfigured GRUB and run
 <code class="highlighter-rouge">update-grub</code></a>.</p>
 
-<p>Add an entry to <code class="highlighter-rouge">/etc/hosts</code> for a host to use for burnin testing, for example <code class="highlighter-rouge">burnin.example.com</code>.</p>
+<p>Add an entry to <code class="highlighter-rouge">/etc/hosts</code> for a host to use for burnin testing, for example <code class="highlighter-rouge">burnin.example.com</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>192.168.56.12   burnin.example.com
+</code></pre>
+</div>
 
 <p>Run the <code class="highlighter-rouge">burnin</code> test to make sure that everything is working properly:</p>
 
