@@ -14,7 +14,7 @@ You can access this presentation at: http://afnog.github.io/sse/apache/
 .smaller.left[
 * Online: http://afnog.github.io/sse/apache/
 * Local: http://www.ws.afnog.org/afnog2016/sse/apache/index.html
-* Github: https://github.com/afnog/sse/blob/master/sse/apache/presentation.md
+* Github: https://github.com/afnog/sse/blob/master/apache/presentation.md
 * Download PDF: http://www.ws.afnog.org/afnog2016/sse/apache/presentation.pdf
 ]
 
@@ -43,7 +43,7 @@ What other HTTP (web) servers are commonly used?
 
 What other HTTP (web) servers are commonly used?
 
-[![Netcraft Survey](wpid-wss-share.png)](http://news.netcraft.com/archives/2015/09/16/september-2015-web-server-survey.html)
+.fill[[![Netcraft Survey](wpid-wss-share.png)](http://news.netcraft.com/archives/2015/09/16/september-2015-web-server-survey.html)]
 
 ???
 
@@ -59,10 +59,14 @@ Also note growing popularity of nginx.
 
 ## Which one to use?
 
-* Apache: Popular, well-documented, flexible, secure, big, slow, heavy.
-* Nginx: Increasingly popular, quite well-documented, very fast, reverse proxy, SSL support/wrapper, no PHP.
-* Lighttpd: Simple, fast, no PHP.
-* Thttpd: Tiny, fast, no PHP.
+* Apache
+  * Popular, well-documented, flexible, secure, big, slow, heavy, PHP integration.
+* Nginx
+  * Increasingly popular, quite well-documented, very fast, reverse proxy, SSL support/wrapper, no PHP.
+* Lighttpd
+  * Simple, fast, no PHP.
+* Thttpd
+  * Tiny, fast, no PHP.
 
 ???
 
@@ -101,16 +105,20 @@ Apache support virtual hosting (deciding which website to display) using:
 
 ???
 
-**Name based** virtual hosting is recommended for modern systems to conserve IP addresses. The server looks
-at the Host: header of the request to identify which website to serve. 
-
-However sometimes you will want to show a default page regardless of the hostname that the client accesses,
-e.g. if you are intercepting HTTP requests or to show a helpful error page when your Apache configuration
-does not recognise the domain, e.g. it has not yet been updated to match the DNS pointing a new domain to your
-server. To do this, you will need to understand IP/Port based virtual hosting.
-
 **IP/Port based** virtual hosting looks at the IP and port that received the request to identify which
 website to serve.
+
+**Name based** virtual hosting is recommended for modern systems to conserve IP addresses. The server looks
+at the IP and port **and also the Host: header of the request** to identify which website to serve. 
+
+Every IP and port with `NameVirtualHost` enabled has a default site that is shown if the Host: header
+does not match any site configured on the IP and port. This is useful for:
+
+* showing a default page if the DNS has been changed to point a new domain to the web server,
+  but the web server not yet configured for it;
+
+* when you do not know which domain name the client is going to use, e.g. when intercepting 
+  web requests (captive portal)
 
 ---
 
@@ -132,374 +140,370 @@ website to serve.
 * HTTPS (HTTP over SSL) runs on port 443 by convention
   * Each SSL-wrapped service runs on a different port than its non-SSL-wrapped version
 
+---
 
-* Many web applications written in PHP and using a MySQL database.
-* Relatively easy to deploy under Apache (and most web hosting).
-* We will install the necessary software shortly.
+## SSL Certificates
 
+* Certificates identify parties (servers and sometimes clients)
+  * SSL useless without server auth - why not?
+* Need to generate a Certificate Signing Request (CSR) and get someone to sign it
+  * Chain of trust, established by signatures
+  * Signer needs to be trusted by web browser (directly or indirectly)
+* Each SSL certificate* has a Public and Private key
+  * The public key is used to encrypt the information
+  * The public key is accessible to everyone
+  * The private Key is used to decipher the information
+  * The private should be not be disclosed to anyone
+
+.footnote[.red.bold[*] The key is included on the certificate, but can be
+reused on more certificates as long as not compromised. There is no way to
+revoke it except to revoke all certs signed with it.]
 
 ---
 
-## Stateful Firewalls
+## How SSL works
 
-.fill[[![TCP states](Tcp_state_diagram_fixed.svg)](http://commons.wikimedia.org/wiki/File:Tcp_state_diagram_fixed.svg)]
+.fill[![How SSL works](how-ssl-works.svg)]
 
 ???
 
-* "Stateful inspection" tracks the state or progress of a network connection.
-* These are the states of a TCP connection.
-* Most useful for allowing return packets for an open connection.
-* Can prevent sneaking in packets after connection closed.
-* What about ICMP and UDP? They are not inherently stateful protocols.
-* Almost essential for NAT - tracks the internal address corresponding to a connection.
-* Performance impact - scanning the connection table vs partially/not evaluating the ruleset
+* Server gets a certificate:
+  * Generates a public-private key pair
+  * Generates a Certificate Signing Request (CSR) containing a hash of the public key
+  * Sends CSR and money to a Certificate Authority (CA)
+  * CA generates a certificate, including its own public key, signed with the corresponding private key, and returns to server
+  * All of this happens ~1 time per certificate lifetime (1-5 years)
+* Client connects to server via SSL
+  * Sends a nonce (number used once) to server
+  * Server signs nonce and returns it with the certificate (**which one?**) to client
+* Client checks that:
+  * It trusts the CA - possibly via a chain from a trusted CA
+  * The cert lists the domain that it tried to connect to (**aha!**)
+  * The cert has the correct purpose (authentication)
+  * The cert has not been revoked (against a list downloaded by OCSP)
+  * The nonce was signed by the key listed in the certificate
+* All of this proves that:
+  * The server has a key
+  * which was given a certificate
+  * which is valid for the purpose
+  * and was signed (directly or indirectly) by a CA that the client trusts
+  * and has not been revoked
+  * therefore they can trust the server
+
+Note: no protection against key theft except certificate revocation!
+
+Also, invalidating a certificate invalidates all those signed by it.
 
 ---
 
-## Limitations of Firewalls
+## Certificate Authorities
 
-.fill[[![Snakes on a Plane](snake_plane_2719321b.jpg)](http://i.telegraph.co.uk/multimedia/archive/02719/snake_plane_2719321b.jpg)]
+Who are these guys anyway?
 
-???
-
-* Usually only block *inbound* traffic - what about outbound?
-* How to protect against inside attacks? (more firewalls!)
-* Limited ability to understand application protocols (need other defenses e.g. Application Layer Gateways)
-* Performance impact - minimal (especially compared to ALGs)
-* Blocking legitimate traffic
-* Some traffic very hard to block (skype, encrypted bittorrent, particular websites)
+* Geotrust, Go Daddy, RSA, Thawte, Verisign, many others...
+* Trusted by browsers
+* Verify your identity (not really any more)
+* Take your money
+* Try not to lose their private keys
+  * What would happen if they did?
 
 ---
 
-## Blocking Websites
+## Self-signed certificates
 
-.fill[[![Great Firewall of China](China.png)](http://www.apc.org/en/node/14821)]
-
-???
-
-* How do you do it?
-* How do you know what sites people are accessing?
-* Can you do it at the packet level? DNS? HTTP Host header?
-* Bypassing - alternative DNS servers, HTTPS
-* Turkey blocking Twitter example
-* How does China do it? Secret, massive manpower, intimidation.
+* Useful for testing
+* Useful in controlled environments
+* Free (as in beer, but take time and skill to manage)
+* Useless for clients who won't install the cert
 
 ---
 
-## Typical features
+## Getting Certificates
 
-* Rulesets (lists of rules, read in order)
-* Rules (IF this THEN that)
-* Match conditions
-  * interface, IP address, protocol, port, time, contents
-* Actions
-  * accept, drop, reject, jump to another table, return
-* Default policy
+So how do I get one again?
 
----
+* Pay money
+* Self-certified (own CA)
+* Self-signed
 
-## iptables/netfilter
-
-.fill[[![Netfilter diagram](iptables.png)](http://www.adminsehow.com/2011/09/iptables-packet-traverse-map/)]
-
-???
-
-* `iptables` is the command-line tool to manage the Netfilter firewall
-* connection tracking
-* multiple "tables":
-  * filter (packet filtering)
-  * NAT
-  * mangle
-* hooks at different points in the packet path:
-  * INPUT, FORWARD, OUTPUT, PREROUTING, POSTROUTING
-* many matches and targets
+We will use a self-signed certificate in order to proceed quickly. There are tutorials on the
+Internet on running your own CA with OpenSSL (it's not that hard, really).
 
 ---
 
-## Listing current rules
+## Install Apache
 
-We use the `iptables` command to interact with the firewall (in the kernel):
+	sudo apt install apache2
 
-	$ sudo apt install iptables
-	$ sudo iptables -L -nv
-
-	Chain INPUT (policy ACCEPT 119 packets, 30860 bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-
-	Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-
-	Chain OUTPUT (policy ACCEPT 36 packets, 1980 bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-
-???
-
-This command is to:
-
-* `L`ist all the rules,
-* in the `filter` table (default),
-* not resolving `n`umeric addresses,
-
-This shows 3 chains (INPUT, FORWARD and OUTPUT) with no rules in any of them.
+How do you test that it worked?
 
 ---
 
-## Your first ruleset
+## Install Apache
 
-Configure your firewall to allow ICMP packets.
+	sudo apt install apache2
 
-	$ sudo iptables -A INPUT -p icmp -j ACCEPT
+How do you test that it worked?
 
-	$ sudo iptables -L INPUT -nv
+	telnet localhost 80
 
-	Chain INPUT (policy ACCEPT 4 packets, 520 bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-	    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
+And visit http://pcXX.sse.ws.afnog.org in your browser.
 
-What effect will this have?
-
-What are the numbers?
-
-???
-
-It will **-A**ppend a rule to the `INPUT` chain, which will match incoming packets.
-It will have no effect for now, because the policy is also ACCEPT. However you will see
-*icmp* packets accounted against the rule, instead of the chain.
-
-The first two numbers show that 0 packets (totalling 0 bytes) have matched this rule
-(since it was created or the packet counters were last reset).
+What content is it serving? How do we change it?
 
 ---
 
-## Testing rules
+## Enable and test IPv6
 
-How can you test it?
+Set your IPv6 address to match your IPv4 address (replace `XX` with your PC number plus 100):
 
-	$ ping -c4 127.0.0.1
-	PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
-	64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.058 ms
-	...
+	$ sudo ip -6 addr add 2001:43f8:220:219::XX/64 dev eth0
 
-	$ sudo iptables -L INPUT -nv
-	Chain INPUT (policy ACCEPT 220 packets, 218K bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-	    8   672 ACCEPT     icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
+Then add your default route for IPv6:
 
-Why do we see 8 packets against the rule, instead of 4?
+	$ sudo ip -6 route add default via 2001:43f8:220:219::1
 
-You can use `iptables -L INPUT -nZ` to `Z`ero the counters.
+On the above if you get the error message `RTNETLINK answers: File exists`, it means that
+the gateway is already in place, as it was auto-configured.
 
-???
+Test your IPv6 connectivity:
 
-* The *ping* command uses ICMP packets of the `echo-request` and `echo-response` types.
-* Every ping has a request and a response packet.
-* Both are received by the same machine because it's local.
-* Try working with your neighbour: each test the other's firewall.
+	$ ping6 www.google.com
+
+Then browse your IPv6 address at http://[2001:43f8:220:219::XX] (the square brackets
+are deliberate and essential!).
+
+---
+class: pre-compact
+
+## Apache configuration files
+
+	* /etc
+	  * /apache2
+	    * apache2.conf
+	    * ports.conf
+	    * conf-available
+	      * *.conf
+	    * conf-enabled
+	      * symlinks to mods-available for services which are enabled
+	    * mods-available (and mods-enabled)
+	      * *.load
+	      * *.conf
+	    * sites-available (and sites-enabled)
+	      * 000-default.conf
+	      * default-ssl.conf
+	* /var/www/html (content)
+	  * index.html (the test page)
+
+Why this structure?
 
 ---
 
-## Blocking pings
+## Enabled sites and modules
 
-Add another rule:
+* `mods-available` and `sites-available` allows packages to ship default configuration files
+  * **without** them being enabled automatically
+  * more secure than Red Hat/CentOS system
+* Enable and disable with commands:
+  * `a2enmod` and `a2dismod`: modules (mods)
+  * `a2ensite` and `a2dissite`: sites
+  * `a2enconf` and `a2disconf`: configuration files (confs)
 
-	$ sudo iptables -A INPUT -p icmp -j DROP
-
-	$ sudo iptables -L INPUT -nv
-	Chain INPUT (policy ACCEPT 12 packets, 1560 bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-	    8   672 ACCEPT     icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
-	    0     0 DROP       icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
-
-	$ ping -c1 127.0.0.1
-	64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.067 ms
-
-Is that what you expected?
-
-???
-
-Some people would have expected that pings would be dropped.
-
-* Hint: look at the number of packets matching the DROP rule
-* Why did no packets match? The ACCEPT rule came first!
+Which sites, modules and confs are enabled by default, and which are not?
 
 ---
 
-## Rule precedence
+## Starting Apache
 
-Insert a DROP rule **before** the ACCEPT rule with `-I`:
-
-	$ sudo iptables -I INPUT -p icmp -j DROP
-
-	$ sudo iptables -L INPUT -nv
-	Chain INPUT (policy ACCEPT 12 packets, 1560 bytes)
-	 pkts bytes target     prot opt in     out     source       destination         
-	    0     0 DROP       icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
-	   10   840 ACCEPT     icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
-	    0     0 DROP       icmp --  *      *       0.0.0.0/0    0.0.0.0/0           
+* Startup scripts are located in `/etc/init.d/`
+  * `/etc/init.d/apache2 start`
+  * `service apache2 start`
+* Other useful commands:
+  * `/etc/init.d/apache2 stop`
+  * `/etc/init.d/apache2 restart` (stop+start)
+  * `/etc/init.d/apache2 reload` (graceful reload config)
 
 ---
 
-## Rule precedence testing
+## Install MySQL and PHP
 
-	$ ping -c1 127.0.0.1
-	PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
-	^C
-	--- 127.0.0.1 ping statistics ---
-	1 packets transmitted, 0 received, 100% packet loss, time 0ms
+Install the packages:
 
-???
-
-What can we do to tidy up?
+	$ sudo apt install mysql-server apache2 php5 php5-mysql
+	
+When the mysql-server prompts for a password to be entered use 'afnog' as the
+password. If not prompted, don't worry, we will set it later.
 
 ---
 
-## List rules with indexes
+## Testing PHP
 
-Use the iptables `-L --line-numbers` options:
+Create the file `/var/www/html/test.php` with the following contents:
 
-	$ sudo iptables -L INPUT -nv --line-numbers
-	Chain INPUT (policy ACCEPT 15 packets, 1315 bytes)
-	num   pkts bytes target   prot opt in    out   source       destination         
-	1        0     0 DROP     icmp --  *     *     0.0.0.0/0    0.0.0.0/0           
-	2        0     0 ACCEPT   icmp --  *     *     0.0.0.0/0    0.0.0.0/0           
-	3        0     0 DROP     icmp --  *     *     0.0.0.0/0    0.0.0.0/0
+	<?php echo phpinfo(); ?>
+
+Load it in your browser at <http://pcXX.sse.ws.afnog.org/test.php>. You should see this:
+
+.height_12em[![phpinfo output](phpinfo.png)]
+
+---
+class: pre-compact
+
+## Securing MySQL
+
+Please read the instructions and use the letters "y" or “n” on the keyboard.
+
+	$ sudo mysql_secure_installation
+
+The password for MySQL is probably `afnog` (unless you entered a different password
+during the installation above).
+
+	Enter current password for root (enter for none): 
+	OK, successfully used password, moving on...
+
+	Remove anonymous users? [Y/n] y                                            
+	 ... Success!
+
+	Disallow root login remotely? [Y/n] n
+	... Success!
+
+	Remove test database and access to it? [Y/n] y
+
+	Reload privilege tables now? [Y/n] y
+	 ... Success!
+
+	Cleaning up...
 
 ---
 
-## Deleting Rules
+## Testing MySQL
 
-Delete rule by index:
+Log in to mysql console to check if the password was set properly using command below.
 
-	$ sudo iptables -D INPUT 3
+	$ mysql -u root -p
+	Password:
 
-Delete rule by target:
+Type the password at the prompt. Then you should see a `mysql>` prompt, which means that
+you authenticated successfully and can enter SQL commands.
 
-	$ sudo iptables -D INPUT -p icmp -j ACCEPT
-
-Check the results:
-
-	$ sudo iptables -L INPUT -nv --line-numbers
-	Chain INPUT (policy ACCEPT 9 packets, 835 bytes)
-	num   pkts bytes target     prot opt in     out     source               destination         
-	1        0     0 DROP       icmp --  *      *       0.0.0.0/0            0.0.0.0/0           
+You can exit from the `mysql>` prompt by typing the command `exit`.
 
 ---
 
-## Simple rule set
+## Configuring SSL
 
-This is one of the first things I set up on any new box:
+To create a secure virtual host accessed via https rather than http, you will
+need to configure your Apache server to use OpenSSL for encrypting the data
+served from the web server.
 
-	iptables -P INPUT ACCEPT
-	iptables -F INPUT
-	iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT
-	iptables -A INPUT -i lo -j ACCEPT
-	iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
-	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-	iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix 'Rejected INPUT '
+NOTE:
 
-Check that I can access the server without triggering a "Rejected INPUT" message in the logs, and then
-lock it down:
+* Each virtual host must have its own certificate file see comments on "CommonName".
+* The "CommonName" is the FQDN in this case pcXX.sse.ws.afnog.org  
+* The path is where the certificate File and Keys are located, in this case `/etc/apache2/ssl`.
+ 
+---
 
-	iptables -P INPUT DROP
+## Configuring SSL
+
+### Create your public and private key
+
+Generate a public and private key-pair:
+
+	$ sudo mkdir /etc/apache2/ssl/
+	$ cd /etc/apache2/ssl/
+	$ sudo openssl genrsa -des3 -out server.key 2048 
+
+NOTE: A passphrase will be requested to encrypt the key. For this exercise, use
+"afnog" as the pass phrase. However, this pass-phrase will be needed at every
+apache restart. To get rid of the passphrase prompts at every apache restart
+and maintain the original key, run these commands:
+
+	$ sudo cp server.key server.key.orig
+	$ sudo openssl rsa -in server.key.orig -out server.key
 
 ---
 
-## Persistent Rules
+## Configuring SSL
 
-What happens when you reboot?
+### Create a Certificate Signing Request (CSR)
 
----
+Use this command to generate a new Certificate Signing Request (CSR):
 
-## Persistent Rules
+	$ sudo openssl req -new -key server.key -out server.csr
 
-What happens when you reboot?
-
-The rules that we created are only in the kernel's memory. They will be lost on reboot.
-
-How can we make them permanent? Could be as simple as:
-
-	/sbin/iptables-save > /etc/default/iptables
-	/sbin/iptables-restore < /etc/default/iptables
-
-Or install `iptables-persistent` which automates this a little.
+This will prompt for some information. Most doesn't matter, but the CommonName
+is the name of the Website you will use to access the Apache server. In this case
+you will access your PC using its hostname, i.e. `pcXX.sse.ws.afnog.org`, where
+XX is your computer number.
 
 ---
 
-## Connection Tracking
+## Configuring SSL
 
-Every packet is tracked by default (made into a connection).
+### Self-sign your own certificate
 
-You can see them with `conntrack -L`:
+Use this command to sign the certificate with the same public key (a
+self-signed certificate):
 
-	sudo /usr/sbin/conntrack -L
-	tcp      6 431999 ESTABLISHED src=196.200.216.99 dst=196.200.219.140 sport=58516 dport=22
-	src=196.200.219.140 dst=196.200.216.99 sport=22 dport=58516 [ASSURED] mark=0 use=1
-
-What does this mean?
+	$ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 ---
 
-## Connection Tracking
+## Enable SSL in Apache
 
-	sudo /usr/sbin/conntrack -L
-	tcp      6 431999 ESTABLISHED src=196.200.216.99 dst=196.200.219.140 sport=58516 dport=22
-	src=196.200.219.140 dst=196.200.216.99 sport=22 dport=58516 [ASSURED] mark=0 use=1
+We need to tell Apache where to find the certificate and the private key files
+that we want it to use. 
 
-* ESTABLISHED is the connection state
-  * What are valid states?
-* src=196.200.216.99 is the source address of the tracked connection
-* dst=196.200.219.140 is the destination address
-  * Which one is the address of this host? Will it always be?
-* sport=58516: source port
-* dport=22: destination port
-* Another set of addresses: what is this?
+* Edit `/etc/apache2/sites-available/default-ssl.conf`
+* Find and modify the `SSLCertificateFile` and `SSLCertificateKeyFile` lines to read:
 
----
 
-## Connection Tracking
+	SSLCertificateFile    /etc/apache2/ssl/server.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/server.key
 
-How do we use it?
+* Enable the SSL module and the default SSL site:
 
-* `iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT`
-  * You normally want this!
 
-Can you see any problems?
+	sudo a2enmod ssl
+	sudo a2ensite default-ssl
+	sudo service apache2 reload
 
 ---
 
-## Connection Tracking Problems
+## Testing SSL
 
-What happens if someone hits your server with this?
+Open <https://pcXX.sse.ws.afnog.org> in your browser. What do you see?
 
-	sudo hping3 --faster --rand-source -p 22 196.200.219.140 --syn
-
-Or if you run a server that has thousands of clients?
+.height_8em.center[![Chrome SSL security warning](ssl-security-warning.png)]
 
 ---
 
-## Connection Tracking Problems
+## Testing SSL
 
-Add a rule to block all connection tracking to a particular port:
+You may need to click on *Advanced* and then *Proceed to pcXX.sse.ws.afnog.org (unsafe)*
+(or something like that) to get to the site.
 
-	sudo /sbin/iptables -t raw -A PREROUTING -p tcp --dport 22 -j NOTRACK
+.height_8em.center[![Test page with SSL warning](test-page-with-ssl-warning.png)]
 
-Write your rules so that connection tracking is **not needed** (allow traffic both ways).
-
-You probably want to do this for your DNS server. How?
+### Success! (kind of)
 
 ---
 
-## Connection Tracking Problems
+## Testing SSL
 
-Add a rule to block all connection tracking to a particular port:
+What about the red padlock? Click on it, and then *Details* and *View Certificate* (or similar):
 
-	sudo /sbin/iptables -t raw -A PREROUTING -p tcp --dport 22 -j NOTRACK
+.height_18em.center[![Certificate details](certificate-details.png)]
 
-Write your rules so that connection tracking is **not needed** (allow traffic both ways).
+---
 
-You probably want to do this for your DNS server. How?
+## Solving the security warning
 
-	sudo /sbin/iptables -t raw -A PREROUTING -p udp --dport 53 -j NOTRACK
+* Submit the (same) CSR to a well-known CA, or
+* Install the cert in your browser's certificate store:
+
+.height_18em.center[![Add a certificate to trusted list](add-certificate-trust.png)]
 
 ---
 

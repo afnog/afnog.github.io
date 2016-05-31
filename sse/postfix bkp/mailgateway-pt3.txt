@@ -6,7 +6,7 @@
 ==================
 Copy preconfigured files for Mailwatch from the instructor’s server. The only changes made to these files was to add the MySQL username and password to allow MailWatch to connect to the database.
 
-	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/*.pm /usr/share/MailScanner/perl/custom/
+	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/*.pm /usr/share/MailScanner/MailScanner/CustomFunctions/
 
 
 
@@ -19,11 +19,14 @@ You will need the following CPAN module
 	
 	$sudo cpan install Encoding::FixLatin
 
-
+Update spamassassin:
+Just incase it did not corretly install
+	$sudo apt-get install spamassassin
+	$sudo sa-update
 
 Enable MailScanner
 
-	$sudo nano /etc/MailScanner/defaults
+	$sudo nano /etc/default/mailscanner
 
 	##Uncomment the following line:
 	run_mailscanner=1
@@ -47,20 +50,17 @@ Prepare MailScanner directories (they may already exist)
 ========================================================================
 
 Clamav will automatically attempt to obtain fresh antivirus signatures from the Internet via
-freshclam after installation. Type "freshclam" to see how updates are fetched.
+freshclam after installation. This will take too long for us so please use pre-downloaded signatures for the class.
+(No need to do this on a real server)
 	
 	$sudo freshclam
-	
+	$sudo killall -9 freshclam
+	$sudo scp afnog@pc39.sse.ws.afnog.org:/var/lib/clamav/* /var/lib/clamav/
+	$sudo service clamav-daemon start
 
 
 4. Setup Postfix and SpamAssassin
 ================================
-
-Update spamassassin:
-Just incase it did not corretly install:
-
-	$sudo apt-get install spamassassin
-	$sudo sa-update
 
 Enable SpamAssassin 
 
@@ -82,7 +82,7 @@ Configure Postfix to hold mail first. Effectivly a mail arrives and is put into 
 
 Save and Exit
 
-Configure the main.cf file to read the file created above. Add the following line at the end:
+Configure the main.cf file to read the file created above.
 
 	$sudo nano /etc/postfix/main.cf
 
@@ -96,34 +96,13 @@ Save and Exit
 5. Setup Mailwatch
 ==================
 
-Download MailWatch - MailScanner Frontend
-
-	$cd /home/afnog/
-	$wget https://github.com/mailwatch/1.2.0/archive/master.zip
-	$unzip master.zip
-	$unzip 1.2.0-mailwatch.zip
-	$cd 1.2.0-master
-	$sudo mv mailscanner /var/www/
-
-
-Set up MailWatch:
+Set up MailwWatch
 
 	$cd /home/afnog/1.2.0-master
-
-Setup MailWatch conf.php (copy preconfigured). The changes here were to include the MySQL credentials for MailWatch and also to set the home directory: [[define('MAILWATCH_HOME', '/var/www/mailscanner');]]
-
-	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/conf.php /var/www/mailscanner/
-
-Setup MailWatch web page for Apache:
-
-
-	$sudo sh -c 'echo "Alias /mailwatch /var/www/mailscanner" > /etc/apache2/conf-enabled/mailwatch.conf’
-
-
 
 
 Setup the database. The password is afnog
-	$cd /home/afnog/1.2.0-master
+
 	$mysql –u root –p < create.sql 
 
 THEN
@@ -246,7 +225,24 @@ Type quit to exit
 8. SETUP MAILWATCH
 ====================
 
+Download MailWatch - MailScanner Frontend
 
+	$cd /home/afnog/
+	$wget https://github.com/mailwatch/1.2.0/archive/master.zip
+	$unzip master.zip
+	$unzip 1.2.0-mailwatch.zip
+	$cd 1.2.0-master
+	$sudo mv mailscanner /var/www/
+
+
+Setup MailWatch conf.php (copy preconfigured). The changes here were to include the MySQL credentials for MailWatch and also to set the home directory: [[define('MAILWATCH_HOME', '/var/www/mailscanner');]]
+
+	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/conf.php /var/www/mailscanner/
+
+Setup MailWatch web page for Apache:
+
+
+	$sudo sh -c 'echo "Alias /mailwatch /var/www/mailscanner" > /etc/apache2/conf-enabled/mailwatch.conf’
 
 
 

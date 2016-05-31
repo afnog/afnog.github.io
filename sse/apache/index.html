@@ -16,7 +16,7 @@ https://github.com/afnog/sse.
 -->
 <html>
   <head>
-    <title>Title</title>
+    <title>Apache</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
 	@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -64,8 +64,13 @@ https://github.com/afnog/sse.
 		font-size: 80%;
 		color: #666;
 	}
+	.remark-inline-code,
+	.remark-code-line {
+		background: #eee;
+	}
 	.remark-inline-code {
-		padding: 0.5em;
+		padding: 0.1em 0.3em;
+		font-size: 80%;
 	}
 	.remark-code-line {
 		white-space: pre-wrap;
@@ -75,6 +80,11 @@ https://github.com/afnog/sse.
 		position: relative;
 		text-indent: -1em;
 		background: #eee;
+	}
+	.pre-compact .remark-code-line {
+		margin: 0;
+		padding: 0 0.1em;
+		text-indent: 0;
 	}
 	.remark-code-line:empty {
 		display: none;
@@ -95,7 +105,16 @@ https://github.com/afnog/sse.
 		margin: 0.7em 0;
 	}
 	.height_8em img {
-		height: 8em;
+		max-height: 8em;
+		max-width: 100%;
+	}
+	.height_12em img {
+		max-height: 12em;
+		max-width: 100%;
+	}
+	.height_18em img {
+		max-height: 18em;
+		max-width: 100%;
 	}
 	blockquote {
 		background: #fee;
@@ -126,7 +145,7 @@ https://github.com/afnog/sse.
 		}
 		url += "presentation.md";
 		var lastText = undefined;
-		var slideshow = remark.create({sourceUrl: url});
+		var slideshow = remark.create({sourceUrl: url, footnotes: true});
 		$('#loading').hide();
 
 		var interval = setInterval(function() {
