@@ -330,7 +330,7 @@ Which sites, modules and confs are enabled by default, and which are not?
 
 Install the packages:
 
-	$ sudo apt install mysql-server apache2 php5 php5-mysql
+	$ sudo apt install mysql-server php5 php5-mysql
 	
 When the mysql-server prompts for a password to be entered use 'afnog' as the
 password. If not prompted, don't worry, we will set it later.
@@ -352,7 +352,8 @@ class: pre-compact
 
 ## Securing MySQL
 
-Please read the instructions and use the letters "y" or “n” on the keyboard.
+Run the `mysql_secure_installation` script and answer Yes (`Y`) to every
+question.
 
 	$ sudo mysql_secure_installation
 

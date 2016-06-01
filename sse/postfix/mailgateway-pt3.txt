@@ -6,7 +6,7 @@
 ==================
 Copy preconfigured files for Mailwatch from the instructor’s server. The only changes made to these files was to add the MySQL username and password to allow MailWatch to connect to the database.
 
-	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/*.pm /usr/share/MailScanner/perl/custom/
+	$sudo scp afnog@pc37.sse.ws.afnog.org:/home/afnog/*.pm /usr/share/MailScanner/perl/custom/
 	$sudo chmod ugo+x /usr/share/MailScanner/perl/custom/
 
 
@@ -19,7 +19,6 @@ You will need the following CPAN module
 
 	
 	$sudo cpan install Encoding::FixLatin
-
 
 
 Enable MailScanner
@@ -95,7 +94,42 @@ Configure the main.cf file to read the file created above. Add the following lin
 	###Add the following
 	header_checks = regexp:/etc/postfix/header_checks
 
+ALSO CHECK THAT YOUR XXXX.AFNOG.GURU domain will be accepted. Look for the line starting with "mydestination" and add your domain name followed by a comma. It should looks as follows:
+
+
+mydestination = pc37.sse.ws.afnog.org, XXXXX.afnog.guru, localhost.sse.ws.afnog.org, , localhost
+
+
 Save and Exit
+
+
+Check what the postfix config looks like:
+
+	$sudo postconf -n
+
+
+	alias_database = hash:/etc/aliases
+	alias_maps = hash:/etc/aliases
+	append_dot_mydomain = no
+	biff = no
+	config_directory = /etc/postfix
+	header_checks = regexp:/etc/postfix/header_checks
+	inet_interfaces = all
+	mailbox_size_limit = 0
+	mydestination = pc37.sse.ws.afnog.org, kgc.afnog.guru, localhost.sse.ws.afnog.org, , localhost
+	myhostname = pc37.sse.ws.afnog.org
+	mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+	myorigin = /etc/mailname
+	readme_directory = no
+	recipient_delimiter = +
+	relayhost =
+	smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+	smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+	smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+	smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
+	smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
+	smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+	smtpd_use_tls = yes
 
 
 
@@ -118,7 +152,7 @@ Set up MailWatch:
 
 Setup MailWatch conf.php (copy preconfigured). The changes here were to include the MySQL credentials for MailWatch and also to set the home directory: [[define('MAILWATCH_HOME', '/var/www/mailscanner');]]
 
-	$sudo scp afnog@pc39.sse.ws.afnog.org:/home/afnog/conf.php /var/www/mailscanner/
+	$sudo scp afnog@pc37.sse.ws.afnog.org:/home/afnog/conf.php /var/www/mailscanner/
 
 Setup MailWatch web page for Apache:
 
@@ -249,11 +283,11 @@ Test that port 25 is open and that Postfix is listening
 
 Type quit to exit
 
-8. SETUP MAILWATCH
+8. TEST THE EMAIL SERVER, SEND OUT AN EMAIL
 ====================
 
 
-echo "This is my email, hello" | mail -s "This is a test message" kevin.chege@gmail.com
+echo "This is my email, hello" | mail -s "This is a test message" youremailaddress@gmail.com
 
 
 9. LOGIN TO MAILWATCH
@@ -264,6 +298,10 @@ Username is “mailwatch” password is “afnog”
 Please note that Chrome may not be able to login so try another browser if that is the case.
 
 	https://pcX.sse.ws.afnog.org/mailwatch
+
+	OR
+	
+	https://XXXX.afnog.guru/mailwatch
 
 
 
