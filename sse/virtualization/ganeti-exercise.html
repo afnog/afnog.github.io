@@ -49,12 +49,26 @@
 
 <h1 id="ganeti-exercise">Ganeti Exercise</h1>
 
+<h2 id="about-ganeti">About Ganeti</h2>
+
 <p><a href="https://code.google.com/p/ganeti/">Ganeti</a> is a virtual machine cluster
 management tool developed by Google. The solution stack uses either Xen or KVM
 as the virtualization platform, LVM for disk management, and optionally DRBD
 for disk replication across physical hosts.</p>
 
-<p>We will install Ganeti in a virtual machine, configure it to use the Xen
+<p>Ganeti manages clusters of Xen or KVM host nodes. It controls and configures the
+high availability features such as instance migration, DRBD disk replication and
+host node failover.</p>
+
+<p>You can use multiple clusters for different physical locations for example.
+All the nodes in the cluster expect to have very high bandwidth between them,
+for example for DRBD repication. If you have more than ~40 nodes in your
+cluster, Phil Regnauld recommends that you start a new cluster rather than
+adding more nodes.</p>
+
+<h2 id="about-this-exercise">About this exercise</h2>
+
+<p>We will install Ganeti in some virtual machines, configure it to use the Xen
 hypervisor, and use it to create and manage some virtual machines.</p>
 
 <p>Normally you would install this on your physical hosts. We are using it in a
@@ -64,9 +78,17 @@ we don’t have enough physical boxes for everyone. This forces us to use Xen
 machine. You could use either for a real deployment. The installation process
 is slightly different. KVM is not covered here.</p>
 
-<h2 id="installing-the-first-host-machine">Installing the first host machine</h2>
+<p>This is not a production setup! This is intended to give you hands-on experience
+of Ganeti and Xen on your own hardware (laptop) in a classroom environment. I will
+try to point out where we are taking shortcuts or unusual configurations that we
+would not normally do in production. NSRC has a <a href="https://nsrc.org/workshops/2015/ripe-nsrc-virt/">five-day workshop</a>
+on virtualisation and we have ~3 hours, so this is just an introduction!</p>
+
+<h2 id="install-the-first-node-vm-host-machine">Install the first Node (VM host machine)</h2>
 
 <p>Install VirtualBox or make sure you are running version 4.3 or higher.</p>
+
+<h3 id="configure-virtualbox-networking">Configure VirtualBox networking</h3>
 
 <p>Open VirtualBox Preferences &gt; Network &gt; Host-Only Adaptors. Ensure that you
 have at least two listed: vboxnet0 and vboxnet1. If not, click on the Add
@@ -96,7 +118,7 @@ this change will not take effect, as we discovered after an hour of debugging!</
 <p>Create a new VM called Ganeti Demo. Give it 2 GB RAM and a 40 GB VDI disk,
 dynamically sized.</p>
 
-<h3 id="starting-installation">Starting Installation</h3>
+<h3 id="install-the-os-for-each-node">Install the OS for each Node</h3>
 
 <p>Start the VM and attach the debian-8.x.x-amd64-DVD-1.iso image. Read the
 following sections <strong>before</strong> you start the installation, and use them at the
@@ -105,7 +127,24 @@ installation.</p>
 
 <h4 id="hostname">Hostname</h4>
 
-<p>You must use a fully qualified hostname, for example <code class="highlighter-rouge">ganeti.pcXX.sse.ws.afnog.org</code>.</p>
+<p>You must use a fully qualified hostname, for example <code class="highlighter-rouge">ganeti1.pcXX.sse.ws.afnog.org</code>.
+If you have your own delegated DNS domain, and you know how to add A records to it,
+then you can use it instead!</p>
+
+<p>We will need a cluster address which is separate from each host node’s address. So
+I will use names like this in the example:</p>
+
+<ul>
+  <li><strong>cluster</strong>.pcXX.sse.ws.afnog.org</li>
+  <li><strong>ganeti1</strong>.pcXX.sse.ws.afnog.org</li>
+  <li><strong>ganeti2</strong>.pcXX.sse.ws.afnog.org</li>
+</ul>
+
+<p>You can use multiple clusters for different physical locations for example.
+All the nodes in the cluster expect to have Layer 2 (shared LAN) between them
+(for live migration of instances to another node) and very high bandwidth (for
+DRBD replication).§ If you have more than ~40 nodes in your cluster, Phil
+Regnauld recommends that you start a new cluster rather than adding more nodes.</p>
 
 <h4 id="partitioning">Partitioning</h4>
 
@@ -162,18 +201,20 @@ server or leave it blank.</p>
 <p>Enable installation of the <em>SSH Server</em> and <em>Standard system utilities</em>,
 disable everything else.</p>
 
-<h3 id="network-re-configuration">Network Re-Configuration</h3>
+<h3 id="reconfigure-the-virtual-network">Reconfigure the virtual network</h3>
 
-<p>After installation, shut down the machine and reconfigure its network interfaces in VirtualBox</p>
+<p>After installation, shut down the machine and reconfigure its network interfaces in VirtualBox:</p>
 
 <ul>
-  <li>Adapter 1: Do not change, leave set to NAT.</li>
-  <li>Adapter 2: Host-only network, vboxnet0, enable Promiscuous Mode.</li>
+  <li>Adapter 1: If you have a wired LAN connection, then you can set this to Bridged. Don’t
+try to do that if you are using wireless and don’t have a wired LAN connection!</li>
+  <li>Adapter 2: Enabled, Host-only network, vboxnet0, set Promiscuous Mode to <em>Allow All</em>.</li>
 </ul>
 
 <p><img src="virtualbox-configure-adaptor-2.png" alt="Configuring Network Adaptor 1" /></p>
 
-<p>Then start the machine again. Log in on the console and install some packages:</p>
+<p>Then start the machine again. Log in on the console, edit <code class="highlighter-rouge">/etc/apt/sources.list</code> and delete the
+<code class="highlighter-rouge">deb cdrom</code> line. Then install some packages:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>su
 apt install bridge-utils sudo
@@ -188,17 +229,13 @@ auto lo
 iface lo inet loopback
 
 # The primary network interface
-auto eth1
+auto eth0
 iface eth0 inet dhcp
-
-auto eth1
-iface eth1 inet static
-	address 0.0.0.0
-	netmask 255.255.255.255
 
 auto xen-br0
 iface xen-br0 inet static
-	address 192.168.56.10
+	# This must match the address of your hostname in the DNS, not the cluster address!
+	address 192.168.56.11
 	netmask 255.255.255.0
 	bridge_ports eth1
 	bridge_stp off
@@ -208,29 +245,35 @@ iface xen-br0 inet static
 
 <h3 id="hostnames-and-dns">Hostnames and DNS</h3>
 
-<p>Edit <code class="highlighter-rouge">/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there.</p>
+<p>Edit <code class="highlighter-rouge">/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there. Then change the
+hostname to match:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>hostname `cat /etc/hostname`
+</code></pre>
+</div>
 
 <p>Edit <code class="highlighter-rouge">/etc/hosts</code> and ensure that it contains the IP address and hostname of
 your host. You will also need to choose a name (hostname) and IP address for
 your cluster, which must be different. For example:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>127.0.0.1       localhost
-192.168.56.10   ganeti.pcXX.sse.ws.afnog.org
-192.168.56.11   cluster.pcXX.sse.ws.afnog.org
+192.168.56.10   cluster.pcXX.sse.ws.afnog.org
+192.168.56.11   ganeti1.pcXX.sse.ws.afnog.org
+192.168.56.12   ganeti2.pcXX.sse.ws.afnog.org
 </code></pre>
 </div>
 
-<p>Normally you would add DNS entries for all of these. Feel free to use the DNS
-for the cluster name, instead of editing <code class="highlighter-rouge">/etc/hosts</code>. Your hostname should
-really be in the DNS as well, but for the purposes of this exercise
-(non-production deployment) it doesn’t matter too much.</p>
+<p>You must use fully qualified hostnames for your nodes and for the cluster, for
+example <code class="highlighter-rouge">ganeti1.pcXX.sse.ws.afnog.org</code>, and they must all have IP addresses.
+If you have your own delegated DNS domain, and you know how to add A records to
+it, then you can use it instead!</p>
 
 <h3 id="configure-xen">Configure Xen</h3>
 
-<p>Edit <code class="highlighter-rouge">/etc/default/grub</code> and change the following lines to enable Xen (you would
-not need this for a KVM cluster in production):</p>
+<p>Edit <code class="highlighter-rouge">/etc/default/grub</code> and add/change the following lines to enable Xen (you
+would not need this for a KVM cluster in production):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>GRUB_DEFAULT=saved
+<div class="highlighter-rouge"><pre class="highlight"><code>GRUB_DEFAULT=2
 GRUB_CMDLINE_XEN_DEFAULT="dom0_mem=min:600M,max:600M"
 </code></pre>
 </div>
@@ -241,17 +284,17 @@ for guests. In your own configurations you should probably allocate more RAM to 
 <p>Then run the following commands:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo update-grub
-sudo apt-get dist-upgrade	
-sudo apt-get install xen-linux-system-amd64
+sudo apt dist-upgrade	
+sudo apt install xen-linux-system-amd64
 </code></pre>
 </div>
 
 <p>Then <code class="highlighter-rouge">reboot</code> the host. Be sure to select a Xen kernel from the boot list. Log in again and check
-that the <code class="highlighter-rouge">free</code> command reports 500 MB of total Mem, not 2 GB:</p>
+that the <code class="highlighter-rouge">free</code> command reports 600 MB of total Mem, not 2 GB:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>afnog@ganeti:~$ free
 	     total       used       free     shared    buffers     cached
-Mem:        437896
+Mem:        527640
 </code></pre>
 </div>
 
@@ -282,11 +325,18 @@ out-of-date for Debian &gt;= Wheezy, so we skip that step and do it here instead
 </code></pre>
 </div>
 
-<h3 id="continue-ganeti-installation">Continue Ganeti installation</h3>
+<h3 id="install-ganeti-software">Install Ganeti software</h3>
 
 <p>Start by running the following commands:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install ganeti ganeti-instance-debootstrap
+</code></pre>
+</div>
+
+<p>We also need to apply a patch to Ganeti for
+<a href="http://git.ganeti.org/ganeti.git/?a=commit;h=6b16d04a318d33a59db24f2f7ee5e52721855428">this issue</a>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo wget http://bit.ly/1XkrkbX -O /usr/share/ganeti/2.12/ganeti/hypervisor/hv_xen.py
 </code></pre>
 </div>
 
@@ -295,6 +345,7 @@ skipping the following sections:</p>
 
 <ul>
   <li>Anything to do with KVM (we’re using Xen instead)</li>
+  <li>Installing th Hypervisor (we did that already)</li>
   <li>Installing DRBD (we already did that)</li>
   <li>Installing RBD: skip to
 <a href="http://docs.ganeti.org/ganeti/2.15/html/install.html#installing-gluster">Installing Gluster</a> instead.</li>
@@ -304,10 +355,12 @@ skipping the following sections:</p>
   <li>Installing Ganeti: stop following at this point.</li>
 </ul>
 
-<h3 id="initializing-the-cluster">Initializing the Cluster</h3>
+<h2 id="create-a-new-ganeti-cluster">Create a new Ganeti cluster</h2>
 
-<p>Run the following command, substituting the cluster name you added to
-<code class="highlighter-rouge">/etc/hosts</code> instead of <code class="highlighter-rouge">cluster1...</code>:</p>
+<p>You should only do this on the <strong>first node</strong> in the cluster. Do not do this
+step again unless you are setting up a new cluster!</p>
+
+<p>Run the following command, ensuring that you use the correct cluster hostname:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo mkdir /root/.ssh
 sudo gnt-cluster init --vg-name xenvg --enabled-hypervisors=xen-pvm -H xen-pvm:xen_cmd=xl cluster.pcXX.sse.ws.afnog.org
@@ -322,10 +375,32 @@ doing this inside a virtual machine, so we can’t use the virtualisation CPU
 instructions because VirtualBox is already using them to run the Ganeti host
 node (VirtualBox guest).</p>
 
+<p>Test that you can run the following useful commands and examine their output:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-cluster verify
+sudo gnt-node list
+sudo gnt-instance list
+sudo gnt-job list
+</code></pre>
+</div>
+
+<p>You can ignore the following errors and warnings from <code class="highlighter-rouge">gnt-cluster verify</code>. The error
+is out of date, and the warnings are not problems because not all LVM volumes are
+used by Ganeti.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Thu Jun  2 13:17:09 2016   - ERROR: cluster: File /etc/xen/xend-config.sxp is missing from node(s) ganeti1.pc40.sse.ws.afnog.org
+Thu Jun  2 13:17:09 2016   - WARNING: node ganeti1.pc40.sse.ws.afnog.org: volume xenvg/Swap is unknown
+Thu Jun  2 13:17:09 2016   - WARNING: node ganeti1.pc40.sse.ws.afnog.org: volume xenvg/Root is unknown
+</code></pre>
+</div>
+
+<p>The <a href="http://docs.ganeti.org/ganeti/2.15/html/man-ganeti.html">Ganeti manual page</a> gives
+useful information about Ganeti commands, including examples.</p>
+
 <p>Create the file <code class="highlighter-rouge">/etc/ganeti/vnc-cluster-password</code> containing the password that
 you want to use for VNC access to consoles.</p>
 
-<h3 id="testing-the-setup">Testing the Setup</h3>
+<h2 id="test-your-setup">Test your setup</h2>
 
 <p>Check that the <code class="highlighter-rouge">gnt-node list</code> command shows your node:</p>
 
@@ -369,21 +444,9 @@ much with your new hypervisor. If it doesn’t show enough free RAM, check that
 you have <a href="http://askubuntu.com/a/191489/49566">reconfigured GRUB and run
 <code class="highlighter-rouge">update-grub</code></a>.</p>
 
-<p>Test that you can run the following useful commands and examine their output:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-cluster verify
-sudo gnt-node list
-sudo gnt-instance list
-sudo gnt-job list
-</code></pre>
-</div>
-
-<p>The <a href="http://docs.ganeti.org/ganeti/2.15/html/man-ganeti.html">Ganeti manual page</a> gives
-useful information about Ganeti commands, including examples.</p>
-
 <p>Add an entry to <code class="highlighter-rouge">/etc/hosts</code> for a host to use for burnin testing, for example <code class="highlighter-rouge">burnin.example.com</code>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>192.168.56.12   burnin.example.com
+<div class="highlighter-rouge"><pre class="highlight"><code>192.168.56.20   burnin.example.com
 </code></pre>
 </div>
 
@@ -415,6 +478,123 @@ cat dhparams.pem | sudo tee -a /var/lib/ganeti/server.pem
 </code></pre>
 </div>
 
+<p>If this fails, you may need to remove the instance before trying again:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-instance remove burnin.example.com
+</code></pre>
+</div>
+
+<h3 id="add-a-second-node">Add a second Node</h3>
+
+<p>We want to create a replicating Instance (virtual machine) with high availability, so
+we need a second Node to host the backup copy of this Instance.</p>
+
+<p>Create a new virtual machine and configure it using the same instructions as above,
+up to the point of creating a cluster, but don’t create a new cluster. Use a different
+hostname, for example <code class="highlighter-rouge">ganeti2.pcXX.sse.ws.afnog.org</code>, which must also be listed in
+<code class="highlighter-rouge">/etc/hosts</code>. The <code class="highlighter-rouge">/etc/hosts</code> file should be exactly the same on both hosts.</p>
+
+<p>Enable remote root logins by SSH on the new server, by editing <code class="highlighter-rouge">/etc/ssh/sshd_config</code>
+and changing the <code class="highlighter-rouge">PermitRootLogin</code> setting to <code class="highlighter-rouge">yes</code>. Restart the <code class="highlighter-rouge">ssh</code> service.</p>
+
+<h3 id="create-a-virtual-machine">Create a Virtual Machine</h3>
+
+<p>Add a hostname (to <code class="highlighter-rouge">/etc/hosts</code> or to a DNS domain that you control) with a
+dummy IP address. We will use <code class="highlighter-rouge">test.example.com</code> for this example.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>192.168.56.21	test.example.com
+</code></pre>
+</div>
+
+<p>Normally you would give it a static IP address, but we are on
+a DHCP network with limited IP addresses here.</p>
+
+<p>Use the following command to create the test VM:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-instance add -t plain --disk 0:size=4G -B memory=512 \
+	-H xen-pvm:initrd_path=/boot/initrd-3-xenU -o debootstrap+default \
+	-n ganeti.pc40.sse.ws.afnog.org test.example.com
+</code></pre>
+</div>
+
+<p>This new VM will have the following settings:</p>
+
+<ul>
+  <li>Disk storage as an LVM logical volume of size 4 GB.</li>
+  <li>512 MB memory.</li>
+  <li>Xen paravirtualised with an initial ramdisk containing the Xen paravirt drivers
+(to give access to the root filesystem). With KVM or Xen-HVM you would not need to
+specify the <code class="highlighter-rouge">-H</code> parameter at all.</li>
+  <li>Install Debian (7 in this case).</li>
+  <li>Hosted on our first Ganeti node, <code class="highlighter-rouge">ganeti.pc40.sse.ws.afnog.org</code> (you must specify
+the host node or install an <code class="highlighter-rouge">iallocator</code> script to choose one automatically).</li>
+  <li>With hostname and instance name <code class="highlighter-rouge">test.example.com</code>.</li>
+</ul>
+
+<p>The output should look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Wed Jun  1 11:15:37 2016 * disk 0, size 4.0G
+Wed Jun  1 11:15:37 2016 * creating instance disks...
+Wed Jun  1 11:15:37 2016 adding instance test.example.com to cluster config
+Wed Jun  1 11:15:37 2016 adding disks to cluster config
+Wed Jun  1 11:15:38 2016  - INFO: Waiting for instance test.example.com to sync disks
+Wed Jun  1 11:15:38 2016  - INFO: Instance test.example.com's disks are in sync
+Wed Jun  1 11:15:38 2016  - INFO: Waiting for instance test.example.com to sync disks
+Wed Jun  1 11:15:39 2016  - INFO: Instance test.example.com's disks are in sync
+Wed Jun  1 11:15:41 2016 * running the instance OS create scripts...
+</code></pre>
+</div>
+
+<p>If it doesn’t, look for an error message in the output or in <code class="highlighter-rouge">/var/log/ganeti/jobs.log</code>.
+Most likely one of the <code class="highlighter-rouge">gnt-instance</code> parameters was missing or incorrect.</p>
+
+<p>Check that your new instance appears in the output of <code class="highlighter-rouge">gnt-instance list</code>, with status <code class="highlighter-rouge">running</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>afnog@ganeti:/tmp$ sudo gnt-instance list
+Instance         Hypervisor OS                  Primary_node                 Status  Memory
+test.example.com xen-pvm    debootstrap+default ganeti.pc40.sse.ws.afnog.org running   512M
+</code></pre>
+</div>
+
+<p>You can also 
+Connect to its console:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-instance console test.example.com
+</code></pre>
+</div>
+
+<p>You should see it boot up (if you’re not too late) or a login prompt. If it’s not running, you
+can try to start it again and connect to the console quickly to see what happened:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-instance start test.example.com
+sudo gnt-instance console test.example.com
+</code></pre>
+</div>
+
+<p>You can exit the console by pressing <code class="highlighter-rouge">^]</code> (Ctrl+]).</p>
+
+<p>You should be able to login as <code class="highlighter-rouge">root</code> with no password at the console. Add a normal user and
+change the root password:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>adduser afnog
+passwd root
+</code></pre>
+</div>
+
+<p>And edit <code class="highlighter-rouge">/etc/network/interfaces</code> to configure networking, making it look like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+</code></pre>
+</div>
+
+<p>Then tell it to reboot and watch it come back up. Check that you can access the internet
+from the guest. You should also be able to access the guest from your host computer, and
+hopefully from the local network too, using its IP address (assigned by DHCP).</p>
+
 <h3 id="enable-remote-api">Enable Remote API</h3>
 
 <p>Choose a username and password for your remote account (<code class="highlighter-rouge">jack</code> and <code class="highlighter-rouge">mypassword</code> in this case) and
@@ -434,70 +614,90 @@ with <code class="highlighter-rouge"><span class="p">{</span><span class="err">h
 
 <h3 id="install-the-web-manager">Install the Web Manager</h3>
 
-<p>Download the <a href="https://code.osuosl.org/projects/ganeti-webmgr/files">latest
-release</a>, for example
-0.11.0. We have a local copy which you can download here:</p>
+<p>Run the following commands:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wget http://197.4.11.251/ganeti_webmgr-0.11.0.tar.gz
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install git libssl-dev virtualenv
+cd /tmp
+wget http://sse-mini1.mtg.afnog.org/0.11.1.tar.gz
+tar xzvf 0.11.1.tar.gz
+cd ganeti_webmgr-0.11.1
 </code></pre>
 </div>
 
-<p>Then run the following commands to install it:</p>
+<p>We are using Ganeti Web Manager 0.11.1, which has a bug that we need to
+<a href="https://github.com/osuosl/ganeti_webmgr/pull/93">fix</a> before we install:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt-get install fabric python-virtualenv python-dev libffi-dev libssl-dev patch apache2 libapache2-mod-wsgi
-sudo mkdir -p /opt
-tar xzvf ganeti_webmgr-0.11.0.tar.gz
-sudo mv ganeti_webmgr-0.11.0 /opt/ganeti_webmgr
-cd /opt/ganeti_webmgr
-mv requirements/production.txt requirements/prod.txt
-mv ganeti_webmgr/manage.py .
-mkdir config
-cp ganeti_webmgr/ganeti_web/settings/config.yml.dist config/config.yml
-cd ganeti_webmgr/ganeti_web/settings
-cp settings.py.dist ../settings.py
-sudo chown -R www-data /opt/ganeti_webmgr
+<div class="highlighter-rouge"><pre class="highlight"><code>cd ganeti_webmgr/ganeti_web/settings
+wget https://raw.githubusercontent.com/qris/ganeti_webmgr/db1712973616765f62f85c16c246b53a73e8ac4e/ganeti_webmgr/ganeti_web/settings/base.py
+cd .././..
 </code></pre>
 </div>
 
-<p>Apply a patch to make Fabric download Ganeti’s dependencies using a proxy. This should only 
-be done at an AfNOG workshop, or an environment where you are forced to use a proxy:</p>
+<p>Then we can run the installation script:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>wget http://197.4.11.251/ganeti.patch | sudo patch -p0
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo ./scripts/setup.sh
 </code></pre>
 </div>
 
-<p>Then deploy the web interface:</p>
+<p>Edit the file scripts/vncauthproxy/init-systemd and if the last line contains only a <code class="highlighter-rouge">~</code> character,
+delete it. Also, in the <code class="highlighter-rouge">[Service]</code> section, add the following line:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo -i sh -c 'cd /opt/ganeti_webmgr; fab deploy'
+<div class="highlighter-rouge"><pre class="highlight"><code>User=www.data
 </code></pre>
 </div>
 
-<p>Run this command to generate a new secret key:</p>
+<p>Then copy it to the <code class="highlighter-rouge">systemd</code> service directory, and start it:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>openssl rand -base64 24
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo cp scripts/vncauthproxy/init-systemd /lib/systemd/system/vncauthproxy.service
+sudo mkdir /var/log/vncauthproxy /var/run/vncauthproxy
+sudo chown www-data /var/log/vncauthproxy /var/run/vncauthproxy
+sudo service vncauthproxy start
+sudo cp ganeti_webmgr/ganeti_web/settings/config.yml.dist /opt/ganeti_webmgr/config/config.yml
 </code></pre>
 </div>
 
-<p>Edit <code class="highlighter-rouge">config/config.yml</code> and add the following lines at the end:</p>
+<p>Edit <code class="highlighter-rouge">/opt/ganeti_webmgr/config/config.yml</code> and change the <code class="highlighter-rouge">EMAIL_HOST</code> and
+<code class="highlighter-rouge">DEFAULT_FROM_EMAIL</code> lines, so that their values refer to your outbound server
+and your email address.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>SECRET_KEY: "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
-WEB_MGR_API_KEY: "YZVfMJmDGfk9jSlZ+S6sAT2288he8cEX"
+<p>Also find this line:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>NAME: /opt/ganeti_webmgr/ganeti.db
 </code></pre>
 </div>
 
-<p>Also change the <code class="highlighter-rouge">EMAIL_HOST</code> and <code class="highlighter-rouge">DEFAULT_FROM_EMAIL</code> lines, so that their values refer to your outbound server and your email address.</p>
+<p>And change it to:</p>
 
-<p>Save the file, and check the configuration for errors:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>NAME: /opt/ganeti_webmgr/db/ganeti.db
+</code></pre>
+</div>
+
+<p>Then finish the installation:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cd /opt/ganeti_webmgr
-sudo -u www-data venv/bin/python manage.py syncdb --migrate
-sudo -u www-data venv/bin/python manage.py runserver 0.0.0.0:8000
+sudo mkdir .settings db whoosh_index
+sudo chown www-data .settings db whoosh_index
+export DJANGO_SETTINGS_MODULE=ganeti_webmgr.ganeti_web.settings
+sudo -E -u www-data bin/django-admin.py syncdb --migrate
+sudo -E -u www-data bin/django-admin.py refreshcache
+sudo -E -u www-data bin/django-admin.py rebuild_index
+sudo -E -u www-data bin/django-admin.py collectstatic
 </code></pre>
 </div>
 
-<p>This will start the debugging webserver on port 8000, so you can check that everything is working
-by visiting http://192.168.56.10:8000. You should get a white page with a login and password box,
-but no styling (colours, images, etc.) If not, check the console output for error messages.</p>
+<p>Enter a username, password and email address for a super user for the Ganeti web manager.</p>
+
+<p>Now start the web server in debugging mode:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd /opt/ganeti_webmgr
+sudo -E -u www-data bin/django-admin.py runserver 0.0.0.0:8000 --insecure
+</code></pre>
+</div>
+
+<p>This will start the debugging webserver on port 8000, so you can check that
+everything is working by visiting <a href="http://192.168.56.10:8000">http://192.168.56.10:8000</a>. You should get a
+white page with a login and password box, but no styling (colours, images,
+etc.) If not, check the console output for error messages.</p>
 
 <p>Create the file <code class="highlighter-rouge">/opt/ganeti_webmgr/wsgi.py</code> with the following contents:</p>
 

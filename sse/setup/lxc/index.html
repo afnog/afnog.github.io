@@ -91,10 +91,14 @@ you from starting any LXC containers.</p>
 
 <p>Then <code class="highlighter-rouge">sudo update-grub</code> and <code class="highlighter-rouge">sudo reboot</code> to activate swap accounting.</p>
 
-<p>Create a gold master guest image:</p>
+<p>Create a gold master guest image. According to the
+<a href="https://linuxcontainers.org/lxc/getting-started/">LXC documentation</a>, “most
+distribution templates simply won’t work with (unprivileged containers).
+Instead you should use the “download” template which will provide you with
+pre-built images of the distributions that are known to work in such an
+environment.”</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># lxc-create --template debian --name debian8
-lxc-create -t download -n debian8 -- --dist debian --release jessie --arch i386
+<div class="highlighter-rouge"><pre class="highlight"><code>lxc-create -t download -n debian8 -- --dist debian --release jessie --arch i386
 lxc-ls --fancy
 chmod a+x .local
 chmod a+x .local/share
@@ -105,13 +109,22 @@ lxc-attach --name debian8
 
 <p>Follow <a href="../guest/index.html">guest setup</a> to configure the gold master guest.</p>
 
+<p>Add the following line to <code class="highlighter-rouge">/etc/sysctl.conf</code> on the host, to ensure that the host kernel
+<a href="http://unix.stackexchange.com/questions/116520/mysql-server-wont-install-to-a-new-os-debian-ubuntu">allows sufficient AIO handles</a>
+for all the guests to run MySQL InnoDB:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>fs.aio-max-nr = 1000000
+</code></pre>
+</div>
+
 <p>Edit your user’s crontab and add the following line to make your containers auto-start:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>@reboot lxc-autostart
 </code></pre>
 </div>
 
-<p>Ensure that systemd gives <a href="http://unix.stackexchange.com/questions/253903/creating-threads-fails-with-resource-temporarily-unavailable-with-4-3-kernel">sufficient tasks</a>
+<p>Ensure that systemd on the host gives
+<a href="http://unix.stackexchange.com/questions/253903/creating-threads-fails-with-resource-temporarily-unavailable-with-4-3-kernel">sufficient tasks</a>
 to LXC containers started by <code class="highlighter-rouge">at</code> and <code class="highlighter-rouge">cron</code>, by editing <code class="highlighter-rouge">/etc/systemd/system.conf</code>,
 uncommenting <code class="highlighter-rouge">DefaultTasksMax</code> and setting it to at least 12288.
 See <a href="https://news.ycombinator.com/item?id=11675133">here</a> for more information on this problem.</p>
@@ -121,9 +134,14 @@ See <a href="https://news.ycombinator.com/item?id=11675133">here</a> for more in
 <ul>
   <li><code class="highlighter-rouge">systemd-cgls</code></li>
   <li><code class="highlighter-rouge">systemd-cgtop</code></li>
+  <li><code class="highlighter-rouge">systemctl</code></li>
+  <li><code class="highlighter-rouge">systemctl list-jobs</code></li>
   <li><code class="highlighter-rouge">systemctl status</code></li>
   <li><code class="highlighter-rouge">systemctl show</code></li>
   <li><code class="highlighter-rouge">/sys/fs/cgroup/memory/user/inst/*/lxc</code></li>
+  <li><code class="highlighter-rouge">journalctl</code></li>
+  <li><code class="highlighter-rouge">journalctl -f</code></li>
+  <li><code class="highlighter-rouge">systemctl cancel</code></li>
 </ul>
 
 <p>You may also have issues logging into <code class="highlighter-rouge">sshd</code> with password authentication due to 
@@ -140,6 +158,31 @@ is to edit <code class="highlighter-rouge">/etc/pam.d/sshd</code> and <code clas
 </code></pre>
 </div>
 
+<p>And there is an issue with
+<a href="https://github.com/systemd/systemd/issues/719#issuecomment-223057529">systemd, dbus and OOM_ADJUST in the container</a>
+which requires us to comment-out the <code class="highlighter-rouge">OOMScoreAdjust=-900</code> line in <code class="highlighter-rouge">/lib/systemd/system/dbus.service</code>. The <code class="highlighter-rouge">dbus</code> package
+is not installed by default, so this file does not exist, but installing certain applications (e.g. <code class="highlighter-rouge">mutt</code>) will
+install it and break the system. Even a simple <code class="highlighter-rouge">apt install dbus</code> hangs during package installation,
+and it can’t be safely removed either.</p>
+
+<p>Since we cannot preconfigure <code class="highlighter-rouge">dbus</code> (because <code class="highlighter-rouge">dbus.service</code> is overwritten on package installation) and 
+we cannot easily fix the problem in <code class="highlighter-rouge">systemd</code> (as the actual change that fixes the issue has not been
+identified), we prevent the installation of <code class="highlighter-rouge">dbus</code> in all containers instead, by creating 
+<code class="highlighter-rouge">/etc/apt/preferences.d/no-dbus.pref</code> (in the gold image) with these contents:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># https://github.com/systemd/systemd/issues/719#issuecomment-223057529
+# http://askubuntu.com/questions/75895/how-to-forbid-a-specific-package-to-be-installed
+
+Package: dbus 
+Pin: version *
+Pin-Priority: -1
+
+Package: dbus:amd64
+Pin: version *
+Pin-Priority: -1
+</code></pre>
+</div>
+
 <p>Stop the container and make a lot of copies:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>lxc-stop --name debian8 -t 30
@@ -153,6 +196,16 @@ for i in `seq 1 $NUM_PCS`; do
 	echo "lxc.network.hwaddr = $macaddr" &gt;&gt; $LXC_ROOT/pc$i.sse.ws.afnog.org/config
 done
 lxc-autostart
+</code></pre>
+</div>
+
+<p>To run a command on all containers (for example <code class="highlighter-rouge">hostname</code>):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for i in `seq 1 $NUM_PCS`; do
+	hostname=pc$pc
+	domainname=$hostname.sse.ws.afnog.org
+	lxc-attach -n $domainname -- hostname
+done
 </code></pre>
 </div>
 
