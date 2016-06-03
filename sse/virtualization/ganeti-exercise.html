@@ -17,6 +17,8 @@
 	<link rel="up" title="AfNOG 2016 Workshop Main Page"
 		href="../index.html" type="text/html" />
 	<title>SS-E - AfNOG 2016 Workshop</title>
+	<!-- https://developers.google.com/web/fundamentals/getting-started/your-first-multi-screen-site/responsive?hl=en -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--
 	Showdown - Markdown in Javascript
 	from http://www.showdown.im/
@@ -243,6 +245,23 @@ iface xen-br0 inet static
 </code></pre>
 </div>
 
+<p>Now you should be able to reboot the host and login with SSH using the address that you assigned to
+<code class="highlighter-rouge">xen-br0</code> above. SSH is much more convenient than the console, because you can copy and paste!</p>
+
+<h3 id="enable-debian-backports">Enable Debian Backports</h3>
+
+<p>Edit <code class="highlighter-rouge">/etc/apt/sources.list</code> and add the following line:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>deb http://ftp.debian.org/debian jessie-backports main
+</code></pre>
+</div>
+
+<p>Then run:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt update
+</code></pre>
+</div>
+
 <h3 id="hostnames-and-dns">Hostnames and DNS</h3>
 
 <p>Edit <code class="highlighter-rouge">/etc/hostname</code> and put the fully-qualified hostname (FQDN) in there. Then change the
@@ -325,18 +344,25 @@ out-of-date for Debian &gt;= Wheezy, so we skip that step and do it here instead
 </code></pre>
 </div>
 
+<h3 id="enable-debian-backports-1">Enable Debian Backports</h3>
+
+<p>Edit <code class="highlighter-rouge">/etc/apt/sources.list</code> and add the following line:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>deb http://ftp.debian.org/debian jessie-backports main
+</code></pre>
+</div>
+
+<p>Then run:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt update
+</code></pre>
+</div>
+
 <h3 id="install-ganeti-software">Install Ganeti software</h3>
 
 <p>Start by running the following commands:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install ganeti ganeti-instance-debootstrap
-</code></pre>
-</div>
-
-<p>We also need to apply a patch to Ganeti for
-<a href="http://git.ganeti.org/ganeti.git/?a=commit;h=6b16d04a318d33a59db24f2f7ee5e52721855428">this issue</a>:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo wget http://bit.ly/1XkrkbX -O /usr/share/ganeti/2.12/ganeti/hypervisor/hv_xen.py
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt -t jessie-backports install ganeti ganeti-instance-debootstrap
 </code></pre>
 </div>
 
@@ -388,8 +414,7 @@ sudo gnt-job list
 is out of date, and the warnings are not problems because not all LVM volumes are
 used by Ganeti.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Thu Jun  2 13:17:09 2016   - ERROR: cluster: File /etc/xen/xend-config.sxp is missing from node(s) ganeti1.pc40.sse.ws.afnog.org
-Thu Jun  2 13:17:09 2016   - WARNING: node ganeti1.pc40.sse.ws.afnog.org: volume xenvg/Swap is unknown
+<div class="highlighter-rouge"><pre class="highlight"><code>Thu Jun  2 13:17:09 2016   - WARNING: node ganeti1.pc40.sse.ws.afnog.org: volume xenvg/Swap is unknown
 Thu Jun  2 13:17:09 2016   - WARNING: node ganeti1.pc40.sse.ws.afnog.org: volume xenvg/Root is unknown
 </code></pre>
 </div>
@@ -467,12 +492,16 @@ cat dhparams.pem | sudo tee -a /var/lib/ganeti/server.pem
 
 <p>The output should end with:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>- Checking confd results
-  * Ping: OK
-  * Master: OK
-  * Node role for master: OK
-- Stopping and starting instances
+<div class="highlighter-rouge"><pre class="highlight"><code>- Attaching and removing disks
   * instance burnin.example.com
+    attaching a disk with name RQLX441M
+    removing last disk
+	Thu Jun  2 19:13:17 2016  - WARNING: Hotplug is not supported: Hotplug is not supported by this hypervisor
+	Thu Jun  2 19:13:17 2016  - INFO: Modification will take place without hotplugging.
+	Thu Jun  2 19:13:18 2016  - INFO: Waiting for instance burnin.example.com to sync disks
+	Thu Jun  2 19:13:18 2016  - INFO: Instance burnin.example.com's disks are in sync
+	Thu Jun  2 19:13:19 2016  - WARNING: Hotplug is not supported: Hotplug is not supported by this hypervisor
+	Thu Jun  2 19:13:19 2016  - INFO: Modification will take place without hotplugging.
 - Removing instances
   * instance burnin.example.com
 </code></pre>
@@ -483,19 +512,6 @@ cat dhparams.pem | sudo tee -a /var/lib/ganeti/server.pem
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-instance remove burnin.example.com
 </code></pre>
 </div>
-
-<h3 id="add-a-second-node">Add a second Node</h3>
-
-<p>We want to create a replicating Instance (virtual machine) with high availability, so
-we need a second Node to host the backup copy of this Instance.</p>
-
-<p>Create a new virtual machine and configure it using the same instructions as above,
-up to the point of creating a cluster, but don’t create a new cluster. Use a different
-hostname, for example <code class="highlighter-rouge">ganeti2.pcXX.sse.ws.afnog.org</code>, which must also be listed in
-<code class="highlighter-rouge">/etc/hosts</code>. The <code class="highlighter-rouge">/etc/hosts</code> file should be exactly the same on both hosts.</p>
-
-<p>Enable remote root logins by SSH on the new server, by editing <code class="highlighter-rouge">/etc/ssh/sshd_config</code>
-and changing the <code class="highlighter-rouge">PermitRootLogin</code> setting to <code class="highlighter-rouge">yes</code>. Restart the <code class="highlighter-rouge">ssh</code> service.</p>
 
 <h3 id="create-a-virtual-machine">Create a Virtual Machine</h3>
 
@@ -556,8 +572,7 @@ test.example.com xen-pvm    debootstrap+default ganeti.pc40.sse.ws.afnog.org run
 </code></pre>
 </div>
 
-<p>You can also 
-Connect to its console:</p>
+<p>Connect to its console:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-instance console test.example.com
 </code></pre>
@@ -594,6 +609,65 @@ iface eth0 inet dhcp
 <p>Then tell it to reboot and watch it come back up. Check that you can access the internet
 from the guest. You should also be able to access the guest from your host computer, and
 hopefully from the local network too, using its IP address (assigned by DHCP).</p>
+
+<h3 id="add-a-second-node">Add a second Node</h3>
+
+<p>We want to create a replicating Instance (virtual machine) with high availability, so
+we need a second Node to host the backup copy of this Instance.</p>
+
+<p>Create a new virtual machine and configure it using the same instructions as above,
+up to the point of creating a cluster, but don’t create a new cluster. Use a different
+hostname, for example <code class="highlighter-rouge">ganeti2.pcXX.sse.ws.afnog.org</code>, which must also be listed in
+<code class="highlighter-rouge">/etc/hosts</code>. The <code class="highlighter-rouge">/etc/hosts</code> file should be exactly the same on both hosts.</p>
+
+<p>Enable remote root logins by SSH on the new server, by editing <code class="highlighter-rouge">/etc/ssh/sshd_config</code>
+and changing the <code class="highlighter-rouge">PermitRootLogin</code> setting to <code class="highlighter-rouge">yes</code>. Restart the <code class="highlighter-rouge">ssh</code> service.</p>
+
+<p>Now add this node to the existing cluster, by running the following command on a node
+already in the cluster (ganeti1):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-node add ganeti2.pcXX.sse.ws.afnog.org
+</code></pre>
+</div>
+
+<p>This will prompt you to login as root to the new node (ganeti2) and will forcibly add
+it to the cluster. Do not do this to a node which is already in a cluster, as it will
+probably result in data loss!</p>
+
+<p>Verify the cluster again:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gnt-cluster verify
+</code></pre>
+</div>
+
+<h3 id="test-ha-with-drbd-replication">Test HA with DRBD replication</h3>
+
+<p>We can now use the same <code class="highlighter-rouge">burnin</code> command with a different storage type, <code class="highlighter-rouge">drbd</code>, which will
+create an instance that replicates its data to another node:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo /usr/lib/ganeti/tools/burnin -o debootstrap+default -t drbd --disk-size 1G --mem-size=600 burnin.example.com -vv
+</code></pre>
+</div>
+
+<h3 id="install-snf-image">Install snf-image</h3>
+
+<p>This tool allows you to install many different distributions in a Ganeti instance, not just Debian 7.
+Unfortunately there are some problems with the packaging at the moment, so we need to download and
+install it manually:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install curl mbr python-prctl python-scapy
+sudo wget http://apt.dev.grnet.gr/jessie/snf-image_0.19-1~jessie_all.deb
+sudo dpkg -i snf-image_0.19-1~jessie_all.deb
+</code></pre>
+</div>
+
+<p>When asked for the URL to download snf-image-helper image from, if you are following this
+at an AfNOG event then you can use the copy that we downloaded for you, which will be much faster,
+by entering this URL:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>http://sse-mini1.mtg.afnog.org
+</code></pre>
+</div>
 
 <h3 id="enable-remote-api">Enable Remote API</h3>
 

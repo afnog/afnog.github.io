@@ -17,6 +17,8 @@
 	<link rel="up" title="AfNOG 2016 Workshop Main Page"
 		href="../index.html" type="text/html" />
 	<title>SS-E - AfNOG 2016 Workshop</title>
+	<!-- https://developers.google.com/web/fundamentals/getting-started/your-first-multi-screen-site/responsive?hl=en -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--
 	Showdown - Markdown in Javascript
 	from http://www.showdown.im/
@@ -266,7 +268,7 @@ in the establishment and/or provisioning of a basic national Internet Services i
       <td style="text-align: left"><a href="#data-security">Data Security</a></td>
       <td style="text-align: left"><a href="#postfix">Postfix</a></td>
       <td style="text-align: left"><a href="#radius">RADIUS</a></td>
-      <td style="text-align: left"><a href="#load-balancing">Load Balancing</a></td>
+      <td style="text-align: left">Finishing up e-mail</td>
     </tr>
   </tbody>
   <tbody>
@@ -284,7 +286,7 @@ in the establishment and/or provisioning of a basic national Internet Services i
       <td style="text-align: left"><a href="#dns">DNS</a></td>
       <td style="text-align: left"><a href="#postfix">Postfix</a></td>
       <td style="text-align: left"><a href="#radius">RADIUS</a></td>
-      <td style="text-align: left"><a href="#virtualization">Virtualization</a></td>
+      <td style="text-align: left"><a href="#deployment">Deployment</a></td>
     </tr>
   </tbody>
   <tbody>
@@ -387,8 +389,9 @@ in the establishment and/or provisioning of a basic national Internet Services i
   <h4 id="chris-wilsoncw-1"><a href="#CW">Chris Wilson</a></h4>
 
   <ul>
-    <li><a href="https://www.surveymonkey.com/s/623JR5J">Survey link</a> (online)</li>
-    <li><a href="intro/closing-survey-results.pdf">Survey results/PDF</a></li>
+    <li><a href="http://survey.afrinic.net/index.php/174638?lang=en">AfNOG closing survey</a></li>
+    <li><a href="https://www.surveymonkey.com/r/826VGTT">SS-E closing survey link</a> (online)</li>
+    <li><a href="intro/closing-survey-results.pdf">Survey results</a> (not updated for 2016 yet!)</li>
   </ul>
 
   <h3 id="configuration-management">Configuration Management</h3>
@@ -410,6 +413,14 @@ in the establishment and/or provisioning of a basic national Internet Services i
     <li><a href="pgp/ssh-exercise1.txt">SSH Exercise</a></li>
     <li><a href="pgp/pgp-presentation1.key">Key File</a></li>
     <li><a href="pgp/nanog29-jabley-pgp.pdf">Old NANOG Presentation</a></li>
+  </ul>
+
+  <h3 id="deployment">Deployment</h3>
+
+  <h4 id="chris-wilsoncw-2"><a href="#CW">Chris Wilson</a></h4>
+
+  <ul>
+    <li>Deployment Presentation: <a href="deployment/index.html">HTML</a> <a href="deployment/deployment_presentation.pdf">PDF</a></li>
   </ul>
 
   <h3 id="dns">DNS</h3>
@@ -459,39 +470,31 @@ in the establishment and/or provisioning of a basic national Internet Services i
   <ul>
     <li><a href="dovecot/dovecot-intro.ppt">Presentation/PPT</a></li>
     <li><a href="dovecot/dovecot-intro.pdf">Presentation/PDF</a></li>
-    <li><a href="dovecot-install-setup.txt">Exercise/Text</a></li>
+    <li><a href="dovecot/dovecot-install-setup.txt">Exercise/Text</a></li>
   </ul>
 
   <h3 id="ganeti">Ganeti</h3>
 
-  <h4 id="chris-wilsoncw-2"><a href="#CW">Chris Wilson</a></h4>
+  <h4 id="chris-wilsoncw-3"><a href="#CW">Chris Wilson</a></h4>
 
   <ul>
     <li>Ganeti Presentation: to be written</li>
     <li><a href="virtualization/ganeti-exercise.html">Ganeti Exercise</a></li>
   </ul>
 
-  <h3 id="network-security">Network Security</h3>
-
-  <h4 id="chris-wilsoncw-3"><a href="#CW">Chris Wilson</a></h4>
-
-  <ul>
-    <li>Firewalls: <a href="firewalls/index.html">HTML</a> <a href="firewalls/presentation.pdf">PDF</a></li>
-    <li>Understand the contents and layering of common Internet protocols: <a href="ip/exercise.html">exercise</a></li>
-  </ul>
-
   <h3 id="load-balancing">Load Balancing</h3>
 
-  <h4 id="frank-kusefk-1"><a href="#FK">Frank Kuse</a></h4>
+  <h4 id="chris-wilsoncw-4"><a href="#CW">Chris Wilson</a></h4>
 
   <ul>
+    <li><a href="https://www.digitalocean.com/company/blog/horizontally-scaling-php-applications/">Web article on load balancing and scaling</a></li>
     <li><a href="loadbalancing/docs/sse-LB-overview.pdf">Presentation/PDF</a></li>
     <li><a href="loadbalancing/docs/sse-LB-overview.odp">Presentation/OpenOffice</a></li>
   </ul>
 
   <h3 id="maas">MAAS</h3>
 
-  <h4 id="chris-wilsoncw-4"><a href="#CW">Chris Wilson</a></h4>
+  <h4 id="chris-wilsoncw-5"><a href="#CW">Chris Wilson</a></h4>
 
   <ul>
     <li>MAAS Presentation: to be written</li>
@@ -508,22 +511,22 @@ in the establishment and/or provisioning of a basic national Internet Services i
     <li><a href="nagios/nagios-exercise1.txt">Nagios Exercise-1</a></li>
   </ul>
 
+  <h3 id="network-security">Network Security</h3>
+
+  <h4 id="chris-wilsoncw-6"><a href="#CW">Chris Wilson</a></h4>
+
+  <ul>
+    <li>Firewalls: <a href="firewalls/index.html">HTML</a> <a href="firewalls/presentation.pdf">PDF</a></li>
+    <li>Understand the contents and layering of common Internet protocols: <a href="ip/exercise.html">exercise</a></li>
+  </ul>
+
   <h3 id="openldap">OpenLDAP</h3>
 
-  <h4 id="frank-kusefk-2"><a href="#FK">Frank Kuse</a></h4>
+  <h4 id="frank-kusefk-1"><a href="#FK">Frank Kuse</a></h4>
 
   <ul>
     <li>Presentation: <a href="ldap/Openldap presentation.pptx">PowerPoint</a> <a href="ldap/Openldap presentation.pdf">PDF</a></li>
     <li>Exercise: <a href="ldap/Openldap exercise.pptx">PowerPoint</a> <a href="ldap/Openldap exercise.pdf">PDF</a></li>
-  </ul>
-
-  <h3 id="radius">RADIUS</h3>
-
-  <h4 id="frank-kusefk-3"><a href="#FK">Frank Kuse</a></h4>
-
-  <ul>
-    <li>Presentation: <a href="radius/radius_presentation_2016.ppt">PowerPoint</a> <a href="radius/radius_presentation_2016.pdf">PDF</a></li>
-    <li>Exercise: <a href="radius/FreeRadius Exercise 2016.pptx">PowerPoint</a> <a href="radius/FreeRadius Exercise 2016.pdf">PDF</a></li>
   </ul>
 
   <h3 id="postfix">Postfix</h3>
@@ -538,6 +541,15 @@ in the establishment and/or provisioning of a basic national Internet Services i
     </li>
     <li><a href="postfix/01_email_preso.pdf">Email Overview</a></li>
     <li><a href="postfix/postfix-mailgateway-debian.pdf">Email Best Practices, Postfix and Mail Gateways</a></li>
+  </ul>
+
+  <h3 id="radius">RADIUS</h3>
+
+  <h4 id="frank-kusefk-2"><a href="#FK">Frank Kuse</a></h4>
+
+  <ul>
+    <li>Presentation: <a href="radius/radius_presentation_2016.ppt">PowerPoint</a> <a href="radius/radius_presentation_2016.pdf">PDF</a></li>
+    <li>Exercise: <a href="radius/FreeRadius Exercise 2016.pptx">PowerPoint</a> <a href="radius/FreeRadius Exercise 2016.pdf">PDF</a></li>
   </ul>
 
   <h5 id="spam-filtering">Spam Filtering</h5>
@@ -557,12 +569,12 @@ in the establishment and/or provisioning of a basic national Internet Services i
   <ul>
     <li><a href="squirrelmail/squirrelmail-intro.ppt">Presentation/PPT</a></li>
     <li><a href="squirrelmail/squirrelmail-intro.pdf">Presentation/PDF</a></li>
-    <li><a href="squirrelmail-install-setup.txt">Exercise/Text</a></li>
+    <li><a href="squirrelmail/squirrelmail-install-setup.txt">Exercise/Text</a></li>
   </ul>
 
   <h3 id="virtualization">Virtualization</h3>
 
-  <h4 id="chris-wilsoncw-5"><a href="#CW">Chris Wilson</a></h4>
+  <h4 id="chris-wilsoncw-7"><a href="#CW">Chris Wilson</a></h4>
 
   <ul>
     <li><a href="virtualization/sse-virtualization-overview-2013.odp">Intro Presentation (OpenOffice Impress)</a></li>
@@ -675,7 +687,7 @@ these steps:</p>
   <li>Install Jekyll: <code class="highlighter-rouge">sudo gem install jekyll execjs therubyracer</code></li>
   <li>Open a command prompt and go to ~/SparkleShare/sse</li>
   <li>Run <code class="highlighter-rouge">make serve</code></li>
-  <li>View the results in your browser at http://localhost:4000/…/*.html</li>
+  <li>View the results in your browser at <a href="http://localhost:4000/">http://localhost:4000/</a> (generated HTML files)</li>
 </ul>
 
 <h3 id="source-code-markdown">Source code (Markdown)</h3>
@@ -715,7 +727,7 @@ source code, and then loads the <code class="highlighter-rouge">presentation.md<
 directory using AJAX. So the URL that you use to load it is very important
 in locating the correct <code class="highlighter-rouge">presentation.md</code> file.</li>
   <li>This means that you cannot use Kramdown extensions in presentations. No
-presentation.html files are generated because the <code class="highlighter-rouge">presentation.md</code> files
+<code class="highlighter-rouge">presentation.html</code> files are generated because the <code class="highlighter-rouge">presentation.md</code> files
 deliberately do not have a “front matter” section which Jekyll requires.</li>
 </ul>
 
