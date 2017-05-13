@@ -790,6 +790,34 @@ destination host and directory <strong>which will be overwritten</strong>.</p>
 </code></pre>
 </div>
 
+<h3 id="automatic-publishing">Automatic publishing</h3>
+
+<p>If you want to have a server automatically fetch changes from Git and update
+the static website, you can’t use SparkleShare on the server because it’s a GUI
+tool. What you can do is checkout both Git repositories, using a fresh
+<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">personal access
+token</a>
+to give it write access to the afnog.github.io repository, and “git pull” in a
+loop (or automatically from Cron), generate the HTML and commit and publish it
+if different (which is almost what SparkleShare does):</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install lsyncd rsync ruby ruby-dev gcc g++ make
+sudo gem install jekyll execjs therubyracer
+mkdir ~/website
+cd ~/website
+git clone https://github.com/afnog/sse.git
+git clone https://&lt;your GitHub username&gt;:&lt;your token&gt;@github.com/afnog/afnog.github.io.git
+git config --global push.default simple
+while true; do cd ~/website/sse; git pull; make autocommit; sleep 5; done
+</code></pre>
+</div>
+
+<p>Or replace the last line with a Cron job:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>* * * * *	cd ~/website/sse; git pull; make autocommit
+</code></pre>
+</div>
+
 
 <script type="text/javascript">
 var converter = new Showdown.converter();
