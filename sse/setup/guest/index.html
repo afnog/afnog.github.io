@@ -53,7 +53,8 @@
 
 <p>Using Debian 8 (Jessie). Setup the guest for AfNOG, starting from a (virtual) console:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>adduser afnog
+<div class="highlighter-rouge"><pre class="highlight"><code>passwd
+adduser afnog
 apt install nano sudo openssh-server vim iputils-ping less
 usermod -G sudo afnog
 ifconfig 

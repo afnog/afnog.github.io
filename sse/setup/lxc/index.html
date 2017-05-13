@@ -73,6 +73,21 @@ echo "$USER veth br0 60" | sudo tee -a /etc/lxc/lxc-usernet
 </code></pre>
 </div>
 
+<p>Disable the lxc-net <code class="highlighter-rouge">dnsmasq</code> to stop it binding to port 67, preventing our own <code class="highlighter-rouge">dnsmasq</code>
+from doing the same, by editing <code class="highlighter-rouge">/etc/default/lxc-net</code> and setting:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>USE_LXC_BRIDGE="false"
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">/etc/dnsmasq.d/afnog</code> with the following contents:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>server=&lt;your host IP address&gt;
+interface=br0
+dhcp-range=196.200.219.20,196.200.219.80,12h
+</code></pre>
+</div>
+
 <p>Edit <code class="highlighter-rouge">/etc/default/grub</code> and set:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>GRUB_CMDLINE_LINUX_DEFAULT="cgroup_enable=memory swapaccount=1"
@@ -191,11 +206,11 @@ Pin-Priority: -1
 NUM_PCS=40
 LXC_ROOT=/home/inst/.local/share/lxc
 for i in `seq 1 $NUM_PCS`; do
-	hostname=pc$pc
+	hostname=pc$i
 	domainname=$hostname.sse.ws.afnog.org
 	lxc-copy --name debian8 --newname $hostname
 	macaddr=`openssl rand -hex 4 | sed -e 's/^\(..\)\(..\)\(..\)\(..\).*/52:56:\1:\2:\3:\4/'`
-	echo "lxc.network.hwaddr = $macaddr" &gt;&gt; $LXC_ROOT/pc$i.sse.ws.afnog.org/config
+	echo "lxc.network.hwaddr = $macaddr" &gt;&gt; $LXC_ROOT/pc$i/config
 done
 lxc-autostart
 </code></pre>
@@ -206,8 +221,26 @@ lxc-autostart
 <div class="highlighter-rouge"><pre class="highlight"><code>for i in `seq 1 $NUM_PCS`; do
 	hostname=pc$pc
 	domainname=$hostname.sse.ws.afnog.org
-	lxc-attach -n $domainname -- hostname
+	lxc-attach -n $hostname -- hostname
 done
+</code></pre>
+</div>
+
+<p>Give them all unique IP addresses by doing this with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lxc-attach -n $hostname -- sed -i -e "s/196.200.219.100/196.200.219.$[$i+100]/" /etc/network/interfaces
+</code></pre>
+</div>
+
+<p>And then reboot all the containers:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>lxc-autostart -r
+</code></pre>
+</div>
+
+<p>If you need to destroy all the containers, so you can recreate them, you can do this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for i in `seq 1 $NUM_PCS`; do lxc-stop --name pc$i -k; lxc-destroy --name pc$i; done
 </code></pre>
 </div>
 

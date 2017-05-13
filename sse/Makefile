@@ -13,10 +13,12 @@ help:
 	@echo "  watch:      Watch for source changes and rebuild outputs in $(DST_DIR)"
 	@echo "  serve:      Run built-in HTTP server"
 	@echo "  sync:       Watch for file changes in $(DST_DIR) and sync to $(SYNC_HOST):$(SYNC_DIR)"
+	@echo "  autocommit: Build, autocommit and push the output directory"
 
 # Directories where various files should be found or written to:
 SRC_DIR = .
 DST_DIR = ../afnog.github.io/sse
+REPO_DIR = ../afnog.github.io
 TEMPLATES_DIR = templates
 PROJECT_DIR_ABS = $(shell pwd)
 STATIC_DIR_ABS  = $(PROJECT_DIR_ABS)/static
@@ -159,3 +161,7 @@ serve:
 
 sync:
 	$(LSYNC)
+
+autocommit: output
+	cd $(DST_DIR); if ! git diff -s --exit-code .; then git add -A .; git commit -m "autocommit by Makefile"; git push; fi
+
