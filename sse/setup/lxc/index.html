@@ -53,17 +53,25 @@
 
 <p>Using Ubuntu 16.04. Follow <a href="../server/index.html">server setup</a> first to configure the server.</p>
 
-<p>Following https://help.ubuntu.com/lts/serverguide/lxc.html, but modified for VLAN bridging:</p>
+<p>Following the <a href="https://help.ubuntu.com/lts/serverguide/lxc.html">LXC Server
+Guide</a>, but modified for VLAN
+bridging:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>sudo apt install lxc
 
+# Add a range of UIDs to be used by containers run by the "inst" user
+# (see https://bugs.launchpad.net/serverguide/+bug/1571135 for details):
+echo 'inst:200000:65536' | sudo tee -a /etc/subuid
+echo 'inst:200000:65536' | sudo tee -a /etc/subgid
+
 mkdir -p ~/.config/lxc
 LXC_DEFAULTS=~/.config/lxc/default.conf
-echo "lxc.id_map = u 0 100000 65536" &gt; $LXC_DEFAULTS
-echo "lxc.id_map = g 0 100000 65536" &gt;&gt; $LXC_DEFAULTS
+echo "lxc.id_map = u 0 200000 65536" &gt; $LXC_DEFAULTS
+echo "lxc.id_map = g 0 200000 65536" &gt;&gt; $LXC_DEFAULTS
 echo "lxc.network.type = veth" &gt;&gt; $LXC_DEFAULTS
 echo "lxc.network.link = br0" &gt;&gt; $LXC_DEFAULTS
 echo "lxc.start.auto = 1" &gt;&gt; $LXC_DEFAULTS
+
 # Limit RAM used by containers:
 echo 'lxc.cgroup.memory.limit_in_bytes = 512M' &gt;&gt; $LXC_DEFAULTS
 echo 'lxc.cgroup.memory.memsw.limit_in_bytes = 1G' &gt;&gt; $LXC_DEFAULTS
