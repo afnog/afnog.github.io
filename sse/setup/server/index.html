@@ -92,6 +92,7 @@ COMMIT
 <p>Add the following lines to <code class="highlighter-rouge">/etc/rc.local</code> before the line <code class="highlighter-rouge">exit 0</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>echo cfq &gt; /sys/block/sda/queue/scheduler
+# Mac Mini only: power on automatically after a power failure
 setpci -s 0:1f.0 0xa4.w=0:1
 /sbin/iptables-restore /etc/network/iptables
 </code></pre>
