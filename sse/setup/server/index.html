@@ -153,6 +153,15 @@ sudo ifup br0
 
 <p>Check that you can access the Internet, and then reboot the box and check that it comes up OK.</p>
 
+<p>Enable IP forwarding, but only if you expect the server to be used as a router
+for the virtual machines or containers, e.g. if they will need to be NATted to
+access the Internet during setup week.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo net.ipv4.ip_forward=1 | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p /etc/sysctl.conf
+</code></pre>
+</div>
+
 <p>To stop NetworkManager from editing /etc/resolv.conf, edit <code class="highlighter-rouge">/etc/NetworkManager/NetworkManager.conf</code>
 and set <code class="highlighter-rouge">dns=none</code>, and restart it. Then edit <code class="highlighter-rouge">/var/run/resolvconf/interface/custom</code> and
 add your own DNS settings, and run <code class="highlighter-rouge">resolvconf -u</code> to install them.</p>
