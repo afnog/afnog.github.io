@@ -59,6 +59,7 @@
   <li><a href="../server/index.html">Server setup</a> for the host (sse-nuc1.mtg.afnog.org?)</li>
   <li><a href="../lxc/index.html">LXC setup</a> for running ~40 containers on the host</li>
   <li><a href="../guest/index.html">Guest setup</a> for each container</li>
+  <li><a href="https://linuxcontainers.org/lxc/getting-started/">LXC Getting Started Guide</a> (official manual)</li>
 </ul>
 
 <h2 id="host-access">Host access</h2>
@@ -85,6 +86,12 @@ Password is the usual, adapted to this year. Email me if you don’t know it.</p
 
 <p>I’ve assigned hostnames to each container by editing <code class="highlighter-rouge">/etc/hostname</code>, and IP addresses by editing <code class="highlighter-rouge">/etc/network/interfaces</code>.
 You’ll need to redo that if you destroy and re-clone a container (otherwise you’ll have an IP address conflict).</p>
+
+<p>The guests are all unprivileged containers, running under the <code class="highlighter-rouge">inst</code> user and not <code class="highlighter-rouge">root</code>, so
+you shouldn’t ever need to use <code class="highlighter-rouge">sudo</code> with any of the commands above. If you do, you’ll be
+creating or trying to run privileged containers under the <code class="highlighter-rouge">root</code> user, of which there currently
+aren’t any. So if you think that all your containers have disappeared, check whether you’re using
+<code class="highlighter-rouge">sudo</code> on your <code class="highlighter-rouge">lxc</code> commands by mistake.</p>
 
 <p>The guests all have IP addresses in the 196.200.219.101-140 range, where pcX = 196.200.219.(X + 100).
 External routing for the 196.200.219.0/24 subnet is available now, but SSH is blocked, so you’ll need to
