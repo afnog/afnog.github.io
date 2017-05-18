@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../../../workshop.css" type="text/css" />
+	<link rel="stylesheet" href="../../css/sse.css" type="text/css" />
+	<link rel="copyright" title="Copyright and Usage Restrictions"
+		href="../00readme.html" type="text/html" />
+	<link rel="home" title="AfNOG Workshop web site"
+		href="http://www.ws.afnog.org/" type="text/html" />
+	<link rel="up" title="AfNOG 2017 Workshop Main Page"
+		href="../index.html" type="text/html" />
+	<title>SS-E - AfNOG 2017 Workshop</title>
+	<!-- https://developers.google.com/web/fundamentals/getting-started/your-first-multi-screen-site/responsive?hl=en -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--
+	Showdown - Markdown in Javascript
+	from http://www.showdown.im/
+	-->
+	<script type="text/javascript" src="../../js/showdown.js"></script>
+	<style type="text/javascript">
+	pre {
+		font-size: 120%;
+	}
+	</style>
+</head>
+<body>
+
+<!--
+	PLEASE DO NOT EDIT THIS HTML BY HAND. It is auto-generated. See
+	http://afnog.github.io/sse/#meta-about-this-site for details.
+-->
+
+<div class="arrowlinks">
+  <a href="http://www.afnog.org/">AfNOG</a>
+  &gt;
+  <a href="http://www.ws.afnog.org/">Workshops</a>
+  &gt;
+  <a href="../../../index.html">2017</a>
+  &gt;
+  <a href="../../">Track SS-E &mdash; Scalable Internet Services</a>
+</div>
+
+<hr>
+
+<h1 id="vm-admin-howto">VM admin howto</h1>
+
+<p>The following documents might be useful additional references:</p>
+
+<ul>
+  <li><a href="../server/index.html">Server setup</a> for the host (sse-nuc1.mtg.afnog.org?)</li>
+  <li><a href="../lxc/index.html">LXC setup</a> for running ~40 containers on the host</li>
+  <li><a href="../guest/index.html">Guest setup</a> for each container</li>
+</ul>
+
+<h2 id="host-access">Host access</h2>
+
+<p>SSH to inst@sse-nuc1.mtg.afnog.org (once DNS is set up) or inst@196.200.223.144.
+Password is the usual, adapted to this year. Email me if you don’t know it.</p>
+
+<p>Once on the host, the following commands may be useful:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">lxc-ls --fancy</code> to list all the containers, pc1 through pc40</li>
+  <li><code class="highlighter-rouge">lxc-attach --name pcX</code> to attach to a container (virtual console)</li>
+  <li><code class="highlighter-rouge">lxc-start --name pcX</code> to start a container</li>
+  <li><code class="highlighter-rouge">lxc-stop --name pcX</code> to stop a container</li>
+  <li><code class="highlighter-rouge">lxc-stop --name pcX -r/--reboot</code> to reboot a container</li>
+  <li><code class="highlighter-rouge">lxc-stop --name pcX -k/--kill</code> to kill (force shutdown) a container</li>
+  <li><code class="highlighter-rouge">lxc-destroy --name pcX</code> to completely delete a container (irreversibly)</li>
+  <li><code class="highlighter-rouge">lxc-copy --name pcX --newname pcY</code> to clone an existing container with a new name</li>
+  <li><code class="highlighter-rouge">lxc-autostart</code> to start all the containers</li>
+  <li><code class="highlighter-rouge">lxc-autostart -s/--shutdown</code> to shutdown all the containers cleanly</li>
+  <li><code class="highlighter-rouge">lxc-autostart -r/--reboot</code> to reboot all the containers cleanly</li>
+  <li><code class="highlighter-rouge">lxc-autostart -k/--kill</code> to kill (force shutdown) all the containers</li>
+</ul>
+
+<p>I’ve assigned hostnames to each container by editing <code class="highlighter-rouge">/etc/hostname</code>, and IP addresses by editing <code class="highlighter-rouge">/etc/network/interfaces</code>.
+You’ll need to redo that if you destroy and re-clone a container (otherwise you’ll have an IP address conflict).</p>
+
+<p>The guests all have IP addresses in the 196.200.219.101-140 range, where pcX = 196.200.219.(X + 100).
+External routing for the 196.200.219.0/24 subnet is not available at this time, hopefully it will be soon.</p>
+
+
+<script type="text/javascript">
+var converter = new Showdown.converter();
+var markdownArea = document.getElementById('markdown');
+if (markdownArea)
+{
+	markdownArea.innerHTML = converter.makeHtml(markdownArea.innerHTML);
+}
+</script>
+
+<div class="bottomlinks">
+<p><a href="https://github.com/afnog/sse/blob/master/setup/howto/index.md">Edit this page on GitHub</a></p>
+<p><a href="../index.html">Return to AfNOG Workshop Main Page</a></p>
+</div>
+
+</body>
+</html>
+
