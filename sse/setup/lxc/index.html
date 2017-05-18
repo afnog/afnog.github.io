@@ -106,8 +106,8 @@ dhcp-range=196.200.219.20,196.200.219.80,12h
 otherwise the <code class="highlighter-rouge">lxc.cgroup.memory.memsw.limit_in_bytes</code> setting will not work, and will prevent
 you from starting any LXC containers.</p>
 
-<p>For this to work, you also need to edit <code class="highlighter-rouge">/etc/pam.d/common-session*, find the lines for
-</code>pam_cgso.so<code class="highlighter-rouge"> and add </code>,devices` to the end, as described
+<p>For this to work, you also need to edit <code class="highlighter-rouge">/etc/pam.d/common-session*</code>, find the lines for
+<code class="highlighter-rouge">pam_cgfs.so</code> and add <code class="highlighter-rouge">,devices</code> to the end, as described
 <a href="http://comments.gmane.org/gmane.linux.kernel.containers.lxc.general/11395">here</a>, like this:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>session optional        pam_cgfs.so -c freezer,memory,name=systemd,devices
