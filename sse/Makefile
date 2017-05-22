@@ -83,7 +83,7 @@ JEKYLL_OPTS = --source $(PROJECT_DIR_ABS)/$(SRC_DIR) \
 # LSYNC_OPTS = -nodaemon -log Exec -rsyncssh ../afnog.github.io/sse/ noc.mtg.afnog.org /tmp/sse/
 # LSYNC   = $(LSYNC_BIN) $(LSYNC_OPTS) -rsyncssh $(DST_DIR) $(SYNC_HOST) $(SYNC_DIR)
 LSYNC   = $(LSYNC_BIN) $(LSYNCD_CONF)
-RSYNC   = rsync -aP $(DST_DIR)/ $(SYNC_HOST):$(SYNC_DIR)/
+RSYNC   = rsync -aqP -e 'ssh -o LogLevel=error' $(DST_DIR)/ $(SYNC_HOST):$(SYNC_DIR)/
 
 # Quiet aliases for common shell commands, for output readability
 RST2ODP_V = $(call QUIET, rst2odp, $@, $(RST2ODP))
@@ -162,7 +162,7 @@ serve:
 	$(JEKYLL_BIN) serve $(JEKYLL_OPTS) --watch
 
 rsync:
-	$(RSYNC)
+	@$(RSYNC)
 
 sync:
 	$(LSYNC)
