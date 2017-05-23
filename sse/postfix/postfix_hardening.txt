@@ -1,0 +1,23 @@
+***** INSTALLING POSTFIX ON DEBIAN/UBUNTU *****
+
+
+********* Part 1 *************
+
+
+Require HELO as per RFC 
+
+	$sudo sh -c echo smtpd_helo_required = yes >> /etc/postfix/main.cf 
+
+	$sudo service postfix restart
+
+
+Try From the Server, telnet localhost port 25
+	
+	$telnet localhost 25
+
+
+Then type the following pressing enter after each line:
+
+	mail from: manager@theGrandLottery.com
+
+You should be prompted to require HELO first
