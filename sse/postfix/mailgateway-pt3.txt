@@ -143,15 +143,15 @@ Check what the postfix config looks like. Postconf will reveal the running confi
 Download MailWatch - MailScanner Frontend
 
 	$cd /home/afnog/
-	$wget https://github.com/mailwatch/1.2.0/archive/master.zip
+	$wget https://github.com/mailwatch/MailWatch/archive/master.zip
 	$unzip master.zip
-	$cd 1.2.0-master
+	$cd MailWatch-master/
 	$sudo mv mailscanner /var/www/
 
 
 Set up MailWatch:
 
-	$cd /home/afnog/1.2.0-master
+	$cd /home/afnog/MailWatch-master/
 
 
 Setup MailWatch conf.php (copy preconfigured). The changes here were to include the MySQL credentials for MailWatch and also to set the home directory: [[define('MAILWATCH_HOME', '/var/www/mailscanner');]]
