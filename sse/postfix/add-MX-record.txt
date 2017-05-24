@@ -1,0 +1,26 @@
+#### Add an MX record #####
+
+	$cd /etc/namedb/master
+
+	$nano YYY.afnog.guru
+
+
+At the bottom of the file add the following lines
+
+
+	mail IN A 196.200.219.XX
+	@ IN MX 10 mail.YYY.afnog.guru.
+
+
+Replace XXX with your PC number name.
+Replace YYY with your zone name
+
+Incremenent the Serial number then save and exit the file
+
+Reload BIND as follows
+
+	$sudo rndc reload
+
+	OR
+
+	$suo service named reload
